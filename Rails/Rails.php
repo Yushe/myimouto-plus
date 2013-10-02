@@ -434,9 +434,9 @@ final class Rails
         $autoloadFile = defined("COMPOSER_AUTOLOAD_FILE") ?
                         COMPOSER_AUTOLOAD_FILE :
                         Rails::path() . '/../../../autoload.php';
-        // self::$loader->setComposerAutoload(require $autoloadFile);
-        $loader = require $autoloadFile;
-        vpe($loader->getPrefixes());
+        self::$loader->setComposerAutoload(require $autoloadFile);
+        // $loader = require $autoloadFile;
+        // vpe($loader->getPrefixes());
         spl_autoload_register([Rails::loader(), 'loadClass']);
         
         set_exception_handler('Rails::exceptionHandler');

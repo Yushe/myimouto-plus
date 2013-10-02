@@ -99,6 +99,7 @@ class Base
         $this->setPhpConfig();
         $this->_load_files();
         $this->_load_active_record();
+        $this->initPlugins();
         $this->setDispatcher();
         $this->init();
         $this->runInitializers();
@@ -197,6 +198,17 @@ class Base
      */
     protected function initConfig($config)
     {
+    }
+    
+    private function initPlugins()
+    {
+        if ($this->config()->plugins) {
+            foreach ($this->config()->plugins->toArray() as $pluginName) {
+                $initClassName = $pluginName . '\Initializer';
+                $initializer = new $initClassName();
+                $initializer->initialize();
+            }
+        }
     }
     
     private function _load_controller()
