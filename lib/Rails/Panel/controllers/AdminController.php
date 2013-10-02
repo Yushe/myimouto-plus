@@ -13,13 +13,15 @@ class AdminController extends ApplicationController
     
     public function stylesheet()
     {
-        $path = realpath(__DIR__ . '/../assets/panel.css');
-        $file = new Rails\Assets\File('css', $path);
-        $parser = new Rails\Assets\Parser\Base($file);
-        $parser->parse();
+        $file = realpath(__DIR__ . '/../assets/railspanel.css.php');
+        ob_start();
+        require $file;
+        // $file = new Rails\Assets\File('css', $path);
+        // $parser = new Rails\Assets\Parser\Base($file);
+        // $parser->parse();
         
         $this->response()->headers()->setContentType('text/css');
-		$this->render(['text' => $parser->parsedFile()]);
+		$this->render(['text' => ob_get_clean()]);
     }
     
     final public function genTableData()

@@ -131,11 +131,7 @@ final class Rails
             $prefix = str_replace('\\', '/', self::$config->assets->prefix);
             
             $router = self::application()->router();
-            if ($router && $router->route() && $router->route()->isPanelRoute()) {
-                $basePaths = [
-                    realpath(Rails::path() . '/../../vendor/assets')
-                ];
-            } else {
+            if (!$router || !$router->route() || !$router->route()->isPanelRoute()) {
                 $basePaths = [
                     str_replace('\\', '/', Rails::config()->paths->application) . $prefix,
                     str_replace('\\', '/', Rails::root() . '/lib') . $prefix,
@@ -167,7 +163,7 @@ final class Rails
             
             self::$assets->addPaths($paths);
             
-            self::$assets->addFilePatterns($this->config()->patterns->toArray();
+            self::$assets->addFilePatterns(self::config()->assets->patterns->toArray());
         }
         return self::$assets;
     }
@@ -434,9 +430,10 @@ final class Rails
         
         $autoloadFile = defined("COMPOSER_AUTOLOAD_FILE") ?
                         COMPOSER_AUTOLOAD_FILE :
-                        Rails::path() . '/../../../autoload.php';
+                        Rails::path() . '/../../../../autoload.php';
         self::$loader->setComposerAutoload(require $autoloadFile);
-        
+        // $loader = require $autoloadFile;
+        // vpe($loader->loadClass("Rails\Bootstrap2\Initializer"));
         spl_autoload_register([Rails::loader(), 'loadClass']);
         
         set_exception_handler('Rails::exceptionHandler');

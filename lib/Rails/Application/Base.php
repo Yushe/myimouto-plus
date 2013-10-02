@@ -99,8 +99,8 @@ class Base
         $this->setPhpConfig();
         $this->_load_files();
         $this->_load_active_record();
-        $this->initPlugins();
         $this->setDispatcher();
+        $this->initPlugins();
         $this->init();
         $this->runInitializers();
     }
@@ -156,6 +156,7 @@ class Base
     
     public function router()
     {
+        // if (!$this->_dispatcher) vpe((new \Exception)->getTraceAsString());
         return $this->_dispatcher->router();
     }
     
