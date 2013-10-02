@@ -9,10 +9,7 @@
     },
     "autoload": {
         "psr-0": {
-            "Rails\\": ""
+            "Rails\\": "lib/Rails"
         }
-    },
-    "config": {
-        "vendor-dir": "./.."
     }
 }
