@@ -33,17 +33,6 @@ class ControllerGenerator extends AbstractGenerator
             $filePath = $baseDir . DIRECTORY_SEPARATOR . $fileName;
         }
         
-        if (is_file($filePath)) {
-            $message = sprintf("File already exists (pass 'f' to overwrite): %s", $filePath);
-            if ($console) {
-                $console->terminate($message);
-            } else {
-                throw new Exception\FileExistsException(
-                    $message
-                );
-            }
-        }
-        
         $defaultOptions = [
             'parent' => ''
         ];
@@ -72,14 +61,34 @@ class ControllerGenerator extends AbstractGenerator
             $parent,
         ], $template);
         
-        if (!file_put_contents($filePath, $contents)) {
-            $msg = "Couldn't create file";
+        if (!is_file($filePath)) {
+            if (!file_put_contents($filePath, $contents)) {
+                $msg = "Couldn't create file";
+                if ($console) {
+                    $console->terminate($msg);
+                } else {
+                    throw new Exception\FileNotCreatedException(
+                        $msg
+                    );
+                }
+            }
+        } else {
             if ($console) {
-                $console->terminate($msg);
-            } else {
-                throw new Exception\FileNotCreatedException(
-                    $msg
-                );
+                $console->write("File already exists: " . $filePath);
+            }
+        }
+        
+        # Create view folder
+        $viewsPath = Rails::config()->paths->views;
+        $viewFolder = $viewsPath . '/' . Rails::services()->get('inflector')->underscore($name);
+        if (!is_dir($viewFolder)) {
+            mkdir($viewFolder);
+            if ($console) {
+                $console->write("Created directory: " . $viewFolder);
+            }
+        } else {
+            if ($console) {
+                $console->write("Directory already exists: " . $viewFolder);
             }
         }
         
@@ -96,6 +105,7 @@ class ControllerGenerator extends AbstractGenerator
 class %className% extends %parent%
 {
     
-}';
+}
+';
     }
 }

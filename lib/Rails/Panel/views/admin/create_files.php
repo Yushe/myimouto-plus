@@ -28,6 +28,11 @@
       </div>
     </div>
   </div>
+  <div class="form-group">
+    <div class="col-lg-8">
+      <?= $this->contentTag('button', 'Create', ['class' => 'btn btn-primary']) ?>
+    </div>
+  </div>
 <?php }) ?>
 </div>
 <script>document.getElementById('file_name').focus();</script>

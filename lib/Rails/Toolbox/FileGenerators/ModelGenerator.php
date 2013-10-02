@@ -34,13 +34,11 @@ class ModelGenerator extends AbstractGenerator
         }
         
         if (is_file($filePath)) {
-            $message = sprintf("File already exists (pass 'f' to overwrite): %s", $filePath);
+            $message = sprintf("File already exists: %s", $filePath);
             if ($console) {
                 $console->terminate($message);
             } else {
-                throw new Exception\FileExistsException(
-                    $message
-                );
+                return false;
             }
         }
         
