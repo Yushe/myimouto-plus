@@ -432,8 +432,7 @@ final class Rails
                         COMPOSER_AUTOLOAD_FILE :
                         Rails::path() . '/../../../../autoload.php';
         self::$loader->setComposerAutoload(require $autoloadFile);
-        // $loader = require $autoloadFile;
-        // vpe($loader->loadClass("Rails\Bootstrap2\Initializer"));
+        
         spl_autoload_register([Rails::loader(), 'loadClass']);
         
         set_exception_handler('Rails::exceptionHandler');
