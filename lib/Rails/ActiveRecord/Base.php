@@ -487,7 +487,7 @@ abstract class Base
         $this->isNewRecord = false;
         
         $this->attributes = $data->attributes();
-        // $this->init();
+        $this->loadedAssociations = [];
         
         return true;
     }

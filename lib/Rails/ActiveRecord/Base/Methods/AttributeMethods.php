@@ -104,7 +104,7 @@ trait AttributeMethods
         }
         
         if ((string)$this->getAttribute($name) != (string)$value) {
-            $this->setChangedAttribute($name, $value);
+            $this->setChangedAttribute($name, $this->$name);
         }
         $this->attributes[$name] = $value;
         return $this;

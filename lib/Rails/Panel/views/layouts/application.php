@@ -7,7 +7,7 @@
 </head>
 <body>
   <div id="notice-container"></div>
-  <div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar navbar-inverse navbar-fixed-top" role="banner">
     <div class="container">
       <div class="navbar-header">
         <?= $this->linkTo('RailsPanel', '#index', ['class' => 'navbar-brand']) ?>
@@ -36,8 +36,7 @@
       <?= $this->content() ?>
     </div>
     <hr />
-    <footer><p>&copy; 2013 <em>PHP on Rails</em></p></footer>
+    <footer><p>&copy; 2013 <em>RailsPHP Framework</em></p></footer>
   </div>
 </body>
 </html>
-
