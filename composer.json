@@ -5,11 +5,12 @@
         "zendframework/zend-validator": "2.2.*",
         "zendframework/zend-log": "2.2.*",
         "zendframework/zend-mail": "2.2.*",
-        "symfony/yaml": "2.3.*"
+        "symfony/yaml": "2.3.*",
+        "leafo/scssphp": "0.0.8"
     },
     "autoload": {
         "psr-0": {
-            "Rails\\": "lib/Rails"
+            "Rails\\": "lib/"
         }
     }
 }
