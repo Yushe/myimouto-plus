@@ -169,7 +169,6 @@ $config->assets = [
      */
     'css_extensions' => [
         'scss' => [
-            'file'       => 'scss.inc.php',
             'class_name' => 'scssc',
             'method'     => 'compile',
             'static'     => false
@@ -192,8 +191,8 @@ $config->assets = [
      * Accepts an array like the one for extensions.
      */
     'css_compressor' => [
-        'class_name' => 'Minify_CSS_Compressor',
-        'method'     => 'process'
+        'class_name' => 'Minifier\Cssmin',
+        'method'     => 'run'
     ],
     'js_compressor' => [
         'class_name' => 'Rails\Assets\Parser\Javascript\ClosureApi\ClosureApi',
