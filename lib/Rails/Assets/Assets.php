@@ -206,7 +206,7 @@ class Assets
     protected function compileOtherFiles()
     {
         $exts = $this->filePatterns;
-        $pattern = '*.{' . implode(',', $exts) .'}';
+        $pattern = '{' . implode(',', $exts) .'}';
         $foundFiles = [];
         
         foreach ($this->paths as $assetsRoot) {
@@ -221,9 +221,35 @@ class Assets
             $contents = file_get_contents($foundFile);
             $this->createCompiledFile($assetsPath . '/' . $file->relative_path(), $contents, false);
             
-            $md5 = md5_file($foundFile);
-            $md5File = $file->relative_file_root_path() . '-' . $md5 . '.' . $file->type();
-            $this->createCompiledFile($assetsPath . '/' . $md5File, $contents, false);
+            
+            if ($this->config()->digest) {
+                $md5 = md5_file($foundFile);
+                
+                $relativeDir = $file->relative_dir();
+                if ($relativeDir) {
+                    $relativeDir .= '/';
+                }
+                $relativePath = $relativeDir . $file->file_root();
+                
+
+                $basePath = $this->compilePath() . $this->prefix();
+                $fileroot = $basePath . '/' . $relativeDir . $file->file_root();
+                
+                # Delete previous md5 files
+                $pattern = $fileroot . '-*.' . $ext . '*';
+                if ($mfiles = glob($pattern)) {
+                    $regexp = '/-' . $md5 . '\.' . $ext . '(\.gz)?$/';
+                    foreach ($mfiles as $mfile) {
+                        if (!preg_match($regexp, $mfile)) {
+                            unlink($mfile);
+                        }
+                    }
+                }
+                $this->updateManifestIndex($relativePath . '.' . $ext, $relativePath . '-' . $md5 . '.' . $ext);
+                
+                $md5File = $file->relative_file_root_path() . '-' . $md5 . '.' . $file->type();
+                $this->createCompiledFile($assetsPath . '/' . $md5File, $contents, false);
+            }
         }
     }
     

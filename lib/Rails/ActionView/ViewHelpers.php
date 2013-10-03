@@ -21,6 +21,8 @@ class ViewHelpers
      */
     static protected $queue = [];
     
+    static protected $appQueue = [];
+    
     /**
      * Searches for the helper that owns $method.
      *
@@ -70,10 +72,11 @@ class ViewHelpers
     
     /**
      * For application helpers. Class names passed will be appended with "Helper".
+     * This should only be called by Rails.
      */
     static public function addAppHelpers(array $helpers)
     {
-        self::$queue = array_merge(self::$queue, array_map(function($c) { return $c . 'Helper'; }, $helpers));
+        self::$appQueue = array_merge(self::$appQueue, array_map(function($c) { return $c . 'Helper'; }, $helpers));
     }
     
     /**
@@ -87,23 +90,36 @@ class ViewHelpers
         if (!self::$helpersLoaded) {
             if (($router = Rails::application()->dispatcher()->router()) && ($route = $router->route())) {
                 $controllerHelper = Rails::services()->get('inflector')->camelize($route->controller()) . 'Helper';
-                array_unshift(self::$queue, $controllerHelper);
+                array_unshift(self::$appQueue, $controllerHelper);
             }
             $appHelper = 'ApplicationHelper';
-            array_unshift(self::$queue, $appHelper);
+            array_unshift(self::$appQueue, $appHelper);
             
+            foreach (array_unique(self::$appQueue) as $name) {
+                self::loadHelper($name);
+            }
             foreach (array_unique(self::$queue) as $name) {
-                try {
-                    Rails::loader()->loadClass($name);
-                    self::$helpers[$name] = new $name();
-                } catch (Rails\Loader\Exception\ExceptionInterface $e) {
-                }
+                self::loadHelper($name, true);
             }
             
             # Add base helper
             self::$helpers[self::BASE_HELPER_NAME] = new Helper\Base();
             
             self::$helpersLoaded = true;
+        }
+    }
+    
+    static protected function loadHelper($name, $throwE = false)
+    {
+        try {
+            Rails::loader()->loadClass($name);
+            self::$helpers[$name] = new $name();
+        } catch (Rails\Loader\Exception\ExceptionInterface $e) {
+            if ($throwE) {
+                throw new Exception\RuntimeException(
+                    sprintf("Couldn't load file for helper %s", $name)
+                );
+            }
         }
     }
 }

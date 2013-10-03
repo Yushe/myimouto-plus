@@ -222,10 +222,10 @@ $config->assets = [
      * when compiling. These values will be passed to glob() with GLOB_BRACE.
      */
     'patterns' => [
-        '.gif',
-        '.png',
-        '.jpg',
-        '.jpeg',
+        '*.gif',
+        '*.png',
+        '*.jpg',
+        '*.jpeg',
     ],
     
     /**
