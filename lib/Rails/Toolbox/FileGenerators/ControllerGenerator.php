@@ -33,6 +33,8 @@ class ControllerGenerator extends AbstractGenerator
             $filePath = $baseDir . DIRECTORY_SEPARATOR . $fileName;
         }
         
+        $className .= 'Controller';
+        
         $defaultOptions = [
             'parent' => ''
         ];
