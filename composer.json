@@ -13,5 +13,8 @@
         "psr-0": {
             "Rails\\": "lib/"
         }
+    },
+    "config": {
+        "vendor-dir": "./../../"
     }
 }
