@@ -338,14 +338,10 @@ class Base
             foreach ($this->file->extensions() as $ext) {
                 if ($ext == 'php') {
                     $contents = PHParser::parseContents($contents);
-                    // $contents = $parser->parse();
                 } else {
                     $key = $this->file->type() . '_extensions';
-                    // if (!$this->config()->$key)
-                        // vpe($key);
-                        // vpe($this->config()->$key);
+                    
                     $conf = $this->config()->$key->$ext;
-                    // $conf = $this->config()['parsers'][self::EXTENSION][$ext];
                     
                     if (!$conf) {
                         throw new Exception\RuntimeException(

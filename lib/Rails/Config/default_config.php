@@ -196,7 +196,8 @@ $config->assets = [
     ],
     'js_compressor' => [
         'class_name' => 'Rails\Assets\Parser\Javascript\ClosureApi\ClosureApi',
-        'method'     => 'minify'
+        'method'     => 'minify',
+        'static'     => true
     ],
     
     /**

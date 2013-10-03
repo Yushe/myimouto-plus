@@ -496,7 +496,7 @@ class Assets
             $class = $conf['class_name'];
             
             $method = $conf['method'];
-            $static = empty($conf['static']);
+            $static = isset($conf['static']) && $conf['static'];
             
             if (!empty($conf['file'])) {
                 require_once $conf['file'];
