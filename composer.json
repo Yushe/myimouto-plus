@@ -16,14 +16,16 @@
         }
     },
     "extra": {
-        "ZF2/library": [
-            "zendframework/zend-validator",
-            "zendframework/zend-log",
-            "zendframework/zend-mail",
-            "zendframework/zend-console"
-            // "symfony/yaml"
-            // "leafo/scssphp"
-            // "toopay/assetic-minifier"
-        ]
+        "installer-paths": {
+            "ZF2/library": [
+                "zendframework/zend-validator",
+                "zendframework/zend-log",
+                "zendframework/zend-mail",
+                "zendframework/zend-console"
+                // "symfony/yaml"
+                // "leafo/scssphp"
+                // "toopay/assetic-minifier"
+            ]
+        }
     }
 }
