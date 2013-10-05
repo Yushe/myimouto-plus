@@ -77,20 +77,10 @@ $config->active_record = [
 
 $config->action_view = [
     'layout' => 'application',
-    'suffix' => 'phtml',
-    'helpers' => [
-        // 'will_paginate' => [
-            // /**
-             // * Sets a default custom renderer class.
-             // * Built-in renderers are Bootstrap and Legacy.
-             // * A custom renderer class can be created, extending
-             // * Rails\ActionView\Helper\WillPaginate\AbstractRenderer.
-             // */
-            // 'renderer'    => 'bootstrap',
-            // 'always_show' => false  # Show pagination even if there's only 1 page
-        // ]
-    ]
+    'suffix' => 'phtml'
 ];
+
+$config->plugins = [];
 
 $config->action_mailer = [
     /**

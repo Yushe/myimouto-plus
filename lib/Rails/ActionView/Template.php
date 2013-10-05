@@ -37,22 +37,20 @@ class Template extends Base
     /**
      * Template file.
      */
-    protected $template_file;
+    private $_templateFile;
     
     /**
      * Full template path.
      */
-    protected $template_filename;
+    private $_templateFilename;
     
-    protected $type;
+    private $_type;
     
-    protected $params;
+    private $_contents;
     
-    protected $contents;
+    private $inline_code;
     
-    protected $inline_code;
-    
-    protected $lambda;
+    private $_lambda;
     
     /**
      * $render_params could be:
@@ -69,11 +67,11 @@ class Template extends Base
             $render_params = ['file' => $render_params];
         }
         
-        $this->type = key($render_params);
+        $this->_type = key($render_params);
         
-        switch ($this->type) {
+        switch ($this->_type) {
             case 'file':
-                $this->template_file = array_shift($render_params);
+                $this->_templateFile = array_shift($render_params);
                 break;
             
             /**
@@ -81,7 +79,7 @@ class Template extends Base
              * no processing is needed. It will just be added to the layout, if any.
              */
             case 'contents':
-                $this->contents = array_shift($render_params);
+                $this->_contents = array_shift($render_params);
                 break;
             
             /**
@@ -92,10 +90,10 @@ class Template extends Base
                 break;
             
             case 'lambda':
-                $this->lambda = array_shift($render_params);
+                $this->_lambda = array_shift($render_params);
                 break;
         }
-        $this->params = $params;
+        $this->_params = $params;
         
         if (isset($params['locals'])) {
             $locals = $params['locals'];
@@ -171,13 +169,13 @@ class Template extends Base
         }
         
         if (strpos($name, '.') === 0) {
-            if (is_int(strpos($this->template_filename, Rails::config()->paths->views->toString()))) {
+            if (is_int(strpos($this->_templateFilename, Rails::config()->paths->views->toString()))) {
                 $parts = array();
                 $path = substr(
-                            $this->template_filename, strlen(Rails::config()->paths->views) + 1,
-                            strlen(pathinfo($this->template_filename, PATHINFO_BASENAME)) * -1
+                            $this->_templateFilename, strlen(Rails::config()->paths->views) + 1,
+                            strlen(pathinfo($this->_templateFilename, PATHINFO_BASENAME)) * -1
                         )
-                        . pathinfo($this->template_filename, PATHINFO_FILENAME);
+                        . pathinfo($this->_templateFilename, PATHINFO_FILENAME);
                 
                 foreach (explode('/', $path) as $part) {
                     $parts[] = ltrim($part, '_');
@@ -191,34 +189,34 @@ class Template extends Base
     
     protected function _init_render()
     {
-        $layout_wrap = !empty($this->params['layout']);
+        $layout_wrap = !empty($this->_params['layout']);
         
         if ($layout_wrap) {
-            $layout_file = $this->resolve_layout_file($this->params['layout']);
+            $layout_file = $this->resolve_layout_file($this->_params['layout']);
             
             if (!is_file($layout_file))
                 throw new Exception\LayoutMissingException(
                     sprintf("Missing layout '%s' [ file => %s ]",
-                        $this->params['layout'], $layout_file)
+                        $this->_params['layout'], $layout_file)
                 );
             ob_start();
         }
         
-        switch ($this->type) {
+        switch ($this->_type) {
             case 'file':
                 $this->build_template_filename();
                 
-                if (!is_file($this->template_filename)) {
+                if (!is_file($this->_templateFilename)) {
                     throw new Exception\TemplateMissingException(
-                        sprintf("Missing template file %s", $this->template_filename)
+                        sprintf("Missing template file %s", $this->_templateFilename)
                     );
                 }
                 
-                require $this->template_filename;
+                require $this->_templateFilename;
                 break;
             
             case 'contents':
-                echo $this->contents;
+                echo $this->_contents;
                 break;
             
             case 'inline':
@@ -226,8 +224,8 @@ class Template extends Base
                 break;
             
             case 'lambda':
-                $lambda = $this->lambda;
-                $this->lambda = null;
+                $lambda = $this->_lambda;
+                $this->_lambda = null;
                 $lambda = $lambda->bindTo($this);
                 $lambda();
                 break;
@@ -268,14 +266,14 @@ class Template extends Base
     
     private function build_template_filename()
     {
-        $template = $this->template_file;
+        $template = $this->_templateFile;
         if (strpos($template, '/') === 0 || preg_match('/^[A-Za-z]:(?:\\\|\/)/', $template))
-            $this->template_filename = $template;
+            $this->_templateFilename = $template;
         else {
             if (is_int(strpos($template, '.'))) {
-                $this->template_filename = Rails::config()->paths->views . '/' . $template;
+                $this->_templateFilename = Rails::config()->paths->views . '/' . $template;
             } else {
-                $this->template_filename = Rails::config()->paths->views . '/' . $template . '.php';
+                $this->_templateFilename = Rails::config()->paths->views . '/' . $template . '.php';
             }
         }
     }
