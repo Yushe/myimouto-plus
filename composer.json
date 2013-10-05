@@ -8,24 +8,12 @@
         "zendframework/zend-console": "2.2.*",
         "symfony/yaml": "2.3.*",
         "leafo/scssphp": "0.0.8",
-        "toopay/assetic-minifier": "1.0.0"
+        "toopay/assetic-minifier": "1.0.0",
+        "composer/installers": "~1.0"
     },
     "autoload": {
         "psr-0": {
             "Rails\\": "lib/"
-        }
-    },
-    "extra": {
-        "installer-paths": {
-            "ZF2/library": [
-                "zendframework/zend-validator",
-                "zendframework/zend-log",
-                "zendframework/zend-mail",
-                "zendframework/zend-console"
-                // "symfony/yaml"
-                // "leafo/scssphp"
-                // "toopay/assetic-minifier"
-            ]
         }
     }
 }
