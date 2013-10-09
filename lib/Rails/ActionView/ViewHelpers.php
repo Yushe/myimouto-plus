@@ -40,6 +40,7 @@ class ViewHelpers
                 return $helper;
             }
         }
+        
         return false;
     }
     

@@ -170,7 +170,9 @@ trait RelationMethods
      */
     private function _find_has_many($prop, $params)
     {
-        empty($params['class_name']) && $params['class_name'] = rtrim(ucfirst($prop), 's');
+        $inflector = \Rails::services()->get('inflector');
+        
+        empty($params['class_name']) && $params['class_name'] = $inflector->camelize($inflector->singularize($prop));
         
         $builder = new Association($params, $this);
         $builder->build_query();

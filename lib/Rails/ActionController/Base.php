@@ -214,7 +214,7 @@ abstract class Base extends ActionController
     
     public function action_name()
     {
-        return Rails::services()->get('inflector')->camelize(Rails::application()->dispatcher()->router()->route()->action, true);
+        return Rails::services()->get('inflector')->camelize(Rails::application()->dispatcher()->router()->route()->action, false);
     }
     
     public function run_request_action()

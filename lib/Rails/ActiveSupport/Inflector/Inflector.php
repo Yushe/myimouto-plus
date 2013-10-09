@@ -147,7 +147,7 @@ class Inflector
     
     public function classify($tableName)
     {
-        return $this->camelize($this->singuralize(preg_replace('/.*\./', '', $tableName)));
+        return $this->camelize($this->singularize(preg_replace('/.*\./', '', $tableName)));
     }
     
     public function ordinal($number)

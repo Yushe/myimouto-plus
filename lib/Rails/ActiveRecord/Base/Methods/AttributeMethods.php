@@ -61,7 +61,7 @@ trait AttributeMethods
         // if (!Rails::config()->ar2) {
             // return static::table()->columnExists(static::properAttrName($name));
         // } else {
-            return static::table()->columnExists($name);
+        return static::table()->columnExists($name);
         // }
     }
     

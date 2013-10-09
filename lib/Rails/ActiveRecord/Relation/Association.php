@@ -27,8 +27,9 @@ class Association extends AbstractRelation
         $params = $this->params;
         
         if (empty($params['foreign_key'])) {
+            $inflector = \Rails::services()->get('inflector');
             $cn = get_class($this->parent_model);
-            $params['foreign_key'] = substr($cn::tableName(), 0, -1).'_id';
+            $params['foreign_key'] = $inflector->singularize($cn::tableName()).'_id';
         }
         
         $query = new Relation($params['class_name'], $params['class_name']::tableName());
