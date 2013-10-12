@@ -76,15 +76,23 @@ abstract class Base
         
     }
     
+    /**
+     * Finds model by id and updates it.
+     *
+     * @param string|array $id
+     * @param array        $attrs
+     */
     static public function update($id, array $attrs)
     {
-        $attrs_str = [];
-        foreach (array_keys($attrs) as $attr)
-            $attrs_str[] = '`'.$attr.'` = ?';
-        $sql = "UPDATE `" . static::tableName() . "` SET " . implode(', ', $attrs_str) . " WHERE id = ?";
-        array_unshift($attrs, $sql);
-        $attrs[] = $id;
-        static::connection()->executeSql($attrs);
+        if (is_array($id)) {
+            foreach ($id as $k => $i) {
+                static::update($i, $attrs[$k]);
+            }
+        } else {
+            $object = static::find($id);
+            $object->updateAttributes($attrs);
+            return $object;
+        }
     }
     
     /**
@@ -369,24 +377,6 @@ abstract class Base
         return $this->isNewRecord;
     }
     
-    public function updateAttributes(array $attrs)
-    {
-        $this->assignAttributes($attrs);
-        $this->runCallbacks('before_update');
-        
-        /**
-         * iTODO: Must let know save() we're updating, so it will
-         * validate data with action "update" and not "save".
-         * Should separate save() and make this and update_attribute call
-         * something like update()?
-         */
-        if ($this->save(['action' => 'update'])) {
-            $this->runCallbacks('after_update');
-            return true;
-        }
-        return false;
-    }
-    
     /**
      * Directly passes the new value to the attributes array and then
      * saves the record.
@@ -610,7 +600,7 @@ abstract class Base
             return $current;
     }
     
-    protected function runCallbacks($callback_name)
+    public function runCallbacks($callback_name)
     {
         $callbacks = array();
         

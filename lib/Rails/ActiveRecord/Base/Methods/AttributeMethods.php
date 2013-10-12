@@ -103,7 +103,9 @@ trait AttributeMethods
             );
         }
         
-        if ((string)$this->getAttribute($name) != (string)$value) {
+        if ($this->isNewRecord) {
+            $this->setChangedAttribute($name, $value);
+        } elseif ((string)$this->getAttribute($name) != (string)$value) {
             $this->setChangedAttribute($name, $this->$name);
         }
         $this->attributes[$name] = $value;
@@ -119,6 +121,11 @@ trait AttributeMethods
         }
         
         return isset($this->attributes[$name]);
+    }
+    
+    public function attributes()
+    {
+        return $this->attributes;
     }
     
     /**
@@ -176,9 +183,22 @@ trait AttributeMethods
         }
     }
     
-    public function attributes()
+    public function updateAttributes(array $attrs)
     {
-        return $this->attributes;
+        $this->assignAttributes($attrs);
+        $this->runCallbacks('before_update');
+        
+        /**
+         * iTODO: Must let know save() we're updating, so it will
+         * validate data with action "update" and not "save".
+         * Should separate save() and make this and update_attribute call
+         * something like update()?
+         */
+        if ($this->save(['action' => 'update'])) {
+            $this->runCallbacks('after_update');
+            return true;
+        }
+        return false;
     }
 
     /**

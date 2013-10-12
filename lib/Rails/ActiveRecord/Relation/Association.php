@@ -40,7 +40,7 @@ class Association extends AbstractRelation
         # The function is binded to the relation object.
         if (isset($this->params[0])) {
             $lambda = array_shift($this->params);
-            $lambda->bindTo($this);
+            $lambda = $lambda->bindTo($query);
             $lambda();
         }
         
