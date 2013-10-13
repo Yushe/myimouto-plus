@@ -31,6 +31,11 @@ abstract class Base
     static private $preventInit = false;
     
     /**
+     * Flag to prevent setting default attributes.
+     */
+    static private $skipDefaultAttributes = false;
+    
+    /**
      * ActiveModel\Errors instance.
      */
     private $errors;
@@ -205,6 +210,7 @@ abstract class Base
     static private function _create_model(array $data)
     {
         self::$preventInit = true;
+        self::$skipDefaultAttributes = true;
         $model = new static();
         $model->attributes = $data;
         
@@ -243,6 +249,12 @@ abstract class Base
     
     public function __construct(array $attrs = [])
     {
+        if (!self::$skipDefaultAttributes) {
+            $this->setDefaultAttributes();
+        } else {
+            self::$skipDefaultAttributes = true;
+        }
+        
         $this->assignAttributes($attrs);
         if (!self::$preventInit) {
             $this->init();

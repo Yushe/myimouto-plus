@@ -20,7 +20,10 @@ class Table/* extends AbstractTable*/
         $table_data = $table_indexes = $pri = $uni = [];
         
         foreach ($rows as $row) {
-            $data = ['type' => $row['Type']];
+            $data = [
+                'type' => $row['Type'],
+                'default' => $row['Default']
+            ];
             
             if (strpos($row['Type'], 'enum') === 0) {
                 $enum_values = [];

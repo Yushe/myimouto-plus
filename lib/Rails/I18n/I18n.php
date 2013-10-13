@@ -74,6 +74,14 @@ class I18n
             return false;
         }
         
+        /**
+         * When adding new translations with the same name, since the arrays are
+         * recursively merged, the result will not be a string, but an array.
+         * If this is the case, the latter value will be used.
+         */
+        if (is_array($tr))
+            $tr = array_pop($tr);
+        
         if (is_int(strpos($tr, '%{'))) {
             foreach ($params as $k => $param) {
                 $tr = str_replace('%{'.$k.'}', $param, $tr);

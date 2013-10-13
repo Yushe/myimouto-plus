@@ -2,6 +2,7 @@
 namespace Rails\ActionDispatch\Http;
 
 use Rails;
+use Rails\ActionDispatch\Exception;
 
 class Headers
 {

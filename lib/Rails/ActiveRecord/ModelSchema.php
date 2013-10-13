@@ -17,6 +17,8 @@ class ModelSchema
     
     protected $primaryKey;
     
+    protected $columnDefaults;
+    
     public function __construct($name, Connection $connection)
     {
         $this->name = $name;
@@ -102,6 +104,19 @@ class ModelSchema
     public function columnExists($column_name)
     {
         return !empty($this->columns[$column_name]);
+    }
+    
+    public function columnDefaults()
+    {
+        if ($this->columnDefaults === null) {
+            $this->columnDefaults = [];
+            foreach ($this->columns as $name => $data) {
+                if ($data['default'] !== null) {
+                    $this->columnDefaults[$name] = $data['default'];
+                }
+            }
+        }
+        return $this->columnDefaults;
     }
     
     public function enumValues($column_name)

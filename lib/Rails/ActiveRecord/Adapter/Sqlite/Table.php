@@ -24,7 +24,10 @@ class Table/* extends AbstractTable*/
         ];
         
         foreach ($rows as $row) {
-            $data = ['type' => $row['type']];
+            $data = [
+                'type'    => $row['type'],
+                'default' => $row['default']
+            ];
             $table_data[$row['name']] = $data;
             
             if ($row['pk'])

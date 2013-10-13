@@ -282,4 +282,9 @@ trait AttributeMethods
             $attributes = array_diff_key($attributes, array_fill_keys($attrs, true));
         }
     }
+    
+    private function setDefaultAttributes()
+    {
+        $this->attributes = self::table()->columnDefaults();
+    }
 }
