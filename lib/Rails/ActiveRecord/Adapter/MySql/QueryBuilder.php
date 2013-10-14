@@ -71,8 +71,14 @@ class QueryBuilder extends AbstractQueryBuilder
             # Case: ["foo" => $foo, "bar_baz" => $bar];
             if (is_array($condition)) {
                 foreach ($condition as $column => $value) {
-                    $where[] = $column . ' = ?';
-                    $where_params[] = $value;
+                    if (is_array($value)) {
+                        $k = 1;
+                        $where[] =  '`' . $column . '` IN (' . implode(', ', array_fill(0, count($value), '?')) . ')';
+                        $where_params = array_merge($where_params, $value);
+                    } else {
+                        $where[] = '`' . $column . '` = ?';
+                        $where_params[] = $value;
+                    }
                 }
             } else {
                 if ($count = substr_count($condition, '?')) {

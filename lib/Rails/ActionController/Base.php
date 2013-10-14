@@ -602,7 +602,7 @@ abstract class Base extends ActionController
         switch ($render_type) {
             case 'action':
                 # Cut the 'Controller' part of the class name.
-                $path = Rails::services()->get('inflector')->underscore(substr(get_called_class(), 0, -10)) . '/' . $main_param . '.php';
+                $path = Rails::services()->get('inflector')->underscore(substr(get_called_class(), 0, -10)) . '/' . $main_param;
                 
                 // if ($route->namespaces())
                     // $path = implode('/', $route->namespaces()) . '/' . $path;
@@ -611,7 +611,10 @@ abstract class Base extends ActionController
                 # Fallthrough
                 
             case 'template':
+                $respParams = [];
+                
                 $layout = !empty($this->render_params['layout']) ? $this->render_params['layout'] : $this->layout;
+                $respParams['layout'] = $layout;
                 
                 $ext = pathinfo($main_param, PATHINFO_EXTENSION);
                 
@@ -621,8 +624,9 @@ abstract class Base extends ActionController
                     if ($this->request()->format() == 'html') {
                         $ext = 'php';
                     } else {
-                        if ($this->request()->format() == 'xml')
-                            $this->_response_params['is_xml'] = true;
+                        if ($this->request()->format() == 'xml') {
+                            $respParams['is_xml'] = true;
+                        }
                         $ext = [$this->request()->format(), 'php'];
                         
                         $this->response()->headers()->contentType($this->request()->format());
@@ -639,11 +643,10 @@ abstract class Base extends ActionController
                     $template_name = $pinfo['dirname'] . '/' . $pinfo['filename'];
                 }
                 
-                $this->_response_params = [
-                    'layout'        => $layout,
-                    'template_name' => $template_name,
-                    'extension'     => $ext
-                ];
+                $respParams['template_name'] = $template_name;
+                $respParams['extension'] = $ext;
+                
+                $this->_response_params = $respParams;
                 
                 # Here we could choose a different responder according to extensions(?).
                 $class = 'Rails\ActionController\Response\Template';

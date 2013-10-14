@@ -32,7 +32,7 @@ abstract class Base implements \ArrayAccess, \IteratorAggregate
     
     public function getIterator()
     {
-        return new ArrayIterator($this->_get_array());
+        return new \ArrayIterator($this->_get_array());
     }
     
     public function merge()

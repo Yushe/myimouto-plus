@@ -8,10 +8,20 @@ trait Tag
         return '<' . $name . ' ' . $this->_options($options, $escape) . ($open ? '>' : ' />');
     }
     
+    /**
+     * $content could be a Closure that can either return a string or
+     * echo the contents itself.
+     */
     public function contentTag($name, $content, array $options = array(), $escape = false)
     {
         if ($content instanceof \Closure) {
-            $content = $content($this->view());
+            ob_start();
+            $tmpContent = $content();
+            $content = ob_get_clean();
+            if ($tmpContent !== null) {
+                $content = $tmpContent;
+                unset($tmpContent);
+            }
         }
         return $this->_content_tag_string($name, $content, $options, $escape);
     }

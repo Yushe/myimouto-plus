@@ -45,10 +45,10 @@ class Xml
             
             if (is_string($content))
                 $this->_buffer .= $content;
-            elseif ($content instanceof Closure)
+            elseif ($content instanceof \Closure)
                 $this->_buffer .= $content();
             else
-                throw new Exception\InvalidArgumentError(
+                throw new Exception\InvalidArgumentException(
                     sprintf('Expecting Closure or string as third argument, %s passed.', gettype($content))
                 );
             

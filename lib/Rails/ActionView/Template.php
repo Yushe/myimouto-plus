@@ -52,6 +52,13 @@ class Template extends Base
     
     private $_lambda;
     
+    // /**
+     // * Template Extension to search for.
+     // * Eg: xml => file_name.xml.php
+     // * If null, no extra extension is appended.
+     // */
+    // private $tplExtension;
+    
     /**
      * $render_params could be:
      * - A string, that will be taken as "file".

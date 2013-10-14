@@ -81,19 +81,20 @@ class Parameters implements \IteratorAggregate
         if ($var) {
             global ${$var};
             
-            if (is_array(${$var}[$prop])) {
+            // if (is_array(${$var}[$prop])) {
                 // if (isset($this->files[$prop])) {
                     // ${$var}[$prop] = array_merge(${$var}[$prop], $this->files[$prop]);
                 // }
-                $this->$prop = new GlobalVar(${$var}[$prop], $var, $prop);
+                // $this->$prop = new GlobalVar(${$var}[$prop], $var, $prop);
                 # Return here.
-                return $this->$prop;
-            } elseif (is_object(${$var}[$prop])) {
-                $this->$prop = ${$var}[$prop];
-                $ret = $this->$prop;
-            } else {
+                // return 
+                // return $this->$prop;
+            // } elseif (is_object(${$var}[$prop])) {
+                // $this->$prop = ${$var}[$prop];
+                // $ret = $this->$prop;
+            // } else {
                 $ret = ${$var}[$prop];
-            }
+            // }
         } else {
             if (isset($this->putVars[$prop]))
                 $ret = $this->putVars[$prop];
