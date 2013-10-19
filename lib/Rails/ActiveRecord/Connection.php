@@ -203,8 +203,13 @@ class Connection
             $block = $params;
         }
         $this->resource()->beginTransaction();
-        $block();
-        $this->resource()->commit();
+        try {
+            $block();
+            $this->resource()->commit();
+        } catch (\Exception $e) {
+            $this->resource()->rollBack();
+            throw $e;
+        }
     }
     
     public function resource()
