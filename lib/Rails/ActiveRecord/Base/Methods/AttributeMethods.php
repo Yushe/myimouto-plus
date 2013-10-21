@@ -78,6 +78,56 @@ trait AttributeMethods
     }
 
     /**
+     * This method is similar to setAttribute, but goes beyond attributes.
+     * Cheks if the property named $propName is either an attribute,
+     * or a setter exists for it, or it's a public property.
+     *
+     * @return void
+     * @throw Rails\ActiveRecord\Exception\RuntimeException
+     */
+    public function setProperty($propName, $value)
+    {
+        if (self::isAttribute($propName)) {
+            $this->setAttribute($propName, $value);
+        } else {
+            if ($setterName = $this->setterExists($propName)) {
+                $this->$setterName($value);
+            } elseif (self::hasPublicProperty($propName)) {
+                $this->$propName = $value;
+            } else {
+                throw new Exception\RuntimeException(
+                    sprintf("Can't write unknown attribute '%s' for model %s", $propName, get_called_class())
+                );
+            }
+        }
+    }
+    
+    /**
+     * This method is similar to getAttribute, but goes beyond attributes.
+     * Cheks if the property named $propName is either an attribute,
+     * or a getter exists for it, or it's a public property.
+     *
+     * @return mixed
+     * @throw Rails\ActiveRecord\Exception\RuntimeException
+     */
+    public function getProperty($propName)
+    {
+        if (self::isAttribute($propName)) {
+            return $this->getAttribute($propName);
+        } else {
+            if ($getterName = $this->getterExists($propName)) {
+                return $this->$getterName();
+            } elseif (self::hasPublicProperty($propName)) {
+                return $this->$propName;
+            } else {
+                throw new Exception\RuntimeException(
+                    sprintf("Can't read unknown attribute '%s' for model %s", $propName, get_called_class())
+                );
+            }
+        }
+    }
+    
+    /**
      * @throw Exception\InvalidArgumentException
      */
     public function getAttribute($name)
@@ -164,22 +214,7 @@ trait AttributeMethods
         // $reflection = new \ReflectionClass(get_called_class());
         
         foreach ($attrs as $attrName => $value) {
-            if (self::isAttribute($attrName)) {
-                $this->setAttribute($attrName, $value);
-            } else {
-                if ($setterName = $this->setterExists($attrName)) {
-                    $this->$setterName($value);
-                // $setter = 'set' . $inflector->camelize($attrName);
-                } elseif (self::hasPublicProperty($attrName)) {
-                    $this->$attrName = $value;
-                // if ($reflection->hasMethod($setter) && $reflection->getMethod($setter)->isPublic()) {
-                    // $this->$setter($value);
-                } else {
-                    throw new Exception\RuntimeException(
-                        sprintf("Can't write unknown attribute '%s' for model %s", $attrName, get_called_class())
-                    );
-                }
-            }
+            $this->setProperty($attrName, $value);
         }
     }
     

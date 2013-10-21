@@ -105,7 +105,7 @@ class Validator extends RailsValidation
         if ($this->_model->$property === null)
             return true;
         
-        return (string)$this->_model->getAttribute($this->_property) == (string)$this->_model->$property;
+        return (string)$this->_model->getProperty($this->_property) == (string)$this->_model->$property;
     }
     
     protected function _validate_acceptance()

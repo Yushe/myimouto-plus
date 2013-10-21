@@ -273,8 +273,6 @@ abstract class Base
      */
     public function __get($prop)
     {
-        # See Config/default_config.php for more info.
-        // if (!Rails::config()->ar2) {
         if (static::isAttribute($prop)) {
             return $this->getAttribute($prop);
         } elseif ($this->getAssociation($prop) !== null) {
@@ -284,9 +282,6 @@ abstract class Base
         throw new Exception\RuntimeException(
             sprintf("Tried to get unknown property %s::$%s", get_called_class(), $prop)
         );
-        // }
-        // # Force error/default behaviour
-        // return $this->$prop;
     }
     
     /**
@@ -948,30 +943,39 @@ abstract class Base
         }
     }
     
-    private function _getter_for($prop)
+    protected function getterExists($attrName)
     {
-        $camelized = Rails::services()->get('inflector')->camelize($prop);
-        $method = 'get' . ucfirst($camelized);
-        
-        if (method_exists($this, $method)) {
-            return $this->$method();
-        } elseif (method_exists($this, $camelized)) {
-            return $this->$camelized();
+        if (is_int(strpos($attrName, '_'))) {
+            $inflector  = Rails::services()->get('inflector');
+            $getter = 'get' . $inflector->camelize($attrName);
+        } else {
+            $getter = 'get' . ucfirst($attrName);
         }
-        return null;
-    }
-    
-    private function setterExists($attrName)
-    {
-        $inflector = Rails::services()->get('inflector');
+        
         $reflection = self::getReflection();
         
-        $setter = 'set' . $inflector->camelize($attrName);
+        if ($reflection->hasMethod($getter) && $reflection->getMethod($getter)->isPublic()) {
+            return $getter;
+        } else {
+            return false;
+        }
+    }
+    
+    protected function setterExists($attrName)
+    {
+        if (is_int(strpos($attrName, '_'))) {
+            $inflector  = Rails::services()->get('inflector');
+            $setter = 'set' . $inflector->camelize($attrName);
+        } else {
+            $setter = 'set' . ucfirst($attrName);
+        }
+        
+        $reflection = self::getReflection();
         
         if ($reflection->hasMethod($setter) && $reflection->getMethod($setter)->isPublic()) {
             return $setter;
         } else {
-            false;
+            return false;
         }
     }
 }

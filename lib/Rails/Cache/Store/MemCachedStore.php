@@ -29,7 +29,7 @@ class MemCachedStore extends AbstractStore
     {
         $value = $this->connection->get($key);
         
-        if (!$value) {
+        if ($value === false) {
             if ($this->connection->getResultCode() == Memcached::RES_NOTFOUND) {
                 return null;
             } else {
@@ -47,10 +47,11 @@ class MemCachedStore extends AbstractStore
         if (isset($params['expires_in'])) {
             if (!ctype_digit((string)$params['expires_in']))
                 $expires_in = strtotime('+' . $params['expires_in']);
-        } else
+        } else {
             $expires_in = 0;
+        }
         
-        $resp = $this->connection->add($key, $val, $expires_in);
+        return $this->connection->set($key, $val, $expires_in);
     }
     
     public function delete($key, array $params)
