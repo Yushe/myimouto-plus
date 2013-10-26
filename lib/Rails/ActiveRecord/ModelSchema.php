@@ -38,7 +38,7 @@ class ModelSchema
     
     public function schemaFile()
     {
-        $path = Rails::root() . '/db/table_schema/' . $this->connection_name();
+        $path = Rails::root() . '/db/table_schema/' . $this->connection->name();
         $file = $path . '/' . $this->name . '.php';
         return $file;
     }
@@ -51,7 +51,7 @@ class ModelSchema
             $this->loadCachedSchema();
         } elseif (!$this->getSchema()) {
             throw new Exception\RuntimeException(
-                sprintf("Couldn't find schema for %s: %s", $this->name, $this->error_stmt)
+                sprintf("Couldn't find schema for %s", $this->name)
             );
         }
     }

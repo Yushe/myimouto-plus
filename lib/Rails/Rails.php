@@ -130,14 +130,11 @@ final class Rails
             
             $prefix = str_replace('\\', '/', self::$config->assets->prefix);
             
-            $router = self::application()->router();
-            if (!$router || !$router->route() || !$router->route()->isPanelRoute()) {
-                $basePaths = [
-                    str_replace('\\', '/', Rails::config()->paths->application) . $prefix,
-                    str_replace('\\', '/', Rails::root() . '/lib') . $prefix,
-                    str_replace('\\', '/', Rails::root() . '/vendor') . $prefix,
-                ];
-            }
+            $basePaths = [
+                str_replace('\\', '/', Rails::config()->paths->application) . $prefix,
+                str_replace('\\', '/', Rails::root() . '/lib') . $prefix,
+                str_replace('\\', '/', Rails::root() . '/vendor') . $prefix,
+            ];
             
             $paths = [];
             
