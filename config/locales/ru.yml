@@ -1,0 +1,986 @@
+ru:
+  activerecord:
+    attributes:
+      advertisement: {ad_type: Тип баннера, height: Высота, hit_count: Счётчик хитов, image_url: URL картинки, referral_url: Referral URL, reset_hit_count: Сбросить счётчик хитов, status: Статус, width: Ширина}
+      user: {current_password: Текущий пароль, password: Пароль, password_confirmation: Подтверждение пароля}
+    errors:
+      models:
+        wiki_page: {no_change: Нет изменений в содержании/заголовке страницы}
+    models: {advertisement: Реклама}
+  admin:
+    edit_user: {level: Уровень, save: Сохранить, user: Пользователь}
+    index: {cache_statistics: Статистика Кэша, edit_user: Редактировать Пользователя, reset_password: Сброс Пароля, title: Админка}
+    reset_password: {name: Имя, reset: Сброс, title: Сбросить пароль}
+  advertisements:
+    edit:
+      title: 'Редактировать баннер #%{id}'
+    index: {reset_hit_count: Сбросить счётчик хитов, title: Баннеры}
+    new: {title: Новый Баннер}
+    show:
+      title: 'Баннер #%{id}'
+  artist:
+    create: {alias_for: Асевдоним для, aliases: Псевдонимы, info: Разделяйте множественные псевдонимы и участников запятыми., members: Участники, name: Имя, notes: Заметры, urls: URL'ы}
+    destroy: {confirm: 'Вы действительно хотите удалить %{name}?', title: Удалить Художника}
+    footer: {add: Добавить, help: Справка, list: Список}
+    index: {date: Дата, delete: Удалить художника, edit: Редактировать, find: Найти посты этого художника, is_alias: Это псевдоним, is_group: Это группа, last_modified: Последнее Изменение, name: Имя, search: Поиск, title: Художники, updated_by: Обновлено}
+    update: {preview: Предпросмотр Заметок}
+  banned:
+    index: {expires_in: 'Истекает в течение %{t}.', permanent: Этот бан навсегда., reason: Вы забанены}
+  batch:
+    create: {files: Файлы, load_file_index: Загрузить индекс, submit: Начать Закачку, tags: Метки, title: Очередь, url: URL}
+    index: {cancel: Отменить все закачки, clear: Очистить завершённые, completed_html: 'Пост %{id} завершён', exists_html: 'Пост %{id} уже существует', pause: Пауза, paused: Пауза, pending: Ожидает, queue_uploads: Очередь, resume: Возобновить, retry_failed: Повторить сбойные,
+      status: Статус, tags: Метки, title: Очередь Батчей, uploading: Загрузка, url: URL, username: Пользователь}
+  buttons:
+    _no: 'Нет'
+    _yes: 'Да'
+    add: Добавить
+    back: Назад
+    cancel: Отмена
+    delete: Удалить
+    edit: Правка
+    save: Сохранить
+  c:
+    pool:
+      not_found: "Не могу найти коллекцию с номером %{id}"
+  comment:
+    comment: {delete: Удалить, edit: Правка, flag: Пожаловаться, quote: Цитировать}
+    comments: {bump: Отправить скрытно, more: ещё, post: Пост, reply: Ответить »}
+    edit: {save: Сохранить изменения, title: Редактировать Комментарий}
+    footer: {help: Справка, list: Список, search: Поиск, moderate: Модерировать}
+    index: {date: Дата, empty: Нет комментариев., hidden: Скрыт, score: Оценка, tags: Метки, title: Комментарии, translation_html: 'Перевод комментария предоставлен %{p}', user: Пользователь}
+    moderate: {approve: Подтвердить, author: Автор, body: Сообщение, delete: Удалить, select_all: Выбрать Все, select_invert: Инвертировать Выбор, title: Модерировать Комментарии}
+    search: {author: Автор, message: Сообщение, post: Пост, submit: Найти, time: Время}
+    show: {return: Вернуться к посту, title: Комментарий}
+  confirmations: {is_sure: 'Вы уверены?'}
+  dmail:
+    compose:
+      form: {body: Сообщение, title: Заголовок, to: Кому}
+      preview: Предпросмотр
+      preview_loading: Подождите...
+      send: Отправить
+      title: Написать Сообщение
+    confirm_mark_all_read: {title: Пометить Всё Прочитанным, info: 'Вы действительно хотите пометить все Ваши сообщения как прочитанные?'}
+    footer: {compose: Написать, inbox: Входящие, mark_all_read: Пометить всё прочитанным}
+    inbox:
+      empty: Нет сообщений.
+      table: {from: От, title: Заголовок, to: Кому, when: Когда}
+      title: Мои Входящие
+    message: {sent_by_html: 'Отправлено %{user} %{x_ago}'}
+  forum:
+    add: {post: Пост, title: Заголовок}
+    edit: {post: Пост, post_title: Заголовок}
+    index: {created_by: Создано, help: Справка, is_locked: (закрыто), last: последняя, mark: Пометить всё прочитанным, new: Новая тема, post: Пост, post_title: Заголовок, preview: Предпросмотр, responses: Ответы, search: Найти, title: Форум, updated: Обновлено, updated_by: Изменено}
+    new: {help: Справка, list: Список, post: Пост, post_title: Заголовок, preview: Предпросмотр, title: Новая Тема}
+    post: {delete: Удалить, delete_confirm: 'Вы действительно хотите удалить это сообщение?', edit: Правка, lock: Закрыть, quote: Цитировать, stick: Прикрепить, unlock: Открыть, unstick: Открепить}
+    search:
+      author: Автор
+      last_updated: Последнее изменение
+      last_updated_by: '%{t_ago}, %{u}'
+      message: Сообщение
+      post_title: Заголовок
+      search: Поиск
+    show: {help: Справка, list: Список, locked: Эта темя закрыта., new: Новая тема, parent: Родитель, post: Пост, preview: Предпросмотр, reply: Ответить}
+  help:
+    index: {about: О Moebooru, accounts: Учётные Записи, api: API, artists: Художники, bookmarklet: Закладки, bugs: Ошибки, cheat_sheet: Шпаргалка, comments: Комментарии, dtext: DText, faq: Часто Задаваемые Вопросы, firefox_ext: Расширение для Firefox, help: Справка, image_sampling: Образцы
+        Изображений, irc: IRC, mass_tag_edit: Массовая Правка Меток, notes: Заметки, pools: Коллекции, post_relationships: Взаимосвязи Постов, posts: Посты, ratings: Оценки, source: Исходный Код, starting: Вступление, suggestions: Предположения, tag_aliases: Синонимы,
+      tag_implications: Дополнительные Значения, tag_scripts: Сценарии Меток, tags: Метки, voting: Голосование, wiki: Wiki}
+  helpers:
+    submit:
+      advertisement: {create: Создать, update: Сохранить}
+  history:
+    index:
+      change: Изменить
+      date: Дата
+      id: Id
+      object_type: Тип
+      redo: Вернуть
+      search: Поиск
+      show: {all: Показываются все метки, changed: Показываются только изменения}
+      title: История
+      type: {all: Все, pools: Коллекции, posts: Посты, tags: Метки}
+      undo: Отменить
+      user: Пользователь
+  inline:
+    edit:
+      add_do: Добавить
+      add_image: Добавить изображение
+      add_image_description: Добавить описание
+      add_set_description_info: щёлкните для добавления описания к этому набору
+      copy: Копировать
+      crop: Вырезать
+      delete: Удалить
+      delete_confirm: Удалить эту группу изображений?
+      description: Описание
+      file: Файл
+      move: {down: Ниже, up: Выше}
+      preview: Предпросмотр
+      remove: Удалить
+      remove_confirm: Удалить это изображение?
+      save: Сохранить изменения
+      source: Источник
+    footer: {help: Справка, list: Список}
+    index: {create: Создать, description: Описание, first_image: Первое изображение, images: Изображения, user: Пользователь}
+  job_task:
+    index:
+      table: {id: Id, message: Сообщение, status: Статус, type: Тип}
+      title: Задачи
+    show:
+      nav: {list: Список}
+      table: {id: Id, message: Сообщение, status: Статус, type: Тип}
+  layout_login: "Имя"
+  layout_login_text: "Нужно залогиниться. Для регистации новой учётной записи введите желаемые имя и пароль."
+  layout_logout: "Выйти"
+  layout_mail: "Моя Почта"
+  layout_mass_edit: "Массовая Правка"
+  layout_moderate: "Модерировать"
+  layout_more: "Ещё »"
+  layout_name: "Имя"
+  layout_new_mail: "Новое письмо"
+  layout_new_topic: "Новая Тема"
+  layout_no_email: "В Вашем профиле не указан адрес e-mail, поэтому сбросить пароль невозможно."
+  layout_not_exist: "Данное имя не занято. Если вы хотите зарегистрировать новую учётную запись, просто проверьте Ваш пароль и логиньтесь."
+  layout_notes: "Заметки"
+  layout_password: "Пароль"
+  layout_pools: "Коллекции"
+  layout_popular: "Популярные"
+  layout_posts: "Посты"
+  layout_profile: "Мой Профиль"
+  layout_random: "Случайные"
+  layout_requests: "Запросы"
+  layout_reset: "Сбросить Пароль"
+  layout_reset_successful: "Пароль сброшен. Проверьте вашу электронную почту через несколько минут."
+  layout_search_artists: "Поиск Художников"
+  layout_search_comments: "Поиск Комментариев"
+  layout_search_forum: "Поиск по Форуму"
+  layout_search_notes: "Поиск Заметок"
+  layout_search_pools: "Поиск по Коллекциям"
+  layout_search_posts: "Искать Посты"
+  layout_search_tags: "Искать по Меткам"
+  layout_search_wiki: "Поиск по Wiki"
+  layout_settings: "Настройки"
+  layout_site_help: "Справка по сайту"
+  layout_tags: "Метки"
+  layout_unknown_user: "Нет такого пользователя."
+  layout_upload: "Добавить"
+  layout_view_artists: "Просмотр Художников"
+  layout_view_comments: "Просмотр Комментариев"
+  layout_view_notes: "Заметки"
+  layout_view_pools: "Просмотр Коллекций"
+  layout_view_posts: "Смотреть Посты"
+  layout_view_tags: "Просмотр Меток"
+  layout_wiki: "Wiki"
+  layout_wiki_index: "Просмотр Wiki"
+  layout_wrong_email: "Неверный адрес e-mail."
+  layouts:
+    default:
+      old_browser: {hide: (скрыть это сообщение), info: Ваш веб-обозреватель очень старый и не подходит для отображения данного сайта.}
+    login:
+      email: Email
+      email_info: Если вы указали адрес e-mail при регистрации, то Ваш пароль можно сбросить.
+      info: Нужно залогиниться. Для регистации новой учётной записи введите желаемые имя и пароль.
+      login: Войти
+      name: Имя
+      password: Пароль
+      password_confirm: Подтверждение Пароля
+      popup:
+        email_reset: "Введите адрес e-mail, указанный Вами в профиле. Вы получите письмо с новым паролем."
+        exist: Данное имя уже занято. Если вы хотите создать новую учётную запись, выберите другое имя.
+        invalid_email: Сбой доставки сообщения по указанному адресу e-mail.
+        no_email: "В Вашем профиле не указан адрес e-mail, поэтому сбросить пароль невозможно."
+        not_exist: "Данное имя не занято. Если вы хотите зарегистрировать новую учётную запись, просто проверьте Ваш пароль и логиньтесь."
+        unknown_user: Нет такого пользователя.
+        wrong_email: Неверный адрес e-mail.
+      reset: Сбросить Пароль
+    menu:
+      account: {_: Моя Страница, change_password: Сменить Пароль, favorites: Избранное, login: Войти, logout: Выйти, mail: Моя Почта, profile: Мой Профиль, reset: Сброс Пароля, settings: Настройки}
+      artists: {_: Художники, create: Создать, search: Поиск Художников, view: Просмотр Художников}
+      comments: {_: Комментарии, moderate: Модерировать, search: Поиск Комментариев, view: Просмотр Комментариев}
+      forum: {_: Форум, new: Новая Тема, search: Поиск по Форуму, view: Просмотр Тем}
+      help: {_: Справка, site: Справка по сайту}
+      more: Ещё »
+      new_mail: Новое письмо
+      notes: {_: Заметки, requests: Запросы, search: Поиск Заметок, view: Заметки}
+      pools: {_: Коллекции, create: Создать Новую Коллекцию, search: Поиск по Коллекциям, view: Просмотр Коллекций}
+      posts: {_: Посты, batch: Групповая Загрузка, history: Историй, image_search: Поиск Изображений, moderate: Модерировать, popular: Популярные, random: Случайные, search: Искать Посты, upload: Добавить, view: Просмотр}
+      tags: {_: Метки, aliases: Синонимы, edit: Правка, implications: Дополнительные Значения, mass_edit: Массовая Правка, popular: Популярные, search: Искать по Меткам, view: Просмотр Меток}
+      wiki: {_: Wiki, create: Создать Новую Страницу, index: Просмотр Wiki, search: Поиск по Wiki}
+  news_ticker: "Метки должны быть на английском или хотя бы латиницей/ромадзи"
+  news_ticker_close: "Закрыть"
+  note:
+    footer: {help: Справка, history: Историй, list: Список, requests: Запросы, search: Поиск}
+    history:
+      revert: Откатить
+      revert_confirm: Вы действительно хотите вернуть эту заметку к предыдущему состоянию?
+      table: {body: Сообщение, date: Дата, edited: Изменено, note: Заметка, options: Опции, post: Пост}
+      title: История Заметок
+    index: {title: Заметки}
+    note: {click: Щёлкните для правки}
+    search: {search: Найти, title: Поиск Заметок}
+  note_body: "Содержание"
+  note_click: "Щёлкните для правки"
+  note_date: "Дата"
+  note_edited: "Изменено"
+  note_help: "Справка"
+  note_history: "История"
+  note_list: "Список"
+  note_note: "Заметка"
+  note_options: "Опции"
+  note_post: "Пост"
+  note_requests: "Запросы"
+  note_revert: "Откатить"
+  note_revert_confirm: "Вы действительно хотите вернуть эту заметку к предыдущему состоянию?"
+  note_search: "Поиск"
+  notice: "На этот пост пожаловался "
+  notice10: "Причина: "
+  notice11: "Временно удержан из индекса добавляющим."
+  notice12: "активировать"
+  notice13: "Размер изображения изменён. Щёлкните на ссылку "
+  notice14: "Посмотреть увеличенную версию"
+  notice15: " боковой панели для более качественной версии."
+  notice16: "Всегда показывать оригинал"
+  notice17: "Скрыть это сообщение"
+  notice18: "Образцы изображений отключены. Если у вас всё тормозит, верните их в настройках профиля (отключите Всегда показывать оригинал)"
+  notice19: "Этот пост принадлежит "
+  notice2: "отменить"
+  notice20: "родителю"
+  notice21: "сделать основым"
+  notice22: "У этого поста есть "
+  notice23: "дочерний пост"
+  notice24: "дочерние посты"
+  notice3: "удалить"
+  notice4: "Этот пост ждет подтверждения модератором."
+  notice5: "Причина: "
+  notice6: "одобрить"
+  notice7: "удалить"
+  notice8: "Этот пост удалён."
+  notice9: "Кем: "
+  notice_text: "Вы действительно хотите подтвердить этот пост?"
+  old_browser: "Ваш веб-обозреватель очень старый и не подходит для отображения данного сайта."
+  old_browser2: "Будьте так любезны обновиться:"
+  old_browser3: "(скрыть это сообщение)"
+  pool:
+    index:
+      title: '%{q} - Коллекции'
+      title_main: Коллекции
+  pool_active: "Активный"
+  pool_active_text: "Неактивные коллекции не будут показаны в списке для добавления."
+  pool_add: "Добавить"
+  pool_add2: "Добавить"
+  pool_add_text: "Выберите коллекцию:"
+  pool_ago: " назад"
+  pool_cancel: "Отмена"
+  pool_clone: "Клонировать Коллекцию"
+  pool_confirm: "Вы действительно хотите удалить "
+  pool_copy: "Копировать Коллекцию"
+  pool_create: "Создать Коллекцию"
+  pool_created: "Создано"
+  pool_creator: "Автор"
+  pool_delete: "Удалить"
+  pool_delete_mode: "Режим удаления"
+  pool_delete_mode_text: "В режиме удаления щелчок по миниатюре удалит пост из этой коллекции."
+  pool_description: "Описание"
+  pool_edit: "Редактировать Коллекцию"
+  pool_help: "Справка"
+  pool_import: "Импорт Коллекции: "
+  pool_import2: "Импорт"
+  pool_import_text: "Вы можете выполнить поиск по меткам и добавить его результаты в эту коллекцию."
+  pool_index: "Обычный Вид"
+  pool_interval: "Введите интервал"
+  pool_jpeg: "Скачать JPEG"
+  pool_list: "Список"
+  pool_name: "Имя"
+  pool_new: "Создать"
+  pool_no: "Нет"
+  pool_order: "Порядок Коллекции: "
+  pool_order2: "Порядок"
+  pool_order_auto: "Авто порядок"
+  pool_order_minus_one: "-1"
+  pool_order_plus_one: "+1"
+  pool_order_text: "Вначале будут показаны меньшие числа."
+  pool_png: "Скачать"
+  pool_pool: "Коллекция"
+  pool_pool2: "Коллекция: "
+  pool_posts: "Посты"
+  pool_public: "Публичная?"
+  pool_public_text: "Публичные коллекции могут быть изменены другими пользователями."
+  pool_question_mark: "?"
+  pool_reverse: "Перевернуть"
+  pool_save: "Сохранить"
+  pool_search: "Поиск"
+  pool_show_copy: "Копировать"
+  pool_show_history: "История"
+  pool_show_import: "Импортировать"
+  pool_show_order: "Упорядочить"
+  pool_show_transfer: "Перенести Данные"
+  pool_toggle: "Переключить Вид"
+  pool_transfer: "Перенос из коллекции №:"
+  pool_transfer_button: "Перенос"
+  pool_transfer_from: "Из"
+  pool_transfer_tags: "Метки"
+  pool_transfer_text: "Перемещение информации постов из коллекции "
+  pool_transfer_text2: " в посты коллекции "
+  pool_transfer_text3: "Метки и рейтинги будут перенесены, и все старые посты станут дочерними новым."
+  pool_transfer_text4: "Эти коллекции имеют разное количество постов"
+  pool_transfer_text5: "Пожалуйста, проверьте, что все метки были перенемены корректно на нужные посты."
+  pool_transfer_text6: " перенос "
+  pool_transfer_to: "В"
+  pool_updated: "Изменено"
+  pool_yes: "Да"
+  post:
+    moderate: {mod: mod, title: Очередь Модерирования, uploaded_by_when_html: 'Создано %{u} %{t_ago} (%{mod})'}
+    popular_by_day: {title: 'Просмотр %{year}/%{month}/%{day}'}
+    popular_by_month: {title: 'Просмотр %{year}/%{month}'}
+    popular_by_week: {title: 'Просмотр %{st_year}/%{st_month}/%{st_day} - %{end_year}/%{end_month}/%{end_day}'}
+    popular_recent: {title: 'Просмотр %{period}'}
+    show_partials:
+      edit:
+        find_artists: Поиск художников
+        note_locked: Заметки заблокированы
+        parent: Родительский Пост
+        rating: Рейтинг
+        rating_locked_info: Рейтинг заблокирован
+        related: {artists: Связанные художники, characters: Связанные персоонажи, copyrights: Связанные произведения, none: Нет, tags: Связанные метки}
+        save: Сохранить изменения
+        shown_in_index: Показан в индексе
+        source: Источник
+        tags: Правка Меток
+      statistics_panel:
+        uploaded_by_user_html: ' %{u}'
+    upload: {anonymous: Анонимная Загрузка, title: Добавить}
+  post_404: "Нет такого поста."
+  post_activate: "Активировать все удержанные посты"
+  post_amb: "Данные метки неоднозначны: "
+  post_approve: "Одобрение"
+  post_batch: "Батч"
+  post_blacklist_add: "Добавить"
+  post_blacklist_text: "Посты, содержащие все метки, будут скрыты. Разделяйте метки пробелами."
+  post_browse: "Листать"
+  post_browse_cancel: "Отмена"
+  post_browse_explicit: "Откровенный"
+  post_browse_frame: "Добавить Кадр"
+  post_browse_frames: "Кадры"
+  post_browse_no_results: "Ничего не найдено."
+  post_browse_parent: "Родительский Пост"
+  post_browse_questionable: "Спорный"
+  post_browse_rating: "Рейтинг"
+  post_browse_safe: "Безопасный"
+  post_browse_save: "Сохранить"
+  post_browse_show_in_index: "Показывать в списке"
+  post_browse_source: "Источник"
+  post_browse_text: "Изображение Скрыто"
+  post_browse_text10: "Источник: "
+  post_browse_text11: "Этот пост удалён."
+  post_browse_text12: "Кем: "
+  post_browse_text13: "Причина: "
+  post_browse_text14: "восстановить"
+  post_browse_text15: "Скачать:"
+  post_browse_text16: "Данный пост имеет "
+  post_browse_text17: "родителя"
+  post_browse_text18: " (сделать этот пост главным)"
+  post_browse_text19: "Данный пост имеет "
+  post_browse_text2: "Настройки Вашего профиля запрещают показ данного изображения."
+  post_browse_text20: "дочерние посты"
+  post_browse_text21: "Помечено "
+  post_browse_text22: "Причина: "
+  post_browse_text23: "Данный пост ждет подтверждения модератором."
+  post_browse_text24: "Данный пост скрыт из индекса добавившим."
+  post_browse_text25: "(активировать)"
+  post_browse_text26: "правка"
+  post_browse_text3: "Используйте двойной щелчок для просмотра изображения"
+  post_browse_text4: "Post #"
+  post_browse_text5: "Скрытый"
+  post_browse_text6: "Добавлено "
+  post_browse_text7: " назад "
+  post_browse_text8: "Оценка: "
+  post_browse_text9: "Кадры: "
+  post_cancel: "Отмена"
+  post_comment_google: "Перевод комментария предоставлен "
+  post_delete: "Удалить"
+  post_delete_access: "(родительский пост скрыт ввиду ограничений доступа)"
+  post_delete_cancel: "Отмена"
+  post_delete_delete: "Удалить"
+  post_delete_no_parent_text: "У данного поста нет родителей. Если он был заменён, исправьте родительские связи для переноса голосов."
+  post_delete_parent_text: "Голоса будут перенесены на указанный родительский пост. Если это неправильно, то нужно поправить родителя до удаления."
+  post_delete_perma: "Уничтожить Безвозвратно"
+  post_delete_perma_text: "Этот пост уже удален. Уничтожение уберёт его безвозвратно."
+  post_deleted_by: "Удалено"
+  post_deleted_post: "Пост"
+  post_deleted_posts: "Удалённые"
+  post_deleted_reason: "Причина"
+  post_deleted_tags: "Метки"
+  post_deleted_user: "Пользователь"
+  post_download: "Скачать"
+  post_download_text: "Вы должны скачать этот файлы вручную."
+  post_edit: "Редактирование"
+  post_edit_e: "Откровенный"
+  post_edit_find_artists: "Поиск художников"
+  post_edit_help: "справка"
+  post_edit_note_locked: "Заметки заблокированы"
+  post_edit_parent: "Родительский Пост"
+  post_edit_q: "Спорный"
+  post_edit_rating: "Рейтинг"
+  post_edit_rating_close: ")"
+  post_edit_rating_locked: "Рейтинг заблокирован"
+  post_edit_rating_text: "Откровенные метки включают в себя sex, pussy, penis, masturbation, blowjob, и т.п. ("
+  post_edit_related_artists: "Связанные художники"
+  post_edit_related_characters: "Связанные персоонажи"
+  post_edit_related_copyrights: "Связанные произведения"
+  post_edit_related_none: "Нет"
+  post_edit_related_tags: "Связанные метки"
+  post_edit_related_tags2: "Связанные Метки"
+  post_edit_s: "Безопасный"
+  post_edit_save: "Сохранить изменения"
+  post_edit_shown: "Показан в индексе"
+  post_edit_source: "Источник"
+  post_edit_tags: "Метки"
+  post_edit_tags_close: ")"
+  post_edit_tags_text: "Разделяйте метки пробелами ("
+  post_empty: "Ничего не найдено. И ничего с этим не поделаешь."
+  post_favorited_by: "В избранном у"
+  post_file: "Файл"
+  post_flag: "Пожаловаться"
+  post_flash_dl: "Сохранить ролик (правая кнопка мыши)"
+  post_gar: "gar"
+  post_held_text: "Вы удержали "
+  post_held_view: "просмотр"
+  post_help: "Справка"
+  post_hidden_posts: "Скрытые Посты"
+  post_history: "История"
+  post_history_notes: "Заметки"
+  post_history_tags: "Метки"
+  post_hover_by: "  "
+  post_hover_child: "Потомок"
+  post_hover_flagged: "Жалоба"
+  post_hover_hidden: "Скрыто"
+  post_hover_parent: "Родитель"
+  post_hover_pending: "Ожидает"
+  post_hover_post: "Пост #"
+  post_hover_rating: "Рейтинг: "
+  post_hover_score: "Оценка: "
+  post_image: "Поиск Изображений"
+  post_image_edit: "Правка"
+  post_image_respond: "Ответить"
+  post_image_text: "Вам нужен привилегированный доступ для просмотра этого изображения"
+  post_list: "Список"
+  post_meant: "Возможно вы имели ввиду: "
+  post_mod: "Модерировать"
+  post_mod_ago: " назад "
+  post_mod_approve: "Одобрить"
+  post_mod_delete: "Удалить"
+  post_mod_down: "вниз"
+  post_mod_enter_reason: "Введите причину"
+  post_mod_flagged: "Жалоба"
+  post_mod_invert: "Инвертировать Выделение"
+  post_mod_mod: "mod"
+  post_mod_parent: "Родитель: "
+  post_mod_pending: "Ожидают"
+  post_mod_rating: "Рейтинг: "
+  post_mod_reason: "Причина: "
+  post_mod_score: "Оценка: "
+  post_mod_search: "Поиск"
+  post_mod_select: "Выбрать Все"
+  post_mod_size: "Размер: "
+  post_mod_tags: "Метки: "
+  post_mod_uploaded: "Загружено"
+  post_mode: "Режим"
+  post_next: "Вперёд"
+  post_options: "Опции"
+  post_options_add_fav: "Добавить в избранные"
+  post_options_add_pool: "Добавить в коллекцию"
+  post_options_approve: "Одобрить"
+  post_options_approve_confirm: "Вы действительно хотите подтвердить этот пост?"
+  post_options_avatar: "Установить аватаркой"
+  post_options_del_fav: "Удалить из избранных"
+  post_options_delete: "Удалить"
+  post_options_download: "Скачать"
+  post_options_download_larger: "Скачать увеличенную версию"
+  post_options_edit: "Правка"
+  post_options_flag: "Пожаловаться"
+  post_options_history: "История изменений"
+  post_options_image: "Изображение"
+  post_options_resize: "Изменить размер"
+  post_options_tl: "Добавить перевод"
+  post_options_undelete: "Восстановить"
+  post_options_view_larger: "Посмотреть увеличенную версию"
+  post_pool_change: "страница изменений"
+  post_pool_next: "Вперёд »"
+  post_pool_previous: "« Назад"
+  post_pool_remove: "удалить"
+  post_pool_remove_confirm: "Вы уверены, что хотите удалить этот пост из "
+  post_pool_text: "Этот пост принадлежит "
+  post_pool_text2: " "
+  post_pool_text3: " коллекции"
+  post_pool_xfer: "перенести родителю"
+  post_pool_xfer_confirm: " и добавить вместо него его родительский пост?"
+  post_popular: "Популярные"
+  post_previous: "Назад"
+  post_random: "Случайный"
+  post_related: "Связанные посты"
+  post_related_dupe: "Найти дубликаты"
+  post_related_next: "Вперёд"
+  post_related_parent: "Родитель"
+  post_related_posts: "Связанные Посты"
+  post_related_previous: "Назад"
+  post_related_random: "Случайный"
+  post_related_sim: "Найти похожие"
+  post_reparent: "Изменить родителя"
+  post_script: "Применить сценарий меток"
+  post_search: "Поиск"
+  post_sim_cancel: "Отмена"
+  post_sim_color: "Не игнорировать цветность"
+  post_sim_down: "(лежит)"
+  post_sim_dupe: "Пометить дубликат"
+  post_sim_dupe_period: "."
+  post_sim_dupe_text: "Ваш пост может быть дубликатом."
+  post_sim_dupe_text10: "Скрытые Посты"
+  post_sim_dupe_text11: " на боковой панели для их просмотра."
+  post_sim_dupe_text2: "Пожалуйста, прочтите "
+  post_sim_dupe_text3: "Если Ваш пост лучше существующего, но старый пост должен остаться,"
+  post_sim_dupe_text4: " - сделайте его дочерним."
+  post_sim_dupe_text5: "Если Ваш пост лучше существующего, и старый пост должен быть удалён, "
+  post_sim_dupe_text6: "пометьте старый пост как дубликат."
+  post_sim_dupe_text7: "Иначе, будьте так любезны, "
+  post_sim_dupe_text8: "удалите Ваш пост"
+  post_sim_dupe_text9: "Ваш чёрный список меток скрыл некоторые потенциальные дубликаты. Используйте "
+  post_sim_edit: "Редактировать"
+  post_sim_edit_tags: "Правка Меток"
+  post_sim_flag: "Пожаловаться"
+  post_sim_gray: "Игнорировать цветность"
+  post_sim_mode: "Режим"
+  post_sim_more: "Показать Ещё"
+  post_sim_options: "Oпции"
+  post_sim_reparent: "Назначить родителя"
+  post_sim_script: "Применить сценарий"
+  post_sim_services: "Сервисы"
+  post_sim_services_text: "Использовать все сервисы "
+  post_sim_update: "Обновить"
+  post_sim_upload: "Загрузить это изображение"
+  post_sim_view: "Просмотр"
+  post_source: "Источник"
+  post_stats: "Статистика"
+  post_stats_ago: " назад"
+  post_stats_approver: "Одобрил: "
+  post_stats_fav: "В избранном: "
+  post_stats_id: "Id: "
+  post_stats_posted: "Добавлено: "
+  post_stats_rating: "Рейтинг: "
+  post_stats_score: "Оценка: "
+  post_stats_size: "Размер: "
+  post_stats_source: "Источник: "
+  post_subs: "Подписки"
+  post_tag_script: "Сценарий"
+  post_tag_script_text: "Применить сценарий ко всем выбранным постам?"
+  post_tags: "Метки"
+  post_update: "Обновить"
+  post_upload: "Добавить"
+  post_upload_artist: "Найти художника"
+  post_upload_e: "Откровенный"
+  post_upload_file: "Файл"
+  post_upload_parent: "Родитель"
+  post_upload_q: "Спорный"
+  post_upload_rating: "Рейтинг"
+  post_upload_rating_text: "Откровенные метки включают в себя sex, pussy, penis, masturbation, blowjob, и т.п. "
+  post_upload_related: "Нет"
+  post_upload_related_circles: "Связанные круги"
+  post_upload_s: "Безопасный"
+  post_upload_source: "Источник"
+  post_upload_source_text: "Вы сожете ввести здесь URL для загрузки с сайта."
+  post_upload_tags: "Метки"
+  post_upload_tags_help: "справка"
+  post_upload_tags_text: "Разделяйте метки пробелами. "
+  post_upload_text: "Один"
+  post_upload_text10: "Не загружайте на сайт "
+  post_upload_text11: " или "
+  post_upload_text12: " творчество"
+  post_upload_text13: "Не загружайте на сайт вещи с "
+  post_upload_text14: "Группируйте додзинси, страницы манги, и похожие картинки из игр вместе"
+  post_upload_text15: "Прочтите "
+  post_upload_text16: "Вы можете добавить "
+  post_upload_text17: " сегодня."
+  post_upload_text18: "Этот пост уже существует: "
+  post_upload_text2: "Несколько"
+  post_upload_text3: " из ваших постов "
+  post_upload_text4: "был"
+  post_upload_text5: "были"
+  post_upload_text6: "недавно удалены"
+  post_upload_text7: "убрать это сообщение"
+  post_upload_text8: "Правила и рекомендации"
+  post_upload_text9: "Пожалуйста, помните следующие рекомендации, когда добавляете что-нибудь. Регулярные нарушения приведут к летальному исходу."
+  post_view: "Просмотр"
+  post_viewing: "Просмотр коллекции "
+  ratings: {_: Рейтинг, e: Откровенный, q: Спорный, s: Безопасный}
+  record_action: "Действие"
+  record_add: "Добавить Запись для "
+  record_add2: "Добавить"
+  record_ago: " назад"
+  record_body: "Сообщение"
+  record_cancel: "Отмена"
+  record_delete: "Удалить"
+  record_list: "Список для пользователя"
+  record_list2: "Список для всех"
+  record_pos: "Положительная"
+  record_reason: "Обоснование"
+  record_record: "Запись"
+  record_reporter: "Доносчик"
+  record_submit: "Отбравить"
+  record_user: "Пользователь"
+  record_when: "Когда"
+  report: "Отчёт "
+  report_changes: "Правки"
+  report_end: "Конечная Дата"
+  report_level: "Уровень"
+  report_limit: "Ограничение"
+  report_notes: "Заметки"
+  report_percent: "Проценты"
+  report_search: "Поиск"
+  report_start: "Начальная Дата"
+  report_tags: "Метки"
+  report_total: "Всего"
+  report_uploads: "Загрузки"
+  report_user: "Пользователь"
+  report_votes: "Отчёт: Пользовательские Голоса"
+  report_votes2: "Голоса"
+  report_votes_text: "Данный отчёт показывает пользовательские голоса за последние три дня."
+  report_wiki: "Wiki"
+  static:
+    index: {search: Поиск}
+  static1: "Справка"
+  static10: "Случайные"
+  static11: "Недавние Удаления"
+  static12: "История"
+  static13: "Добавить"
+  static14: "Bookmarklet"
+  static15: "Расширение для Firefox"
+  static16: "Документация для разработчиков"
+  static17: "Изменения Заметок"
+  static18: "Изменения Меток"
+  static19: "Изменения Wiki"
+  static2: "Atom Feed"
+  static20: "Добавленные Посты"
+  static21: "Пользовательские Голоса"
+  static22: "Задачи"
+  static23: "Справка"
+  static24: "Синонимы"
+  static25: "Дополнительные Значения"
+  static26: "Правка"
+  static27: "Список (облачный вид)"
+  static28: "Список (все)"
+  static29: "Массовая Правка"
+  static3: "Список"
+  static30: "Справка"
+  static31: "История"
+  static32: "Список"
+  static33: "Справка"
+  static34: "Список"
+  static35: "Справка"
+  static36: "Список"
+  static37: "Справка"
+  static38: "Список"
+  static39: "Модерировать"
+  static4: "Листать"
+  static40: "Справка"
+  static41: "Список"
+  static42: "Встроенные Изображения"
+  static43: "Справка"
+  static44: "Список"
+  static45: "История"
+  static46: "Источник"
+  static47: "Оригинальный Danbooru"
+  static48: "Войти"
+  static49: "Зарегистрироваться"
+  static5: "Поиск Изображений"
+  static50: "Сброс Пароля"
+  static51: "Главная"
+  static52: "Выйти"
+  static53: "Мой Профиль"
+  static54: "Записи"
+  static55: "Настройки"
+  static56: "Заблокированные Пользователи"
+  static57: "Сменить Пароль"
+  static58: "Приглашения"
+  static59: "Справка"
+  static6: "Популярные (последние 24 часа)"
+  static60: "Список"
+  static61: "Правила использования Сервиса"
+  static62: "Редактировать Пользователя"
+  static63: "Сбросить Пароль"
+  static7: "Популярные (по дням)"
+  static8: "Популярные (по неделям)"
+  static9: "Популярные (по месяцам)"
+  static_comments: "Комментарии"
+  static_comments_text: "Постраничный список всех комментариев"
+  static_domain: "Домен пожертвован "
+  static_more: "Карта сайта"
+  static_posts: "Посты"
+  static_posts2: " изображений "
+  static_posts_text: "Постраничный список всех постов"
+  static_running: "Работает на Moebooru "
+  static_search: "Поиск"
+  static_serve: "Содержит "
+  static_t1: "Посты"
+  static_t10: "Wiki"
+  static_t11: "Разное"
+  static_t12: "Пользователи"
+  static_t13: "Администрирование"
+  static_t2: "Инструменты"
+  static_t3: "Отчёты"
+  static_t4: "Метки"
+  static_t5: "Заметки"
+  static_t6: "Художники"
+  static_t7: "Коллекции"
+  static_t8: "Комментарии"
+  static_t9: "Форум"
+  static_tags: "Метки"
+  static_tags_text: "Постраничный список всех меток"
+  static_wiki: "wiki"
+  static_wiki_text: "Wiki"
+  sub_add: "Добавить"
+  sub_edit: "правка"
+  sub_name: "Имя"
+  sub_none: "Нет"
+  sub_save: "Сохранить"
+  sub_tags: "Метки"
+  sub_text: "Вы можете создать не более "
+  sub_text2: " подписок на метки."
+  sub_vis: "Показывать"
+  tag:
+    cloud: {title: Метки}
+    index: {title: Метки}
+    mass_edit: {title: Массовая Правка Меток}
+  tag_action: "Действие"
+  tag_alias:
+    index:
+      add: Добавить
+      add_new: {alias_to: Синоним к, info: 'Вы можете предложить новый синоним, но он должен быть подтверждён администратором.', name: Имя, submit: Отправить, title: Добавить Синоним}
+      alias: Синоним
+      approve: Подтвердить
+      delete: Удалить
+      pending: Выбрать Ожидающие
+      reason: Причина
+      search: Поиск Синонимов
+      title: Метки-Синонимы
+      to: Для
+  tag_aliases: "Синонимы"
+  tag_amb: "Неоднозначный"
+  tag_cancel: "Отмена"
+  tag_cloud: "Нет меток."
+  tag_count: "Количество"
+  tag_date: "Дата"
+  tag_edit: "Правка"
+  tag_help: "Справка"
+  tag_history: "Историй"
+  tag_imp: "Дополнительные Значения"
+  tag_implication:
+    index:
+      add: Добавить
+      add_new: {title: Добавить Дополнительное Значение, info: 'Предикат - метка, для которой добавляется метка дополнение. Например, дополнительное значение с предикатом=квадрат и дополнением=прямоугольник означает, что для каждого поста, помеченного как квадрат, будет
+          также добавлена метка прямоугольник.', info_moderation: 'Вы можете предложить новое дополнительное значение для метки, но оно должно быть подтверждено модератором.', submit: Отправить}
+      approve: Подтвердить
+      consequent: Дополнение
+      delete: Удалить
+      predicate: Предикат
+      reason: Причина
+      search: Поиск Дополнительных Значений
+      select_pending: Выбрать Ожидающие
+      title: Метки-Дополнения
+  tag_js: "Вы действительно хотите выполнить данное редактирование меток?"
+  tag_js_preview: "Предпросмотр"
+  tag_js_preview_txt: "Загрузка..."
+  tag_js_save: "Сохранить"
+  tag_list: "Список"
+  tag_mass: "Массовая Правка"
+  tag_name: "Имя"
+  tag_order: "Сортировка"
+  tag_popular: "Популярные"
+  tag_popular_day: "Популярные по Дням"
+  tag_popular_month: "Популярные по Месяцам"
+  tag_popular_week: "Популярные по Неделям"
+  tag_posts: "Посты"
+  tag_save: "Сохранить"
+  tag_search: "Поиск"
+  tag_type: "Тип"
+  tag_wild: "Используйте * в качестве шаблона"
+  time:
+    x_ago: '%{t} назад'
+  user:
+    change_email: {current_email: Текущий Email, current_password: Текущий пароль, new_email: Новый Email}
+    change_password: {new_password: Новый пароль}
+    edit: {email: Email, no_email: нет, title: Редактровать Учётную Запись, update_email: Изменить}
+    home:
+      action_info: Здесь расположены опции и функции, связанные с вашей учётной записью.
+      blocked_users: Заблокированные Пользователи
+      change_password: Сменить Пароль
+      greet_user: 'Привет, %{u}!'
+      invites: Приглашения
+      login: Войти
+      logout: Выйти
+      moderator_tools: Инструменты Модератора
+      my_favorites: Избранное
+      my_mail: Моя Почта
+      my_profile: Мой Профиль
+      no_signup: Регистрация запрещена
+      not_logged_in: Вы не залогинены.
+      reset_password: Сбросить Пароль
+      settings: Настройки
+      signup: Зарегистрироваться
+      title: Моя Страница
+    index: {title: Пользователи}
+    login: {title: Вход}
+    logout: {title: Выйти}
+    reset_password: {title: Сбросить Пароль}
+    show:
+      avatar:
+        remove: {confirm: 'Удалить аватарку?', link: (удалить)}
+      own_title: Мой Профиль
+      title: "Профиль %{name}"
+    show_blocked_users: {title: Заблокированные Пользователи}
+    signup: {title: Зарегистрироваться}
+  user1: "Чёрный Список Меток"
+  user10: " или редактировании постов."
+  user11: "Масштабировать Изображения"
+  user12: "Если включено, то большие изображения будут смасштабированы, чтобы поместиться на экране."
+  user13: "Получать Почту"
+  user14: "Получать письма, когда кто-то прислал вам сообщение."
+  user15: "Показывать Образцы"
+  user16: "Показывать уменьшенные версии изображений."
+  user17: "Использовать обозреватель постов"
+  user18: "Использовать альтернативный обозреватель для просмотра постов и коллекций."
+  user19: "Расширенное Редактирование"
+  user2: "Все посты, содержащие метки из чёрного списка, будут скрыты. Разделяйте метки пробелами."
+  user20: "Показывать инструменты расширенного редактирования."
+  user21: "Язык"
+  user22: "На каком языке показывать комментарии."
+  user23: "Исходный (без перевода)"
+  user24: "Дополнительные языки"
+  user25: "Языки, с которых не требуется перевод."
+  user3: "Email"
+  user4: "Для активации учётной записи необходим email."
+  user5: "Это поле опционально. Оно пригодится, если вы забудете свой пароль и захотите его сбросить."
+  user6: "Подписки на Метки"
+  user7: "Правка Меток"
+  user8: "Эти метки будут доступны "
+  user9: "на странице загрузки"
+  user_address: "Адрес"
+  user_address_text: "Можно использовать маски IP, например 127.0.0.1/24"
+  user_ban: "Забанить"
+  user_banned_by: "Забанен"
+  user_blocked: "Заблокированные Пользователи"
+  user_blocked_ips: "Заблокированные IP-адреса"
+  user_cancel: "Отмена"
+  user_comments: "Комментарии"
+  user_confirm_pwd: "Подтверждение Пароля"
+  user_current_invites: "Текущие Приглашения"
+  user_current_invites_text: "Список пользователей, приглашенных Вами."
+  user_deleted_posts: "Удалённые Посты"
+  user_duration: "Длительность (дни)"
+  user_edit: "(правка)"
+  user_edits: "Правки"
+  user_expire2: " ; истекает: "
+  user_expires: "Истекает"
+  user_fav: "Избранное"
+  user_fav2: "Избранные "
+  user_fav3: "Избранные"
+  user_forum_post: "Сообщения на форуме"
+  user_home: "Вы не залогинены."
+  user_home10: "» Моя Почта"
+  user_home11: "» Избранное"
+  user_home12: "» Настройки"
+  user_home13: "» Сменить Пароль"
+  user_home14: "Инструменты Модератора"
+  user_home15: "Приглашения"
+  user_home16: "» Заблокированные Пользователи"
+  user_home2: "» Войти"
+  user_home3: "» Зарегистрироваться"
+  user_home4: "Регистрация запрещена"
+  user_home5: "» Сброс Пароля"
+  user_home6: "Привет "
+  user_home7: "Здесь расположены опции и функции, связанные с вашей учётной записью."
+  user_home8: "» Выйти"
+  user_home9: "» Мой Профиль"
+  user_invite_link: "Пригласить"
+  user_invited_by: "Приглашён"
+  user_invites: "Приглашения"
+  user_invites2: "Пригласить Пользователя"
+  user_invites_text: "Вы можете поручиться за существующих пользователей и повысить их до статуса Contributor."
+  user_invites_text2: "Вы действительно хотите пригласить "
+  user_ip: "IP"
+  user_join: "Дата Регистрации"
+  user_level: "Уровень"
+  user_list: "Список"
+  user_login_text1: "Войти"
+  user_login_text10: "здесь"
+  user_login_text11: "На данный момент регистрация запрещена."
+  user_login_text2: "Вы ещё не активировали вашу учётную запись. Щёлкните "
+  user_login_text3: "здесь"
+  user_login_text4: ", чтобы повторно послать письмо на "
+  user_login_text5: "Вам нужна цчётная запись, чтобы получить доступ к "
+  user_login_text6: "Щёлкните "
+  user_login_text7: "здесь"
+  user_login_text8: " для сброса пароля"
+  user_login_text9: "Вы можете зарегистрироваться "
+  user_logout_link: "&#171; войти"
+  user_logout_text: "Выйти"
+  user_logout_text2: "Вы вышли на свободу..."
+  user_new_pwd: "Новый Пароль"
+  user_note_edits: "Правки Заметок"
+  user_password: "Пароль"
+  user_password_confirm: "Подтвердите пароль"
+  user_password_text: "Не менее пяти символов."
+  user_posts: "Посты"
+  user_reason: "Причина"
+  user_reason2: "(причина: "
+  user_reason3: ")"
+  user_rec_invites: "Недавние Пришлашения"
+  user_record: "Записи"
+  user_record_add: "добавить"
+  user_record_none: "Нет"
+  user_resend: "Если вы не получили письмо с подтверждением, убедитесь, что оно не было перехвачено спам-фильтром"
+  user_resend_email: "Email"
+  user_resend_submit: "Отправить"
+  user_reset: "Сброс Пароля"
+  user_reset_email: "Email"
+  user_reset_name: "Имя"
+  user_reset_text: "Если вы указали адрес email при регистрации или добавили его позднее, то вы можете сбросить ваш пароль. Вы получите письмо с новым паролем."
+  user_save: "Сохранить"
+  user_send_msg: "Отправить сообщение"
+  user_set_avatar: "Установить аватар"
+  user_signup: "Зарегистрироваться"
+  user_signup_email: "Email"
+  user_signup_email_text: "Опционально, для уведомлений и сброса пароля."
+  user_signup_name: "Имя"
+  user_signup_name_text: "Помните, что это имя просто найти в поисковиках типа Яндекса"
+  user_signup_text: "Зарегистрироваться"
+  user_signup_text2: "Регистрация запрещена."
+  user_signup_text3: "Создавая учётную запись, вы соглашаетесь с "
+  user_signup_text4: "условиями использования сервиса"
+  user_signup_text5: ". "
+  user_signup_text6: "Помните, что этот сайт доступен поисковикам, так что люди смогут легко найти вас по указанному имени."
+  user_sub2: "Подписка: "
+  user_submit: "Отправить"
+  user_subs: "Подписки на Метки"
+  user_tag_edits: "Правки Меток"
+  user_unblock: "Разблокировать"
+  user_uploaded: "Загружено "
+  user_uploaded_tags: "Загруженные Метки"
+  user_uploads: "Загрузки"
+  user_user: "Пользователь"
+  user_votes: "Голоса"
+  user_when: "Когда"
+  user_wiki_edits: "Правки Wiki"
+  users: "Пользователи"
+  users_deleted: "Удаленные"
+  users_joined: "Дата регистрации"
+  users_level: "Уровень"
+  users_name: "Имя"
+  users_neg: "% Нег"
+  users_notes: "Заметки"
+  users_order: "Сортировка"
+  users_pos: "% Поз"
+  users_posts: "Посты"
+  users_search: "Поиск"
+  wiki:
+    diff: {title: Wiki Разница}
+    footer: {list: Список, new: Создать, help: Справка}
+    history: {title: История Wiki}
+    index: {title: Wiki}
+    recent_changes: {title: Последние Изменения}

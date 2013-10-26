@@ -1,0 +1,15 @@
+# Copy this to "database.yml" and adjust the fields accordingly.
+# Only works with mysql adapter.
+login: &login
+  adapter: mysql
+  host: 127.0.0.1
+  username: moe
+  password: imouto
+
+development:
+  <<: *login
+  database: myimouto_dev
+
+production:
+  <<: *login
+  database: myimouto

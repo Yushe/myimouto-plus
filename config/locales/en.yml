@@ -1,0 +1,1469 @@
+en:
+  activerecord:
+    attributes:
+      advertisement:
+        ad_type: Advertisement type
+        height: Height
+        hit_count: Hit Count
+        image_url: Image URL
+        referral_url: Referral URL
+        reset_hit_count: Reset hit count
+        status: Status
+        width: Width
+      user:
+        current_password: Current password
+        password: Password
+        password_confirmation: Password confirmation
+    errors:
+      models:
+        wiki_page:
+          no_change: No change in page content/title
+    models:
+      advertisement: Advertisement
+  admin:
+    edit_user:
+      level: Level
+      save: Save
+      user: User
+    index:
+      cache_statistics: Cache Statistics
+      edit_user: Edit User
+      reset_password: Reset Password
+      title: Admin
+    reset_password:
+      name: Name
+      reset: Reset
+      title: Reset Password
+  # view: /advertisements
+  advertisements:
+    edit:
+      title: 'Edit Advertisement #%{id}'
+    index:
+      reset_hit_count: Reset hit count
+      title: Advertisements
+    new:
+      title: New Advertisement
+    show:
+      title: 'Advertisement #%{id}'
+  # view: /artist
+  artist:
+    create:
+      alias_for: Alias for
+      aliases: Aliases
+      info: Separate multiple aliases and group members with commas.
+      members: Members
+      name: Name
+      notes: Notes
+      urls: URLs
+    destroy:
+      confirm: Are you sure you want to delete %{name}?
+      title: Delete Artist
+    footer:
+      add: Add
+      help: Help
+      list: List
+    index:
+      date: Date
+      delete: Delete artist
+      edit: Edit artist
+      find: Find posts for this artist
+      is_alias: This artist is an alias
+      is_group: This artist is a group
+      last_modified: Last Modified
+      name: Name
+      search: Search
+      title: Artists
+      updated_by: Updated By
+    update:
+      preview: Preview Notes
+  # view: /banned
+  banned:
+    index:
+      expires_in: This will expire in %{t}.
+      permanent: This ban is permanent.
+      reason: You have been banned
+  batch:
+    create:
+      files: Files
+      load_file_index: Load file index
+      submit: Start Upload
+      tags: Tags
+      title: Queue Uploads
+      url: URL
+    index:
+      cancel: Cancel all uploads
+      clear: Clear finished uploads
+      completed_html: Post %{id} complete
+      exists_html: Post %{id} already exists
+      pause: Pause
+      paused: Paused
+      pending: Pending
+      queue_uploads: Queue Uploads
+      resume: Resume
+      retry_failed: Retry failed
+      status: Status
+      tags: Tags
+      title: Batch Queue
+      uploading: Uploading
+      url: URL
+      username: User
+  buttons:
+    _no: 'No'
+    _yes: 'Yes'
+    add: Add
+    approve: Approve
+    back: Back
+    cancel: Cancel
+    delete: Delete
+    edit: Edit
+    save: Save
+    search: Search
+    select:
+      all: Select All
+      invert: Invert Selection
+    update: Update
+  c:
+    pool:
+      not_found: "Can't find pool with id %{id}"
+  # view: /comment
+  comment:
+    comment:
+      delete: Delete
+      edit: Edit
+      flag: Flag for deletion
+      quote: Quote
+    comments:
+      bump: Post without bumping
+      more: more
+      post: Post
+      reply: Reply »
+    edit:
+      save: Save changes
+      title: Edit Comment
+    footer:
+      help: Help
+      list: List
+      search: Search
+      moderate: Moderate
+    index:
+      date: Date
+      empty: No comments.
+      hidden: Hidden
+      score: Score
+      tags: Tags
+      title: Comments
+      translation_html: Comment translation provided by %{p}
+      user: User
+    moderate:
+      approve: Approve
+      author: Author
+      body: Body
+      delete: Delete
+      select_all: Select All
+      select_invert: Invert Selection
+      title: Moderate Comments
+    search:
+      author: Author
+      message: Message
+      post: Post
+      submit: Search
+      time: Time
+    show:
+      return: Return to post
+      title: Comment
+  confirmations:
+    is_sure: Are you sure?
+  dmail:
+    compose:
+      form:
+        body: Body
+        title: Title
+        to: To
+      preview: Preview
+      preview_loading: Loading preview...
+      send: Send
+      title: Compose Message
+    confirm_mark_all_read:
+      title: Mark All Read
+      info: Are you sure you want to mark all your messages as read?
+    footer:
+      compose: Compose
+      inbox: Inbox
+      mark_all_read: Mark all read
+    inbox:
+      empty: You have no messages.
+      table:
+        from: From
+        title: Title
+        to: To
+        when: When
+      title: My Inbox
+    message:
+      sent_by_html: Sent by %{user} %{x_ago}
+  # view: /forum
+  forum:
+    add:
+      post: Post
+      title: Title
+    edit:
+      post: Post
+      post_title: Title
+      preview: Preview
+    index:
+      created_by: Created by
+      help: Help
+      is_locked: (locked)
+      last: last
+      mark: Mark all read
+      new: New topic
+      post: Post
+      post_title: Title
+      preview: Preview
+      responses: Responses
+      search: Search
+      sticky: Sticky
+      title: Forum
+      updated: Updated
+      updated_by: Updated by
+    new:
+      help: Help
+      list: List
+      post: Post
+      post_title: Title
+      preview: Preview
+      title: New Topic
+    post:
+      delete: Delete
+      delete_confirm: Are you sure you want to delete this post?
+      edit: Edit
+      lock: Lock
+      quote: Quote
+      stick: Stick
+      unlock: Unlock
+      unstick: Unstick
+    search:
+      author: Author
+      last_updated: Last Updated
+      last_updated_by: '%{t_ago} by %{u}'
+      message: Message
+      post_title: Title
+      search: Search
+    show:
+      help: Help
+      list: List
+      locked: This topic is locked.
+      new: New topic
+      parent: Parent
+      post: Post
+      preview: Preview
+      reply: Reply
+  # view: /help
+  help:
+    index:
+      about: About Moebooru
+      accounts: Accounts
+      api: API
+      artists: Artists
+      bookmarklet: Bookmarklet
+      bugs: Bugs
+      cheat_sheet: Cheat Sheet
+      comments: Comments
+      dtext: DText
+      faq: Frequently Asked Questions
+      firefox_ext: Firefox Extension
+      help: Help
+      image_sampling: Image Sampling
+      irc: IRC
+      mass_tag_edit: Mass Tag Edit
+      notes: Notes
+      pools: Pools
+      post_relationships: Post Relationships
+      posts: Posts
+      ratings: Ratings
+      source: Source Code
+      starting: Getting Started
+      suggestions: Suggestions
+      tag_aliases: Tag Aliases
+      tag_implications: Tag Implications
+      tag_scripts: Tag Scripts
+      tags: Tags
+      voting: Voting
+      wiki: Wiki
+  helpers:
+    submit:
+      advertisement:
+        create: Create
+        update: Save
+  # view: /history
+  history:
+    index:
+      change: Change
+      date: Date
+      for: History for
+      id: Id
+      object_type: Type
+      redo: Redo
+      search: Search
+      show:
+        all: Showing all tags
+        changed: Showing only changed tags
+      title: History
+      type:
+        all: All
+        pools: Pools
+        posts: Posts
+        tags: Tags
+      undo: Undo
+      user: User
+  # view: /inline
+  inline:
+    crop:
+      crop_avatar: Select the region to crop all images to and press enter. This operation can not be undone.
+    edit:
+      add_do: Add image
+      add_image: Add an image
+      add_image_description: Add description
+      add_set_description_info: click to add a description for this set
+      copy: Copy
+      crop: Crop
+      delete: Delete
+      delete_confirm: Delete this group of images?
+      description: Description
+      file: File
+      move:
+        down: Move down
+        up: Move up
+      preview: Preview
+      remove: Remove image
+      remove_confirm: Remove this image?
+      save: Save changes
+      source: Source
+      tag: 'Inline tag: image #%{id}'
+    footer:
+      help: Help
+      list: List
+    index:
+      create: Create
+      description: Description
+      first_image: First image
+      images: Images
+      user: User
+  job_task:
+    index:
+      table:
+        data: Data
+        id: Id
+        message: Message
+        status: Status
+        type: Type
+      title: Job Tasks
+    show:
+      nav:
+        list: List
+        restart: Restart
+      table:
+        data: Data
+        id: Id
+        message: Message
+        status: Status
+        type: Type
+      title: 'Job #%{id}'
+  layout_login: "Login"
+  layout_login: "Login"
+  layout_login_text: "Please log in. To create a new account, enter the name and password you want to use."
+  layout_logout: "Logout"
+  layout_mail: "My Mail"
+  layout_mass_edit: "Mass Edit"
+  layout_moderate: "Moderate"
+  layout_more: "More »"
+  layout_name: "Name"
+  layout_new_mail: "New Mail"
+  layout_new_topic: "New Topic"
+  layout_no_email: "You have no email address in your profile, so you can't have your password reset."
+  layout_not_exist: "This user name doesn't exist.  If you want to create a new account, just verify your password and log in."
+  layout_notes: "Notes"
+  layout_password: "Password"
+  layout_pools: "Pools"
+  layout_popular: "Popular"
+  layout_popular: "Popular"
+  layout_posts: "Posts"
+  layout_profile: "My Profile"
+  layout_random: "Random"
+  layout_requests: "Requests"
+  layout_reset: "Reset Password"
+  layout_reset: "Reset password"
+  layout_reset_successful: "Password reset. Check your email in a few minutes."
+  layout_search_artists: "Search Artists"
+  layout_search_comments: "Search Comments"
+  layout_search_forum: "Search Forums"
+  layout_search_notes: "Search Notes"
+  layout_search_pools: "Search Pools"
+  layout_search_posts: "Search Posts"
+  layout_search_tags: "Search Tags"
+  layout_search_wiki: "Search Wiki"
+  layout_settings: "Settings"
+  layout_site_help: "Site Help"
+  layout_tags: "Tags"
+  layout_unknown_user: "That account does not exist."
+  layout_upload: "Upload"
+  layout_view_artists: "View Artists"
+  layout_view_comments: "View Comments"
+  layout_view_notes: "View Notes"
+  layout_view_pools: "View Pools"
+  layout_view_posts: "View Posts"
+  layout_view_tags: "View Tags"
+  layout_wiki: "Wiki"
+  layout_wiki_index: "View Wiki Index"
+  layout_wrong_email: "The email address specified is not registered with this account."
+  layouts:
+    default:
+      old_browser:
+        hide: (hide this message)
+        info: Your browser is very old, and this site will not display properly.
+        suggestion: Please consider upgrading to a more recent web browser
+    login:
+      email: Email
+      email_info: If you supplied an email address when you signed up or added a email later, you can have your password reset.
+      info: Please log in. To create a new account, enter the name and password you want to use.
+      login: Login
+      name: Name
+      password: Password
+      password_confirm: Confirm Password
+      popup:
+        email_reset: "Enter the current email address you have registered in your profile.  You'll get an email containing your new password."
+        exist: This user name exists.  If you want to create a new account, please choose a different name.
+        invalid_email: Delivery to this email address has failed.
+        no_email: "You have no email address in your profile, so you can't have your password reset."
+        not_exist: "This user name doesn't exist.  If you want to create a new account, just verify your password and log in."
+        reset_successful: Password reset. Check your email in a few minutes
+        unknown_user: That account does not exist.
+        wrong_email: The email address specified is not registered with this account.
+      reset: Reset Password
+    menu:
+      account:
+        _: My Account
+        change_password: Change Password
+        favorites: My Favorites
+        login: Login
+        logout: Logout
+        mail: My Mail
+        profile: My Profile
+        reset: Reset Password
+        settings: Settings
+      artists:
+        _: Artists
+        create: Create
+        search: Search Artists
+        view: View Artists
+      comments:
+        _: Comments
+        moderate: Moderate
+        search: Search Comments
+        view: View Comments
+      forum:
+        _: Forum
+        mark_all_read: Mark All Read
+        new: New Topic
+        search: Search Forums
+        view: View Topics
+      help:
+        _: Help
+        artists: Artist Help
+        comments: Comment Help
+        forum: Forum Help
+        notes: Note Help
+        pools: Pool Help
+        posts: Post Help
+        site: Site Help
+        tags: Tag Help
+        wiki: Wiki Help
+      more: More »
+      new_mail: New Mail
+      notes:
+        _: Notes
+        requests: Requests
+        search: Search Notes
+        view: View Notes
+      pools:
+        _: Pools
+        create: Create New Pool
+        search: Search Pools
+        view: View Pools
+      posts:
+        _: Posts
+        batch: Batch Upload
+        history: History
+        image_search: Image Search
+        moderate: Moderate
+        popular: Popular
+        random: Random
+        search: Search Posts
+        upload: Upload
+        view: View Posts
+      tags:
+        _: Tags
+        aliases: Aliases
+        edit: Edit
+        implications: Implications
+        mass_edit: Mass Edit
+        popular: Popular
+        search: Search Tags
+        view: View Tags
+      wiki:
+        _: Wiki
+        create: Create New Page
+        index: View Wiki Index
+        search: Search Wiki
+    news:
+      close: Close
+    settings:
+      menu:
+        title: Settings
+  note:
+    footer:
+      help: Help
+      history: History
+      list: List
+      requests: Requests
+      search: Search
+    history:
+      revert: Revert
+      revert_confirm: Do you really wish to revert to this note?
+      table:
+        body: Body
+        date: Date
+        edited: Edited By
+        note: Note
+        options: Options
+        post: Post
+      title: Note History
+    index:
+      title: Notes
+    note:
+      click: Click to edit
+    search:
+      search: Search
+      title: Search Notes
+  pool:
+    add_post:
+      add: Add
+      cancel: Cancel
+      info: 'Select a pool to add this post to:'
+      order: Order
+      pool: Pool
+      title: Add to Pool
+    copy:
+      copy: Copy Pool
+      name: Name
+      title: Clone Pool
+    create:
+      cancel: Cancel
+      description: Description
+      is_public: Public?
+      name: Name
+      save: Save
+      title: Create Pool
+    destroy:
+      confirm: 'Are you sure you wish to delete pool %{name}?'
+      title: Delete
+    footer:
+      help: Help
+      list: List
+      new: New
+    import:
+      import: Import
+      info: You can perform a tag search and import all the matching posts into this pool.
+      search: Search
+      title: 'Pool Import: %{name}'
+    index:
+      search: Search
+      table:
+        created: Created
+        creator: Creator
+        name: Name
+        posts: Posts
+        updated: Updated
+      title: '%{q} - Pools'
+      title_main: Pools
+    order:
+      auto_order: Auto Order
+      info: Lower numbers will appear first.
+      interval: Enter an interval
+      minus_one: '-1'
+      order: Order
+      plus_one: '+1'
+      reverse: Reverse
+      title_html: 'Pool Ordering: %{name}'
+    select_form:
+      add: Add
+    show:
+      delete_mode_info: 'When delete mode is enabled, clicking on a thumbnail will remove the post from this pool.'
+      links:
+        copy: Copy
+        delete: Delete
+        delete_mode: Delete mode
+        edit: Edit
+        history: History
+        import: Import
+        index_view: Index View
+        jpeg: Download JPGs
+        order: Order
+        png: Download
+        toggle_view: Toggle View
+        transfer: Transfer Post Data
+      title: 'Pool: %{name}'
+    transfer_metadata:
+      from:
+        from: From
+        from_number: 'Transfer from pool number:'
+        to: To
+        transfer: Transfer
+      info_truncated: "These pools don't have the same number of posts."
+      info_truncated_warning: 'Please check that tags are being transferred to the correct posts.'
+      info_what: 'Tags and ratings will be transferred, and the old posts will be parented to the new posts.'
+      reverse: Reverse
+      reverse_text_html: '%{reverse} the transfer'
+      table:
+        from: From
+        tags: Tags
+        to: To
+        transfer: Transfer
+      title_html: 'Transferring post data from posts in pool %{from} to posts in pool %{to}'
+    update:
+      form:
+        description: Description
+        is_active:
+          _: Active
+          info: 'Inactive pools will no longer be selectable when adding a post.'
+        is_public:
+          _: 'Public?'
+          info: 'Public pools allow anyone to add/remove posts.'
+        name: Name
+      title: Edit Pool
+  post:
+    blacklists:
+      add: Add
+      hidden_posts: Hidden Posts
+      info: Posts containing all tags will be hidden. Seperate tags with spaces.
+    browse:
+      by:
+        # Posted / <x> ago / by <user>
+        all_html: '%{text} %{ago} %{by}'
+        by_html: by %{user}
+        text: Posted
+      child:
+        all_html: This post has %{child}.
+        child: child posts
+      deleted:
+        by: By
+        reason: Reason
+        title: This post was deleted.
+        undelete: undelete
+      download: Download
+      edit: edit
+      flagged_info_html: Flagged by %{user}.
+      frames: Frames
+      held:
+        activate: (activate it)
+        info: This post is held from the index by the poster.
+      hidden: Hidden
+      image_hidden:
+        info: This post is not displayed due to your account settings.
+        show: Double-click here to display the image
+        title: Image Hidden
+      no_result: No search results.
+      parent:
+        all_html: This post has a %{parent}%{make_parent}.
+        make_parent: make this post the parent
+        parent: parent post
+      parent_post: Parent Post
+      pending_info: This post is pending moderator approval.
+      post_num_html: 'Post #%{num}'
+      reason: Reason
+      score: Score
+      shown_in_index: Shown in Index
+      source: Source
+    delete:
+      delete: Delete
+      noaccess_info: (parent post hidden due to access restrictions)
+      noparent_info: This post has no parent. If this post has been replaced, reparent this post before deleting, and votes will be transferred.
+      parent_info: Votes will be transferred to the following parent post. If this is incorrect, reparent this post before deleting it.
+      permanent: Destroy Permanently
+      permanent_info: This post is already deleted. Destroying it will remove it permanently.
+      reason: Reason
+      title: Delete Post
+    deleted_index:
+      by: Deleted by
+      post: Post
+      reason: Reason
+      tags: Tags
+      title: Deleted Posts
+      user: User
+    favorites:
+      title: Favorited by
+    footer:
+      batch: Batch
+      browse: Browse
+      help: Help
+      history: History
+      image_search: Image Search
+      list: List
+      mod: Moderate
+      popular: Popular
+      random: Random
+      subs: Subscriptions
+      upload: Upload
+    hover:
+      child: Child
+      flagged:
+        by_html: '%{text} by %{data}'
+        text: Flagged
+      hidden: Hidden
+      parent: Parent
+      pending: Pending
+      post_number: 'Post #'
+      rating: Rating
+      score: Score
+    index:
+      activate: Activate all held posts
+      ambiguous: The following tags are ambiguous
+      edit_tags: Edit Tags
+      held_html: You have held %{count}
+      held_view: view
+      maybe_you_meant: Maybe you meant
+      mode: Mode
+      mode_form:
+        approve: Approve posts
+        edit: Edit posts
+        flag: Flag post
+        pool_remove: Remove from pool
+        reparent: Reparent posts
+        script: Apply tag script
+        view: View posts
+      pool_view_html: Viewing pool %{pool}.
+    moderate:
+      down: down
+      flagged: Flagged
+      mod: mod
+      parent: Parent
+      pending: Pending
+      prompt_reason: Enter a reason
+      rating: Rating
+      reason: Reason
+      score: Score
+      size: Size
+      tags: Tags
+      title: Moderation Queue
+      uploaded_by_when_html: Uploaded by %{u} %{t_ago} (%{mod})
+      vote_down_html: vote %{down}
+    popular_by_day:
+      popular:
+        _: Popular
+        month: Popular (by month)
+        week: Popular (by week)
+      title: Exploring %{year}/%{month}/%{day}
+    popular_by_month:
+      popular:
+        _: Popular
+        month: Popular (by month)
+        week: Popular (by week)
+      title: Exploring %{year}/%{month}
+    popular_by_week:
+      popular:
+        _: Popular
+        month: Popular (by month)
+        week: Popular (by week)
+      title: Exploring %{st_year}/%{st_month}/%{st_day} - %{end_year}/%{end_month}/%{end_day}
+    popular_recent:
+      popular:
+        _: Popular
+        month: Popular (by month)
+        week: Popular (by week)
+      title: Exploring %{period}
+    post_atom:
+      data: Image data
+      dimension: Dimension
+      source: Source
+    posts:
+      empty: Nobody here but us chickens!
+    search:
+      search: Search
+      title: Search
+    show:
+      empty: Nobody here but us chickens!
+    show_empty:
+      info: This post does not exist.
+      related:
+        _: Related Posts
+        next: Next
+        previous: Previous
+        random: Random
+    show_partials:
+      edit:
+        find_artists: Find artists
+        help: help
+        note_locked: Note locked
+        parent: Parent Post
+        rating: Rating
+        rating_info_html: Explicit tags include sex, pussy, penis, masturbation, blowjob, etc. (%{more})
+        rating_locked: Rating locked
+        rating_locked_info: This post is rating locked.
+        related:
+          artists: Related artists
+          characters: Related characters
+          copyrights: Related copyrights
+          none: None
+          tags: Related tags
+        save: Save changes
+        shown_in_index: Shown in index
+        source: Source
+        tags: Edit Tags
+        tags_info_html: Separate tags with spaces (%{more})
+      history_panel:
+        notes: Notes
+        tags: Tags
+        title: History
+      image:
+        denied: You need a privileged account to see this image
+        download:
+          _: Download
+          info: You must download this file manually.
+        save_flash: Save this flash (right click and save)
+      image_footer:
+        edit: Edit
+        respond: Respond
+      options_panel:
+        add_notes: Add translation
+        add_to_pool: Add to pool
+        approve:
+          _: Approve
+          confirm: Do you really want to approve this post?
+        delete: Delete
+        download:
+          image: Image
+          larger: Download larger version
+          normal: Download
+        favorites:
+          add: Add to favorites
+          remove: Remove from favorites
+        flag: Flag for deletion
+        history: Post history
+        resize: Resize image
+        set_avatar: Set avatar
+        title: Options
+        undelete: Undelete
+        view_larger: View larger version
+      pool:
+        change: change page
+        info_html: 'This post is %{sequence} in the %{pool} pool.'
+        next: 'Next »'
+        previous: '« Previous'
+        remove:
+          _: remove
+          confirm: Are you sure you want to remove this post from %{current_pool}?
+        transfer:
+          _: transfer to parent
+          confirm: Are you sure you want to remove this post from %{current_pool} and add the parent post instead?
+      related_posts_panel:
+        find:
+          duplicate: Find dupes
+          similar: Find similar
+        next: Next
+        parent: Parent
+        previous: Previous
+        random: Random
+        title: Related Posts
+      statistics_panel:
+        approver: Approver
+        favorited_by: Favorited by
+        id: Id
+        posted: Posted
+        posted_data_html: '%{time} by %{user}'
+        rating: Rating
+        score: Score
+        size: Size
+        source: Source
+        title: Statistics
+      status_notices:
+        by: By
+        deleted_info: This post was deleted.
+        flagged:
+          delete: delete
+          info: 'This post was flagged for deletion by %{user}. Reason: %{reason}.'
+          unflag: unflag this post
+        held:
+          activate: activate this post
+          info: This post has been temporarily held from the index by the poster.
+        parent:
+          child: a child post
+          child_post_html: 'post #%{child}'
+          children: child posts
+          has_child_html: This post has %{child}.
+          has_parent_html: This post belongs to a %{parent}.
+          make_parent: make this post the parent
+          parent: parent post
+        pending:
+          approve:
+            _: approve
+            confirm: Do you really want to approve this post?
+          delete: delete
+          info: This post is pending moderator approval.
+        reason: Reason
+        resized:
+          always_view_original: Always view original
+          hide: Hide this message
+          info_html: This image has been resized. Click on the %{larger} link in the sidebar for a high-quality version.
+          view_larger: View larger version
+        samples_disabled: Image samples have been disabled. If you find this to be too slow, you can turn samples back on in your profile settings.
+    similar:
+      apply_tag_script: Apply Tag Script
+      down: down
+      duplicate:
+        blacklist: Hidden Posts
+        delete: delete your post
+        guide: duplicate post guidelines
+        info_blacklist_html: Your tag blacklist has hidden some potential duplicates. Use %{blacklist} in the sidebar to view hidden posts.
+        info_delete_html: Otherwise, please %{delete}.
+        info_guide_html: Your post may be a duplicate. Please read the %{guide}.
+        info_reparent_html: If your post is a better version of an existing one, but the old post should remain, %{reparent} the old post.
+        info_mark_duplicate_html: If your post is a better version of an existing one, and the old post should be deleted, %{mark_duplicate}.
+        mark_duplicate: mark the old post as a duplicate
+        reparent: reparent
+      edit_posts: Edit Posts
+      edit_tags: Edit Tags
+      file: File
+      flag_duplicate: Flag as duplicate
+      flag_post: Flag Post
+      mode: Mode
+      mode_color: "Don't ignore colors"
+      mode_gray: Ignore colors
+      options: Options
+      reparent: Reparent
+      services: Services
+      show_more: Show More
+      source: Source
+      update: Update
+      upload: Upload this image
+      use_all_services: Use all services
+      view_posts: View Posts
+    tag_script:
+      confirm: 'Apply tag script to all of these posts?'
+      title: Tag Script
+    tags:
+      title: Tags
+    upload:
+      already_exists: This post already exists
+      anonymous: Anonymous Upload
+      form:
+        file: File
+        find_artist: Find artist
+        find_related:
+          artists: Related artists
+          characters: Related characters
+          circles: Related circles
+          copyrights: Related copyrights
+          none: none
+          tags: Related tags
+        help: help
+        parent: Parent
+        rating:
+          _: Rating
+          info: Explicit tags include sex, pussy, penis, masturbation, blowjob, etc.
+        source:
+          _: Source
+          info: You can enter a URL here to download from a website.
+        tags:
+          _: Tags
+          info: Separate tags with spaces.
+        upload: Upload
+      guidelines:
+        do_not:
+          compression_artifacts: compression artifacts
+          obnoxious_watermarks: obnoxious watermarks
+          tags_html: Do not upload %{tags} art
+          with_html: Do not upload things with %{with}
+        group: Group doujinshi, manga pages, and similar game CGs together
+        info: Please keep the following guidelines in mind when uploading something. Consistently violating these rules will result in a ban.
+        last_word_connector_or: ', or '
+        limit: You can only upload %{n} today.
+        more_html: Read the %{more_link}
+        more_link: tagging guidelines
+        title: Upload Guidelines
+      posts_deleted:
+        hide: dismiss this message
+        notice_plural_html: Some of your posts were %{recently_deleted}.
+        notice_singular_html: One of your posts was %{recently_deleted}.
+        recently: recently deleted
+      title: Upload
+  ratings:
+    _: Rating
+    e: Explicit
+    q: Questionable
+    s: Safe
+  record_action: "Action"
+  record_add: "Add Record for "
+  record_add2: "Add"
+  record_ago: " ago"
+  record_ago2: ""
+  record_body: "Body"
+  record_cancel: "Cancel"
+  record_delete: "Delete"
+  record_list: "List for user"
+  record_list2: "List for all"
+  record_pos: "Positive"
+  record_reason: "Reason"
+  record_record: "Record"
+  record_reporter: "Reporter"
+  record_submit: "Submit"
+  record_user: "User"
+  record_when: "When"
+  report: "Report "
+  report_changes: "Changes"
+  report_end: "End Date"
+  report_level: "Level"
+  report_limit: "Limit"
+  report_notes: "Notes"
+  report_percent: "Percentage"
+  report_search: "Search"
+  report_start: "Start Date"
+  report_tags: "Tags"
+  report_total: "Total"
+  report_uploads: "Uploads"
+  report_user: "User"
+  report_votes: "Report: User Votes"
+  report_votes2: "Votes"
+  # moderator_report is admin stuff anyways
+  # static
+  report_votes_text: "The following report shows user votes over the past three days."
+  report_wiki: "Wiki"
+  settings:
+    api:
+      show:
+        info: Your API Key
+        reset: Reset
+        title: API Key
+  static:
+    index:
+      search: Search
+  # view: /help
+  static1: "Help"
+  static10: "Random"
+  static11: "Recent Deletions"
+  static12: "History"
+  static13: "Upload"
+  static14: "Bookmarklet"
+  static15: "Firefox Extension"
+  static16: "API Documentation"
+  static17: "Note Updates"
+  static18: "Tag Updates"
+  static19: "Wiki Updates"
+  static2: "Atom Feed"
+  static20: "Post Uploads"
+  static21: "User Votes"
+  static22: "Job Tasks"
+  static23: "Help"
+  static24: "Aliases"
+  static25: "Implications"
+  static26: "Edit"
+  static27: "List (cloud view)"
+  static28: "List (all)"
+  static29: "Mass Edit"
+  static3: "Listing"
+  static30: "Help"
+  static31: "History"
+  static32: "Listing"
+  static33: "Help"
+  static34: "Listing"
+  static35: "Help"
+  static36: "Listing"
+  static37: "Help"
+  static38: "Listing"
+  static39: "Moderate"
+  static4: "Browse"
+  static40: "Help"
+  static41: "Listing"
+  static42: "Inline Images"
+  static43: "Help"
+  static44: "Listing"
+  static45: "History"
+  static46: "Source"
+  static47: "Original Danbooru"
+  static48: "Login"
+  static49: "Signup"
+  static5: "Image Search"
+  static50: "Reset Password"
+  static51: "Home"
+  static52: "Logout"
+  static53: "My Profile"
+  static54: "Records"
+  static55: "Settings"
+  static56: "Blocked Users"
+  static57: "Change Password"
+  static58: "Invites"
+  static59: "Help"
+  static6: "Popular (last 24 hours)"
+  static60: "Listing"
+  static61: "Terms of Service"
+  static62: "Edit User"
+  static63: "Reset Password"
+  static7: "Popular (by day)"
+  static8: "Popular (by week)"
+  static9: "Popular (by month)"
+  static_comments: "Comments"
+  static_comments_text: "A paginated list of every comment"
+  static_domain: "Domain donated by "
+  # credits for translation put in your nickname
+  static_more: "A site map"
+  static_posts: "Posts"
+  static_posts2: " posts "
+  static_posts_text: "A paginated list of every post"
+  static_running: "Running Moebooru "
+  static_search: "Search"
+  # try to fix ago problem
+  static_serve: "Serving "
+  static_t1: "Posts"
+  static_t10: "Wiki"
+  static_t11: "Miscellaneous"
+  static_t12: "Users"
+  static_t13: "Admin"
+  # terms of service should be moved to wiki?
+  static_t2: "Tools"
+  static_t3: "Reports"
+  static_t4: "Tags"
+  static_t5: "Notes"
+  static_t6: "Artist"
+  static_t7: "Pools"
+  static_t8: "Comments"
+  static_t9: "Forum"
+  static_tags: "Tags"
+  static_tags_text: "A paginated list of every tag"
+  static_translation: ""
+  static_wiki: "Wiki"
+  static_wiki_text: "Wiki"
+  sub_add: "Add"
+  sub_edit: "Edit Tag Subscriptions"
+  sub_edit: "edit"
+  # view: /user
+  sub_name: "Name"
+  sub_none: "None"
+  sub_save: "Save"
+  sub_tags: "Tags"
+  sub_text: "You can only create up to "
+  sub_text2: " tag subscriptions."
+  sub_vis: "Visible"
+  tag:
+    cloud:
+      title: Tags
+    index:
+      title: Tags
+    mass_edit:
+      title: Mass Edit Tags
+  tag_action: "Action"
+  tag_alias:
+    index:
+      add: Add
+      add_new:
+        alias_to: Alias to
+        info: You can suggest a new alias, but it must be approved by an administrator before it is activated.
+        name: Name
+        submit: Submit
+        title: Add Alias
+      alias: Alias
+      approve: Approve
+      delete: Delete
+      pending: Select Pending
+      reason: Reason
+      search: Search Aliases
+      title: Tag Aliases
+      to: To
+  tag_aliases: "Aliases"
+  tag_amb: "Ambiguous"
+  tag_cancel: "Cancel"
+  tag_cloud: "There are no tags."
+  tag_count: "Count"
+  tag_date: "Date"
+  tag_edit: "Edit"
+  tag_help: "Help"
+  tag_history: "History"
+  tag_imp: "Implications"
+  tag_implication:
+    index:
+      add: Add
+      add_new:
+        title: Add Implication
+        info: The predicate tag is the tag that is matched against, and the consequent tag is the tag that is added. For example, a tag implication with predicate=square consequent=rectangle would mean any post tagged with square would also be tagged with rectangle.
+        info_moderation: You can suggest a new implication, but it must be approved by a moderator before it is activated.
+        submit: Submit
+      approve: Approve
+      consequent: Consequent
+      delete: Delete
+      predicate: Predicate
+      reason: Reason
+      search: Search Implications
+      select_pending: Select Pending
+      title: Tag Implications
+  # tag imp
+  tag_js: "Are you sure you wish to perform this tag edit?"
+  tag_js_preview: "Preview"
+  tag_js_preview_txt: "Loading..."
+  tag_js_save: "Save"
+  tag_list: "List"
+  tag_mass: "Mass Edit"
+  tag_name: "Name"
+  tag_order: "Order"
+  tag_popular: "Popular"
+  tag_popular_day: "Popular by Day"
+  tag_popular_month: "Popular by Month"
+  # tag alias
+  tag_popular_week: "Popular by Week"
+  tag_posts: "Posts"
+  tag_save: "Save"
+  tag_search: "Search"
+  tag_type: "Type"
+  tag_wild: "Use * as a wildcard."
+  time:
+    # t: "16 days", "1 hour", etc (localized)
+    x_ago: '%{t} ago'
+    x_ago_html: '%{t} ago'
+  user:
+    change_email:
+      current_email: Current Email
+      current_password: Current password
+      new_email: New Email
+      title: Change Email Address
+    change_password:
+      new_password: New password
+      title: Change Password
+    edit:
+      email: Email
+      no_email: none
+      title: Edit Account
+      update_email: Change
+    home:
+      action_info: From here you can access account-specific options and features.
+      blocked_users: Blocked Users
+      change_password: Change Password
+      greet_user: 'Hello %{u}!'
+      invites: Invites
+      login: Login
+      logout: Logout
+      moderator_tools: Moderator Tools
+      my_favorites: My Favorites
+      my_mail: My Mail
+      my_profile: My Profile
+      no_signup: Registration is disabled
+      not_logged_in: You are not logged in.
+      reset_password: Reset Password
+      settings: Settings
+      signup: Register
+      title: My Account
+    index:
+      title: Users
+    login:
+      title: Login
+    logout:
+      title: Logout
+    reset_password:
+      title: Reset Password
+    show:
+      avatar:
+        remove:
+          confirm: Remove avatar?
+          link: (remove)
+      own_title: My Profile
+      title: "%{name}'s Profile"
+    show_blocked_users:
+      title: Blocked Users
+    signup:
+      title: Signup
+  # user
+  user1: "Tag Blacklist"
+  user10: " or edit a post."
+  user11: "Resize Images"
+  user12: "If enabled, large images will always be resized to fit the screen."
+  user13: "Receive Mails"
+  user14: "Receive emails when someone sends you a message."
+  user15: "Show Image Samples"
+  user16: "Show reduced large-resolution images."
+  user17: "Use post browser"
+  user18: "Use the post browser when viewing posts and pools."
+  user19: "Advanced Editing"
+  user2: "Any post containing all blacklisted tags on a line will be hidden. Separate tags with spaces."
+  user20: "Show advanced editing controls."
+  user21: "Language"
+  user22: "Language to show comments in."
+  user23: "Original (no translation)"
+  user24: "Secondary languages"
+  user25: "Languages to not translate from."
+  user3: "Email"
+  user4: "An email address is required to activate your account."
+  user5: "This field is optional. It is useful if you ever forget your password and want to reset it."
+  user6: "Tag Subscriptions"
+  user7: "Edit Tags"
+  user8: "These will be accessible when you "
+  user9: "upload"
+  user_address: "Address"
+  user_address_text: "IP masks may be used, such as 127.0.0.1/24"
+  user_ban: "Ban"
+  user_banned_by: "Banned by"
+  user_blocked: "Blocked Users"
+  user_blocked_ips: "Blocked IPs"
+  user_cancel: "Cancel"
+  user_comments: "Comments"
+  user_confirm_pwd: "Confirm Password"
+  user_current_invites: "Current Invites"
+  user_current_invites_text: "These are the users you have invited so far."
+  user_deleted_posts: "Deleted Posts"
+  user_duration: "Duration (days)"
+  user_duration: "Duration (days)"
+  user_edit: "(edit)"
+  user_edits: "Edits"
+  user_expire2: " ; expires: "
+  user_expires: "Expires"
+  user_fav: "Favorites"
+  user_fav2: "Favorite "
+  user_fav3: "Favorites"
+  user_forum_post: "Forum Posts"
+  user_home: "You are not logged in."
+  user_home10: "» My Mail"
+  user_home11: "» My Favorites"
+  user_home12: "» Settings"
+  user_home13: "» Change Password"
+  user_home14: "Moderator Tools"
+  user_home15: "Invites"
+  user_home16: "» Blocked Users"
+  user_home2: "» Login"
+  user_home3: "» Sign Up"
+  user_home4: "Signups are disabled"
+  user_home5: "» Reset Password"
+  user_home6: "Hello "
+  user_home7: "From here you can access account-specific options and features."
+  user_home8: "» Logout"
+  user_home9: "» My Profile"
+  user_invite_link: "Invite"
+  user_invited_by: "Invited By"
+  user_invites: "Invites"
+  user_invites2: "Invite User"
+  user_invites_text: "You can vouch for existing members and invite them to contributor status."
+  user_invites_text2: "Are you sure you want to invite "
+  user_ip: "IP"
+  user_join: "Join Date"
+  user_level: "Level"
+  user_list: "List"
+  user_login_text1: "Login"
+  user_login_text10: "here"
+  user_login_text11: "Registration is current disabled."
+  user_login_text2: "You have not yet activated your account. Click "
+  user_login_text3: "here"
+  user_login_text4: " to resend your confirmation email to "
+  user_login_text5: "You need an account to access some parts of "
+  user_login_text6: "Click "
+  user_login_text7: "here"
+  user_login_text8: " to reset your password."
+  user_login_text9: "You can register for an account "
+  user_logout_link: "&#171; login"
+  user_logout_text: "Logoff"
+  user_logout_text2: "You are now logged out of the system..."
+  user_new_pwd: "New Password"
+  user_note_edits: "Note Edits"
+  user_password: "Password"
+  user_password_confirm: "Confirm password"
+  user_password_text: "Minimum of five characters."
+  user_posts: "Posts"
+  user_reason: "Reason"
+  user_reason: "Reason"
+  user_reason2: "(reason: "
+  user_reason3: ")"
+  user_rec_invites: "Recent Invites"
+  user_record: "Record"
+  user_record_add: "add"
+  user_record_none: "None"
+  user_resend: "If you haven't received your confirmation email, make sure it wasn't caught by your spam filter."
+  user_resend_email: "Email"
+  user_resend_submit: "Submit"
+  user_reset: "Reset Password"
+  user_reset_email: "Email"
+  user_reset_name: "Name"
+  user_reset_text: "If you supplied an email address when you signed up, or added an email later, you can have your password reset. You'll get an email containing your new password."
+  user_save: "Save"
+  user_send_msg: "Send message"
+  user_set_avatar: "Set avatar"
+  user_signup: "Signup"
+  user_signup_email: "Email"
+  user_signup_email_text: "Optional, for email notifications and password resets."
+  user_signup_email_text_wa: "Required for account activation, email notifications and password resets."
+  user_signup_name: "Name"
+  user_signup_name_text: "Please remember your name will be easy to Google on this site."
+  user_signup_text: "Signup"
+  user_signup_text2: "Signups are currently disabled."
+  user_signup_text3: "By creating an account, you are agreeing to the "
+  user_signup_text4: "terms of service"
+  user_signup_text5: ". "
+  user_signup_text6: "Remember that this site is open to web crawlers, so people will be able to easily search your name."
+  user_sub2: "Tag Subscription: "
+  user_submit: "Submit"
+  user_submit: "Submit"
+  user_subs: "Tag Subscriptions"
+  user_tag_edits: "Tag Edits"
+  user_unblock: "Unblock"
+  user_uploaded: "Uploaded "
+  user_uploaded_tags: "Uploaded Tags"
+  user_uploads: "Uploads"
+  user_user: "User"
+  user_user: "User"
+  user_votes: "Votes"
+  user_when: "When"
+  # user record
+  user_wiki_edits: "Wiki Edits"
+  users: "Users"
+  users_deleted: "Deleted"
+  users_joined: "Joined"
+  users_level: "Level"
+  users_level: "Level"
+  users_name: "Name"
+  users_neg: "% Neg"
+  users_notes: "Notes"
+  users_order: "Order"
+  users_pos: "% Pos"
+  users_posts: "Posts"
+  users_search: "Search"
+  wiki:
+    diff:
+      title: Wiki Diff
+    footer:
+      list: List
+      new: New
+      help: Help
+    history:
+      title: Wiki History
+    index:
+      title: Wiki
+    recent_changes:
+      title: Recent Changes
+  # Client side (javascript) specific translations
+  js:
+    comment:
+      flag_ask: Flag this comment?
+      flag_process: Flagging comment for deletion...
+      flag_notice: Comment flagged for deletion
+      quote_error: Error quoting comment
+      delete_ask: Are you sure you want to delete this comment?
+      delete_error: 'Error deleting comment: '
+    denied: Access Denied
+    dmail:
+      fetch_prev_msg: Fetching previous messages...
+      prev_msg_loaded: Previous messages loaded
+    error: 'Error: '
+    forum:
+      mark_as_read: Marked all topics as read
+      quote_error: Error quoting forum post
+    no_translation: 'No translation: '
+    noone: no one
+    said: 'said:'
+    vote:
+      remove: Remove vote
+      good: Good
+      great: Great
+      fav: Favorite
+      saved: Vote saved
+      voting: Voting...

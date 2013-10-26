@@ -1,0 +1,4 @@
+zh_CN:
+  errors:
+    template:
+      body: '如下字段出现错误：'

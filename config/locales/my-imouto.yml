@@ -1,0 +1,20 @@
+en:
+  layouts:
+    menu:
+      posts:
+        import: Import
+    
+    admin:
+      menu:
+        title: Actions
+        edit_user: Edit user
+        reset_password: Reset user password
+        fix_tag_count: Recalculate tag count
+        purge_tags: Purge tags
+  
+  post:
+    show_partials:
+      options_panel:
+        notes_create_notice: To create a note, <br/>Shift + Click + Drag<br/> over the image. More info in the %{notes_help}. (%{close})
+  
+  static62a: Index

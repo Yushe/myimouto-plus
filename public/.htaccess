@@ -1,0 +1,23 @@
+RewriteEngine On
+
+# Images redirection.
+# The following RewriteCond will try to deny any direct linking to images.
+# RewriteCond %{HTTP:Referer} ^http://myimouto/
+RewriteRule ^(?:data/)?(preview|sample|jpeg|image)/([0-9a-f]{2})([0-9a-f]{2})([0-9a-f]{28})(?:/.*?)?(\.[\w]+)$  data/$1/$2/$3/$2$3$4$5 [L]
+
+# Serve gzipped Stylesheets and Javascripts if mod_headers are enabled.
+<IfModule mod_headers.c>
+    SetEnv no-gzip
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^(assets/.*)\.css $1\.css\.gz [L,ENV=ASSETSCSS:true] [L]
+    Header set Content-Type text/css env=ASSETSCSS
+    Header set Content-Encoding gzip env=ASSETSCSS
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule ^(assets/.*)\.js $1\.js\.gz [L,ENV=ASSETSJS:true] [L]
+    Header set Content-Type text/javascript env=ASSETSJS
+    Header set Content-Encoding gzip env=ASSETSJS
+</IfModule>
+
+# Redirect to index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule .* index.php [L]

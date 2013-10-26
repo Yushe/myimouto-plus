@@ -1,0 +1,86 @@
+div#main-menu {
+  display: block;
+  padding-left: 0;
+  margin-left: 0;
+  width: 100%;
+}
+div#main-menu > ul {
+  float: left;
+  list-style: none;
+}
+div#main-menu ul li {
+  margin: 0 12px 0 0;
+  padding: 0;
+  float: left;
+  position: relative;
+}
+div#main-menu > ul > li > a {
+  padding: 0;
+  margin: 0;
+}
+div#main-menu > ul > li > a.submenu-button {
+  opacity: 0.3;
+  padding: 0 1px;
+  margin: 0;
+}
+div#main-menu > ul > li:hover > a.submenu-button {
+  opacity: 0.6;
+}
+div#main-menu > ul > li:hover > a.submenu-button:hover {
+  opacity: 1;
+}
+div#main-menu .search-box {
+  display: none;
+  list-style: none;
+  position: absolute;
+  background: black;
+  border: 1px solid #666;
+  padding: 5px;
+}
+div#main-menu ul li ul.submenu {
+  z-index: 1000;
+  position: absolute;
+  list-style: none;
+  float: none;
+  display: none;
+  background: black;
+  border: 1px solid #666;
+  margin: 0;
+  max-width: 200px;
+}
+div#main-menu ul li ul li {
+  float: none;
+  margin: 0;
+  padding: 0;
+}
+div#main-menu ul li ul.submenu li a {
+  display: block;
+  padding: 2px 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+div#main-menu ul li ul.submenu li a.hover {
+  background: #222;
+}
+div#main-menu ul li ul.submenu li:hover a {
+  background: #222;
+}
+div#main-menu .separator {
+  display: block;
+  width: 100%;
+  background: #aaa;
+  height: 1px;
+  margin: 1px 0px;
+  /* For IE7: */
+  overflow: hidden;
+}
+div#main-menu a#forum-link.forum-update {
+  font-weight: bold;
+}
+div#main-menu .forum-items-start {
+  display: none;
+}
+div#main-menu #has-mail-notice {
+  display: none;
+}

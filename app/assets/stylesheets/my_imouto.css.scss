@@ -1,0 +1,63 @@
+// Show hidden, blacklisted posts direct-link bar in red
+// when unhidden.
+.blacklisted-post .directlink {
+  background-color: #833333;
+}
+
+#image {
+  -webkit-touch-callout:none;
+  -webkit-user-select:none;
+  -khtml-user-select:none;
+  -moz-user-select:moz-none;
+  -ms-user-select:none;
+  user-select:none;
+}
+
+// Notice that appears when clicking the "Add translation" link,
+// if old-note-creation functionality is disabled.
+#note_create_notice {
+  display:none;
+  position:absolute;
+  width:200px;
+  background-color:#333;
+  border:1px solid white;
+  padding:5px;
+  top:-75px;
+}
+
+.default_to_large_cont {
+  display: none;
+  position: absolute;
+  padding: 3px;
+  left: 19px;
+  top: -1px;
+  width: 120px;
+  background-color: #005;
+  border: 1px solid white;
+}
+
+// Markdown
+div#post-view > div#right-col > div > div#note-container > div.note-body {
+  // Markdown will insert rows into <p> tags, which won't inherit "color" from .note-body.
+  *:not(a) {
+    color: inherit;
+  }
+  // Remove bottom margin from last <p>.
+  p:last-child {
+    margin-bottom: 0px;
+  }
+}
+
+// Tags in site-title in post#index that overflow the span container
+// jump a line below and overlaps the main menu and elements below.
+// This fixes so.
+h2#site-title {
+  overflow: hidden;
+  height: 79px;
+  
+  span {
+    overflow: hidden;
+  }
+}
+
+
