@@ -12,8 +12,9 @@ use FilesystemIterator;
 abstract class FileTools
 {
     /**
-     * Deletes all files directories recursively from a directory.
+     * Deletes all files and directories recursively from a directory.
      * Note that existance of the dir must be previously checked.
+     * The directory isn't deleted.
      * SO.com:1407338
      */
     static public function emptyDir($dirpath)

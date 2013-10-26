@@ -6,9 +6,7 @@ use Rails\ActiveRecord\ActiveRecord;
 
 /**
  * This class is supposed to store all the
- * models created. Since they're objects, this
- * serves as cache. We will save up memory and
- * sql queries. This is supposed to be great.
+ * models created.
  */
 class Registry
 {
@@ -84,6 +82,7 @@ class Registry
     
     public function search($id)
     {
+        return;
         $id = (string)$id;
         if (isset($this->_reg[$this->connection()][$this->_current_model]) && isset($this->_reg[$this->connection()][$this->_current_model][$id]))
             return $this->_reg[$this->connection()][$this->_current_model][$id];
@@ -91,6 +90,7 @@ class Registry
     
     public function register($model)
     {
+        return;
         $cn = get_class($model);
         
         if (!$cn::table()->primaryKey()) {

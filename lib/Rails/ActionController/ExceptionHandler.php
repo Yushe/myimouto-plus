@@ -7,7 +7,9 @@ use Rails\ActionController\Base;
 /**
  * Basic use:
  *  Create a class that extends this one.
- *  According to Exception or status, change the value of $template
+ *  According to Exception or status, change the value of $template by
+ *   overriding handle(). Although this isn't needed for basic handling,
+ *   default setup should work fine.
  *  The system will render that template.
  */
 abstract class ExceptionHandler extends Base

@@ -16,7 +16,7 @@ class SystemExit
     public function unregister($name)
     {
         if (isset($this->callbacks[$name])) {
-            unset($this->callbacks[$name];
+            unset($this->callbacks[$name]);
             return true;
         } else {
             return false;

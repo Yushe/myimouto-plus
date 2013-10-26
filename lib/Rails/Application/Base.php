@@ -75,11 +75,16 @@ class Base
         $paths = Rails::config()->paths;
         
         $paths->application->setPath($basePath)->setBasePaths([]);
+        
         $trait = $basePath . '/traits/AdminController.php';
         require_once $trait;
-        
         $trait = $basePath . '/traits/ApplicationController.php';
         require_once $trait;
+        $panelAppController = $basePath . '/controllers/ApplicationController.php';
+        require_once $panelAppController;
+        $panelController = $basePath . '/controllers/AdminController.php';
+        require_once $panelController;
+        
         
         Rails::loader()->addPaths([
             $paths->helpers->toString(),
@@ -176,8 +181,9 @@ class Base
         if ($this->dispatcher()->router()->route()->assets_route()) {
             Rails::assets()->server()->dispatch_request();
         } else {
-            if ($this->dispatcher()->router()->route()->rails_admin())
-                $this->setPanelConfig();
+            if ($this->dispatcher()->router()->route()->rails_admin()) {
+                self::setPanelConfig();
+            }
             $this->_load_controller();
             $this->controller()->run_request_action();
         }

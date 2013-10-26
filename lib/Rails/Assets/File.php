@@ -54,7 +54,9 @@ class File
         
         if (preg_match('/^\w:/', $path) || strpos($path, '/') === 0) {
             $path = str_replace('\\', '/', $path);
+			
             foreach ($this->assets_paths() as $asset_path) {
+				$asset_path = str_replace('\\', '/', $asset_path);
                 if (strpos($path, $asset_path) === 0) {
                     $this->baseDir = $asset_path;
                     $path = substr($path, strlen($asset_path) + 1);

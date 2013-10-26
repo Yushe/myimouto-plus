@@ -81,21 +81,16 @@ class AdminController extends ApplicationController
                     Rails::assets()->compileFile($file);
                 }
             } catch (Rails\Assets\Parser\Javascript\ClosureApi\Exception\ErrorsOnCodeException $e) {
-                if ($e instanceof Rails\Assets\Parser\Javascript\ClosureApi\Exception\ErrorsOnCodeException) {
-                    Rails::log()->error(
-                        sprintf(
-                            "[%s] Asset compilation error for file %s\n%s",
-                            date('Y-m-d H:i:s'),
-                            $file_path . '.' . $ext,
-                            $e->getMessage()
-                        )
-                    );
-                    $message = sprintf("ClosureAPI reported an error - JS file was saved to %s for verfications, error was logged.<br /><pre>%s</pre>",
-                        Rails\Assets\Parser\Javascript\ClosureApi\ClosureApi::errorFile(), $e->getMessage());
-                } else {
-                    // throw $e;
-                    // $message = sprintf('%s raised: %s', get_class($e), $e->getMessage());
-                }
+                Rails::log()->error(
+                    sprintf(
+                        "[%s] Asset compilation error for file %s\n%s",
+                        date('Y-m-d H:i:s'),
+                        $file_path . '.' . $ext,
+                        $e->getMessage()
+                    )
+                );
+                $message = sprintf("ClosureAPI reported an error - JS file was saved to %s for verfications, error was logged.<br /><pre>%s</pre>",
+                    Rails\Assets\Parser\Javascript\ClosureApi\ClosureApi::errorFile(), $e->getMessage());
                 
                 $this->error = $message;
             }

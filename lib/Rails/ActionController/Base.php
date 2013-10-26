@@ -621,15 +621,18 @@ abstract class Base extends ActionController
                 if (!$ext) {
                     $template_name = $main_param;
                     
-                    if ($this->request()->format() == 'html') {
+                    # Unknown routes don't have format.
+                    $format = $this->request()->format();
+                    
+                    if (!$format || $format == 'html') {
                         $ext = 'php';
                     } else {
-                        if ($this->request()->format() == 'xml') {
+                        if ($format == 'xml') {
                             $respParams['is_xml'] = true;
                         }
-                        $ext = [$this->request()->format(), 'php'];
+                        $ext = [$format, 'php'];
                         
-                        $this->response()->headers()->contentType($this->request()->format());
+                        $this->response()->headers()->contentType($format);
                     }
                 } else {
                     $pinfo = pathinfo($main_param);

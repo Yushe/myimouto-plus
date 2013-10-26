@@ -73,13 +73,12 @@ class Template extends Base
     
     private function build_template_file_name()
     {
-        $views_path = Rails::config()->paths->views;
-        
         if (is_array($this->_params['extension']))
             $ext = implode('.', $this->_params['extension']);
         else
             $ext = $this->_params['extension'];
         
+        $views_path = Rails::config()->paths->views;
         $this->template_file_name = $views_path . DIRECTORY_SEPARATOR . $this->_params['template_name'] . '.' . $ext;
     }
 }

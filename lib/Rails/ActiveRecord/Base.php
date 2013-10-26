@@ -277,6 +277,8 @@ abstract class Base
             return $this->getAttribute($prop);
         } elseif ($this->getAssociation($prop) !== null) {
             return $this->loadedAssociations[$prop];
+        } elseif ($getter = $this->getterExists($prop)) {
+            return $this->$getter();
         }
         
         throw new Exception\RuntimeException(
@@ -969,7 +971,6 @@ abstract class Base
         } else {
             $setter = 'set' . ucfirst($attrName);
         }
-        
         $reflection = self::getReflection();
         
         if ($reflection->hasMethod($setter) && $reflection->getMethod($setter)->isPublic()) {

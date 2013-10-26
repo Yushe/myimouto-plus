@@ -194,6 +194,8 @@ trait AttributeMethods
         if (!$attrs) {
             return;
         }
+        // if (get_called_class() == 'TagImplication')
+            // vpe('a', $attrs);
         
         if (empty($options['without_protection'])) {
             $this->filterProtectedAttributes($attrs);
@@ -210,6 +212,7 @@ trait AttributeMethods
             // return;
         // }
         
+        // if (get_called_class() == 'TagImplication' && !in_array($propName, ['reason', 'creator_id', 'is_pending']))
         // $inflector = Rails::services()->get('inflector');
         // $reflection = new \ReflectionClass(get_called_class());
         

@@ -155,8 +155,9 @@ class Request
     
     public function format()
     {
-        if ($route = \Rails::application()->dispatcher()->router()->route())
+        if ($route = \Rails::application()->dispatcher()->router()->route()) {
             return $route->format;
+        }
     }
     
     /**

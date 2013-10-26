@@ -77,7 +77,7 @@ $config->active_record = [
 
 $config->action_view = [
     'layout' => 'application',
-    'suffix' => 'phtml'
+    // 'suffix' => 'phtml'
 ];
 
 $config->plugins = [];
