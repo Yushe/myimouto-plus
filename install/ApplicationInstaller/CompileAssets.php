@@ -9,7 +9,17 @@ class CompileAssets
 {
     static public function compile()
     {
-        require __DIR__ . '/../../config/boot.php';
+        $railsRoot = __DIR__ . '/../..';
+        
+        # Create temporary config/config.php file
+        $file = $railsRoot . '/config/config.php.example';
+        $target = $railsRoot . '/config/config.php';
+        copy($file, $target);
+        
+        require $railsRoot . '/config/boot.php';
         \Rails::assets()->compileAll();
+        
+        # Delete temporary config file.
+        unlink($target);
     }
 }
