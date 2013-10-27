@@ -25,7 +25,6 @@ class Install extends Base
         $this->setLoginCookies();
         $this->createPublicDataDirs();
         $this->renameIndex();
-        $this->deleteInstallFiles();
     }
     
     private function createTables()

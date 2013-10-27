@@ -18,7 +18,6 @@ class Update extends Base
         $this->executeQueries();
         $this->createHistory();
         $this->renameIndex();
-        $this->deleteInstallFiles();
     }
     
     private function executeQueries()
