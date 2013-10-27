@@ -1,0 +1,10 @@
+/config/config.php
+/config/database.yml
+/log/*
+/public/assets
+/public/data
+/tmp/*
+/vendor/*
+!/vendor/assets
+!/vendor/Horde
+!/vendor/ZipStream.php

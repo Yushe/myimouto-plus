@@ -1,0 +1,9 @@
+{
+    "name": "myimouto/myimouto",
+    "require": {
+        "php": ">=5.4.0",
+        "myimouto/railsphp": "v1.0.6",
+        "railsphp/willpaginate": "dev-master",
+        "michelf/php-markdown": "lib"
+    }
+}
