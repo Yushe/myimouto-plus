@@ -26,7 +26,7 @@ Note: You need both Git and Composer installed in your system. How to install Co
   * Set your database configuration in _config/database.yml_.
   * Set your MyImouto configuration in _config/config.php_ (read the _config/default_config.php_ file to see the available options). For the system for work correctly only the *server_host* and *url_base* options are the most important.
   * If you're not accessing the site locally, list the IP address you'll connect from in the 'safe_ips' array in _install/config.php_.
-  * Go to your site to complete the installation.
+  * Go to your site to complete the installation. After installation is completed, you may delete the install folder.
   * If you have problems, read below the Troubleshooting section or report them in the issues section.
 
 Troubleshooting
