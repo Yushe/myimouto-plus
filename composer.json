@@ -4,6 +4,6 @@
         "php": ">=5.4.0",
         "myimouto/railsphp": "v1.0.6",
         "railsphp/willpaginate": "dev-master",
-        "michelf/php-markdown": "lib"
+        "michelf/php-markdown": "1.3.*"
     }
 }
