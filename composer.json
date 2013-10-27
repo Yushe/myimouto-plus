@@ -19,7 +19,7 @@
         }
     },
     "scripts": {
-        "post-package-install": [
+        "post-root-package-install": [
             "ApplicationInstaller\\CompileAssets::compile"
         ]
     }
