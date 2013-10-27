@@ -17,51 +17,56 @@ class Installer extends Base
     {
         $this->loadConfig();
         
-        if (!$this->validateSafeIps()) {
-            # Client not allowed
-            if ($this->dataDirExists()) {
-                # Updating message
-                $this->renderMessage(self::$PLEASE_WAIT_MESSAGE);
+        if ($this->request()->path() == '/') {
+            if (!$this->validateSafeIps()) {
+                # Client not allowed
+                if ($this->dataDirExists()) {
+                    # Updating message
+                    $this->renderMessage(self::$PLEASE_WAIT_MESSAGE);
+                } else {
+                    # Installing message
+                    $this->renderMessage(sprintf(self::$ACCESS_DENIED_MESSAGE, $_SERVER['REMOTE_ADDR']));
+                }
             } else {
-                # Installing message
-                $this->renderMessage(sprintf(self::$ACCESS_DENIED_MESSAGE, $_SERVER['REMOTE_ADDR']));
+                # Client allowed; serve forms/commit actions
+                try {
+                    # To make things nice, check write permissions
+                    # on some paths.
+                    $this->checkWriteablePaths();
+                
+                    if ($this->request()->isGet()) {
+                        # Serve forms
+                        if ($this->dataDirExists()) {
+                            # Update form
+                            $this->renderUpdateForm();
+                        } else {
+                            # Install form
+                            $this->renderInstallForm();
+                        }
+                    } else {
+                        # Commit actions
+                        if ($this->dataDirExists()) {
+                            # Update
+                            $this->commitUpdate();
+                        } else {
+                            # Install
+                            $this->commitInstall();
+                        }
+                    }
+                } catch (Exception\ExceptionInterface $e) {
+                    $this->renderMessage($e->getMessage());
+                }
             }
         } else {
-            # Client allowed; serve forms/commit actions
-            try {
-                # To make things nice, check write permissions
-                # on some paths.
-                $this->checkWriteablePaths();
-            
-                if ($this->request()->isGet()) {
-                    # Serve forms
-                    if ($this->dataDirExists()) {
-                        # Update form
-                        $this->renderUpdateForm();
-                    } else {
-                        # Install form
-                        $this->renderInstallForm();
-                    }
-                } else {
-                    # Commit actions
-                    if ($this->dataDirExists()) {
-                        # Update
-                        $this->commitUpdate();
-                    } else {
-                        # Install
-                        $this->commitInstall();
-                    }
-                }
-            } catch (Exception\ExceptionInterface $e) {
-                $this->renderMessage($e->getMessage());
-            }
+            # Load application and let it serve the request.
+            $appClass = get_class(Rails::application());
+            $appClass::dispatchRequest();
         }
     }
     
     protected function checkWriteablePaths()
     {
         $paths = [
-            '/install',
             '/log',
             '/tmp',
             '/public'
