@@ -1,9 +1,26 @@
 {
     "name": "myimouto/myimouto",
+    "description": "Image board for PHP 5.4+ and MySQL",
+    "license": "MIT",
+    "keywords": [
+        "myimouto",
+        "booru",
+        "image board"
+    ],
     "require": {
         "php": ">=5.4.0",
         "myimouto/railsphp": "v1.0.6",
         "railsphp/willpaginate": "dev-master",
         "michelf/php-markdown": "1.3.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "ApplicationInstaller\\": "install/"
+        }
+    },
+    "scripts": {
+        "post-package-install": [
+            "ApplicationInstaller\\CompileAssets::compile"
+        ]
     }
 }
