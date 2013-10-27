@@ -8,7 +8,7 @@ namespace MyImouto;
  * Values placed here will overwrite the values in the parent class.
  * List the properties you want to overwrite.
  */
-class BooruConfig extends DefaultBooruConfig
+class LocalConfig extends DefaultConfig
 {
     # The name of this booru.
     public $app_name    = 'my.imouto';
