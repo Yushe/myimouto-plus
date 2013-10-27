@@ -109,7 +109,7 @@ class WikiPage extends Rails\ActiveRecord\Base
     
     public function toXml(array $options = [])
     {
-        return parent::toXml(array_merge($options, ['root' => 'wiki_page']), ['id' => $this->id, 'created_at' => $this->created_at, 'updated_at' => $this->updated_at, 'title' => $this->title, 'body' => $this->body, 'updater_id' => $this->user_id, 'locked' => $this->is_locked, 'version' => $this->version]);
+        return parent::toXml(array_merge($options, ['root' => 'wiki_page', 'attributes' => ['id' => $this->id, 'created_at' => $this->created_at, 'updated_at' => $this->updated_at, 'title' => $this->title, 'body' => $this->body, 'updater_id' => $this->user_id, 'locked' => (bool)(int)$this->is_locked, 'version' => $this->version]]));
     }
     
     public function asJson()

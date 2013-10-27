@@ -52,7 +52,6 @@ class TagController extends ApplicationController
     {
         $this->set_title('Tags');
         
-        # TODO: convert to nagato
         if ($this->params()->limit === "0")
             $limit = null;
         elseif (!$this->params()->limit)
@@ -105,21 +104,17 @@ class TagController extends ApplicationController
             'html' => function () use ($order, $query) {
                 $this->can_delete_tags = CONFIG()->enable_tag_deletion && current_user()->is_mod_or_higher();
                 $this->tags = $query->paginate($this->page_number(), 50);
-                // vpe($this->tags);
-                // $this->tags = Tag::paginate(array('order' => $order, 'per_page' => 50, 'conditions' => array_merge(array(implode(' AND ', $conds)), $cond_params), 'page' => $this->page_number()));
             },
             'xml' => function () use ($order, $limit, $query) {
-                if (!$this->params()->order)
-                    $order = 'id DESC';
-                $conds = implode(" AND ", $conds);
-                if ($conds == "true" && CONFIG()->web_server == "nginx" && file_exists(Rails::publicPath()."/tags.xml")) {
-                    # Special case: instead of rebuilding a list of every tag every time, cache it locally and tell the web
-                    # server to stream it directly. This only works on Nginx.
-                    $this->response()->headers()->add("X-Accel-Redirect", Rails::publicPath() . "/tags.xml");
-                    $this->render(array('nothing' => true));
-                } else {
+                // $conds = implode(" AND ", $conds);
+                // if ($conds == "true" && CONFIG()->web_server == "nginx" && file_exists(Rails::publicPath()."/tags.xml")) {
+                    // # Special case: instead of rebuilding a list of every tag every time, cache it locally and tell the web
+                    // # server to stream it directly. This only works on Nginx.
+                    // $this->response()->headers()->add("X-Accel-Redirect", Rails::publicPath() . "/tags.xml");
+                    // $this->render(array('nothing' => true));
+                // } else {
                     $this->render(array('xml' => $query->limit($limit)->take(), 'root' => "tags"));
-                }
+                // }
             },
             'json' => function ($s) use ($order, $limit, $query) {
                 $tags = $query->limit($limit)->take();

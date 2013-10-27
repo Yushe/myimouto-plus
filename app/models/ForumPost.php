@@ -121,7 +121,9 @@ class ForumPost extends Rails\ActiveRecord\Base
             'creator_id' => $this->creator_id,
             'id'         => $this->id,
             'parent_id'  => $this->parent_id,
-            'title'      => $this->title
+            'title'      => $this->title,
+            'updated_at' => $this->updated_at,
+            'pages'      => ceil((!$this->response_count ? 1 : $this->response_count) / 30)
         ];
     }
 
@@ -132,7 +134,7 @@ class ForumPost extends Rails\ActiveRecord\Base
 
     public function toXml(array $options = [])
     {
-        return parent::toXml($this->api_attributes, ['root' => "forum_post"]);
+        return parent::toXml(array_merge($options, ['root' => "forum-post", 'attributes' => $this->api_attributes()]));
     }
     
     /* } */

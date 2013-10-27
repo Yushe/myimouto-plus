@@ -153,7 +153,7 @@ class ForumController extends ApplicationController
         } else {
             $this->forum_posts = ForumPost::where("parent_id IS NULL")->order("is_sticky desc, updated_at DESC")->paginate($this->page_number(), 30);
         }
-
+        
         $this->respond_to_list("forum_posts");
     }
 

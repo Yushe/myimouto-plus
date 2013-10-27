@@ -200,18 +200,15 @@ class Pool extends Rails\ActiveRecord\Base
         return $this->api_attributes();
     }
 
-    # iTODO:
-    // public function to_xml(array $options = [])
-    // {
-        // empty($options['indent']) && $options['indent'] = 2;
-        // empty($options['indent']) && $options['indent'] = 2; // ???
-        // $xml = isset($options['builder']) ? $options['builder'] : new Rails_Builder_XmlMarkup(['indent' => $options['indent']]);
-        // # $xml = options['builder'] ||= Builder::XmlMarkup.new('indent' => options['indent']);
-        // $xml->pool($api_attributes, function() {
-            // $xml->description($this->description);
-            // yield options['builder'] if $this->block_given()
-        // })
-    // }
+    public function toXml(array $options = [])
+    {
+        /*empty($options['indent']) && $options['indent'] = 2;*/
+        $xml = isset($options['builder']) ? $options['builder'] : new Rails\ActionView\Xml(/*['indent' => $options['indent']]*/);
+        $xml->pool($this->api_attributes(), function() use ($xml) {
+            $xml->description($this->description);
+        });
+        return $xml->output();
+    }
     
     /* } NameMethods { */
     
