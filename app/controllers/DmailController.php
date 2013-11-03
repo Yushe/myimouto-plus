@@ -73,7 +73,6 @@ class DmailController extends ApplicationController
 
     public function markAllRead()
     {
-        vpe('a');
         if ($this->params()->commit == "Yes") {
             foreach (Dmail::where("to_id = ? and has_seen = false", $this->current_user->id)->take() as $dmail)
                 $dmail->updateAttribute('has_seen', true);

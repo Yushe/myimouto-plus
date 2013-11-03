@@ -71,14 +71,14 @@ class Dmail extends Rails\ActiveRecord\Base
         }
     }
     
-    protected function setToName($name)
+    public function setToName($name)
     {
         if (!$user = User::where(['name' => $name])->first())
             return;
         $this->to_id = $user->id;
     }
     
-    protected function setFromName($name)
+    public function setFromName($name)
     {
         if (!$user = User::where(['name' => $name])->first())
             return;
