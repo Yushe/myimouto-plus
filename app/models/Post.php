@@ -303,6 +303,7 @@ class Post extends Rails\ActiveRecord\Base
             $this->commit_tags();
             $sql = "UPDATE posts SET cached_tags = ? WHERE id = ?";
             self::connection()->executeSql($sql, $this->cached_tags, $this->id);
+            $this->save();
         }
     }
     
