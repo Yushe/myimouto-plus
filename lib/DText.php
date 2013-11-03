@@ -34,7 +34,9 @@ class DText
         # Parse inline tags as a whole.
         $result = self::parseinline($result);
         
-        return $result;
+        # htmLawed ensures valid html output.
+        require_once Rails::root() . '/vendor/htmLawed/htmLawed.php';
+        return htmLawed($result);
     }
     
     static public function parseinline($str)
@@ -126,7 +128,7 @@ class DText
             $state[] = "1";
             $html .= '<ul>';
         } else {
-            $n = substr_count(preg_match('/^\*+\s+/', $str) ? $str : '', '*');
+            $n = substr_count((preg_match('/^\*+\s+/', $str, $m) ? $m[0] : ''), '*');
             $last = (int)end($state);
             if ($n < $last) {
                 $html .= str_repeat('</ul>', $last - $n);
@@ -135,7 +137,7 @@ class DText
             } elseif ($n > $last) {
                 $html .= '<ul>';
                 array_pop($state);
-                $state[] = (string)(end($state) + 1);
+                $state[] = (string)($last + 1);
             }
             if (!preg_match('/^\*+\s+/', $str)) {
                 array_pop($state);
