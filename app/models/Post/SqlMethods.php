@@ -199,6 +199,7 @@ trait PostSqlMethods
         }
 
         if (is_string($q['user'])) {
+            $joins[] = "JOIN users u ON p.user_id = u.id";
             $conds[] = "lower(u.name) = lower(?)";
             $cond_params[] = $q['user'];
         }

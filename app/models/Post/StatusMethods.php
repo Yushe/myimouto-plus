@@ -83,7 +83,7 @@ trait PostStatusMethods
         $this->set_flag_detail($this->status_reason, null);
     }
 
-    protected function setIsHeld($hold)
+    public function setIsHeld($hold)
     {
         # Hack because the data comes in as a string:
         if ($hold === "false")
@@ -103,6 +103,8 @@ trait PostStatusMethods
         }
 
         $was_held = $this->is_held;
+        
+        $this->attributes['is_held'] = $hold;
         
         # When a post is unheld, bump it.
         if ($was_held && !$hold) {
