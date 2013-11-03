@@ -159,8 +159,8 @@ class WikiPage extends Rails\ActiveRecord\Base
         ];
     }
     
-    protected function versioningRelation($relation)
+    protected function versioningRelation()
     {
-        return $relation->order("updated_at DESC");
+        return self::order("updated_at DESC");
     }
 }
