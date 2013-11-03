@@ -19,7 +19,7 @@
 <!--        <td><?= $post->flag_detail->is_resolved ? 'Yes' : 'No' ?></td> -->
         <td><?= $this->linkTo($post->id, ['action' => 'show', 'id' => $post->id]) ?></td>
         <td><?= $this->linkTo($this->h($post->author()), ['user#show', 'id' => $post->user_id]) ?></td>
-        <td><?= $this->h($post->tags()) ?></td>
+        <td><?= $this->h($post->cached_tags) ?></td>
         <td><?= $this->h($post->flag_detail->reason) ?></td>
         <?php if (current_user()->is_mod_or_higher()) : ?>
         <td><?= $this->linkTo($this->h($post->flag_detail->author()), ['user#show', 'id' => $post->flag_detail->user_id]) ?></td>
