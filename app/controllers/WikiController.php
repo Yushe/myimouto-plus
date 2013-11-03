@@ -69,6 +69,7 @@ class WikiController extends ApplicationController
 
     public function preview()
     {
+        $this->setLayout(false);
         $this->render(['inline' => '<?= $this->format_text($this->params()->body) ?>']);
     }
 
