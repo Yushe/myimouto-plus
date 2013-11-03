@@ -18,10 +18,10 @@ Installation
 
 Note: You need both Git and Composer installed in your system. How to install Composer can be found [here](http://getcomposer.org/download/) and/or [here](http://getcomposer.org/doc/00-intro.md).
 
-  * Go to the location where you want MyImouto to be installed, then run `composer create-project myimouto/myimouto:v1.0.6`.
+  * Go to the location where you want MyImouto to be installed, then run `composer create-project myimouto/myimouto:dev-master`.
   * Wait for Composer to download MyImouto and all its dependencies. After that, wait a little longer as the asset files will be compiled.
   * Point the document root of your web server to the /public folder.
-  * Rename config/config.php.example and config/database.yml.example, remove the ".example" part.
+  * Create config/config.php and config/database.yml.example by copying their respective ".example" files.
   * Create the database for the booru.
   * Set your database configuration in _config/database.yml_.
   * Set your MyImouto configuration in _config/config.php_ (read the _config/default_config.php_ file to see the available options). For the system for work correctly only the *server_host* and *url_base* options are the most important.
@@ -41,10 +41,10 @@ You simply need to allow the IP address you see in the notice. Go to _install/co
 
     'safe_ips' = [
       '127.0.0.1',
-      '::1'
+      '::1',
     ]
 
-Enter the IP address you got in the notice in a new line, like this (notice the new comma after "::1"):
+Enter the IP address you got in the notice in a new line, like this:
 
     'safe_ips' = [
       '127.0.0.1',
