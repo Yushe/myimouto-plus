@@ -20,7 +20,7 @@
         }
     },
     "scripts": {
-        "post-create-project-cmd": [
+        "post-package-install": [
             "ApplicationInstaller\\CompileAssets::compile"
         ]
     }
