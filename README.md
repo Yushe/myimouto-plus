@@ -18,11 +18,16 @@ Installation
 
 Note: You need both Git and Composer installed in your system. How to install Composer can be found [here](http://getcomposer.org/download/) and/or [here](http://getcomposer.org/doc/00-intro.md).
 
-  * Go to the location where you want MyImouto to be installed, then run `composer create-project myimouto/myimouto:dev-master`.
+  * Go to the location where you want MyImouto to be installed, then clone the repo, then install dependencies:
+
+    git clone https://github.com/myimouto/myimouto
+    cd myimouto
+    composer install
+
   * Wait for Composer to download MyImouto and all its dependencies. After that, wait a little longer as the asset files will be compiled.
   * Point the document root of your web server to the /public folder.
-  * Create config/config.php and config/database.yml.example by copying their respective ".example" files.
   * Create the database for the booru.
+  * Create config/config.php and config/database.yml.example by copying their respective ".example" files.
   * Set your database configuration in _config/database.yml_.
   * Set your MyImouto configuration in _config/config.php_ (read the _config/default_config.php_ file to see the available options). For the system for work correctly only the *server_host* and *url_base* options are the most important.
   * If you're not accessing the site locally, list the IP address you'll connect from in the 'safe_ips' array in _install/config.php_.
