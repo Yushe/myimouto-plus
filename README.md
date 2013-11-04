@@ -18,7 +18,7 @@ Installation
 
 Note: You need both Git and Composer installed in your system. How to install Composer can be found [here](http://getcomposer.org/download/) and/or [here](http://getcomposer.org/doc/00-intro.md).
 
-  * Go to the location where you want MyImouto to be installed, then clone the repo, then install dependencies:
+Go to the location where you want MyImouto to be installed, then clone the repo, then install dependencies:
 
     git clone https://github.com/myimouto/myimouto
     cd myimouto
