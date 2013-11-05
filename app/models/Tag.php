@@ -571,9 +571,9 @@ class Tag extends Rails\ActiveRecord\Base
     static public function mass_edit($start_tags, $result_tags, $updater_id, $updater_ip_addr)
     {
         foreach (Post::find_by_tags($start_tags) as $p) {
-            $start = TagAlias::to_aliased(Tag::scan_tags($start_tags));
+            $start  = TagAlias::to_aliased(Tag::scan_tags($start_tags));
             $result = TagAlias::to_aliased(Tag::scan_tags($result_tags));
-            $tags = array_merge(array_diff(array_keys($p->tags()), $start), $result);
+            $tags = array_merge(array_diff($p->tags(), $start), $result);
             $tags = implode(' ', $tags);
             $p->updateAttributes(array('updater_user_id' => $updater_id, 'updater_ip_addr' => $updater_ip_addr, 'tags' => $tags));
         }
