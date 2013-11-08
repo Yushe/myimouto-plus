@@ -313,6 +313,7 @@ trait PostTagMethods
         // $this->tags = implode(' ', array_unique(TagImplication::with_implied(TagAlias::to_aliased($this->new_tags))));
         $this->new_tags = TagAlias::to_aliased($this->new_tags);
         $this->new_tags = array_unique(TagImplication::with_implied($this->new_tags));
+        sort($this->new_tags);
         // $this->tags = implode(' ', $this->tags());
         
         # TODO: be more selective in deleting from the join table

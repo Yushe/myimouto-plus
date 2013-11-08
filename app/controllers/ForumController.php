@@ -132,7 +132,6 @@ class ForumController extends ApplicationController
     public function show()
     {
         $this->forum_post = ForumPost::find($this->params()->id);
-        $this->set_title($this->forum_post->title);
         $this->children = ForumPost::where("parent_id = ?", $this->params()->id)->order("id")->paginate($this->page_number(), 30);
 
         if (!$this->current_user->is_anonymous() && $this->current_user->last_forum_topic_read_at < $this->forum_post->updated_at && $this->forum_post->updated_at < (time() - 3)) {

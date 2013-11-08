@@ -362,11 +362,11 @@ class Pool extends Rails\ActiveRecord\Base
     
     protected function callbacks()
     {
-        return array_merge_recursive([
+        return [
             'before_destroy' => ['destroy_pool_posts'],
             'after_save' => ['expire_cache'],
             'before_validation' => ['normalize_name'],
             'after_undo' => ['update_pool_links']
-        ], $this->versioning_callbacks());
+        ];
     }
 }

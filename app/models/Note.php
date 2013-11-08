@@ -61,11 +61,11 @@ class Note extends Rails\ActiveRecord\Base
     
     protected function callbacks()
     {
-        return array_merge_recursive([
+        return [
             'after_save' => [
                 'update_post'
             ]
-        ], $this->versioning_callbacks(), $this->versioningCallbacks());
+        ];
     }
     
     protected function validations()

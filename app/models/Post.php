@@ -228,7 +228,7 @@ class Post extends Rails\ActiveRecord\Base
     
     protected function callbacks()
     {
-        return array_merge_recursive([
+        return [
             'before_save'   => ['commit_tags', 'filter_parent_id'],
             'before_create' => ['set_index_timestamp'],
             'after_create'  => ['after_creation'],
@@ -241,7 +241,7 @@ class Post extends Rails\ActiveRecord\Base
                 'validate_content_type', 'generate_hash', 'set_image_dimensions',
                 'set_image_status', 'check_pending_count', 'generate_sample',
                 'generate_jpeg', 'generate_preview', 'move_file']
-        ], $this->versioning_callbacks());
+        ];
     }
     
     protected function associations()
@@ -303,6 +303,7 @@ class Post extends Rails\ActiveRecord\Base
             $this->commit_tags();
             $sql = "UPDATE posts SET cached_tags = ? WHERE id = ?";
             self::connection()->executeSql($sql, $this->cached_tags, $this->id);
+            $this->save();
         }
     }
     
