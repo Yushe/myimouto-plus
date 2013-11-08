@@ -9,7 +9,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "myimouto/railsphp": "v1.0.6",
+        "myimouto/railsphp": "dev-master",
         "railsphp/willpaginate": "dev-master",
         "railsphp/actsasversioned": "dev-master",
         "michelf/php-markdown": "1.3.*"
@@ -20,7 +20,7 @@
         }
     },
     "scripts": {
-        "post-create-project-cmd": [
+        "post-install-cmd": [
             "ApplicationInstaller\\CompileAssets::compile"
         ]
     }
