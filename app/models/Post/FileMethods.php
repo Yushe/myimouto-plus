@@ -648,12 +648,12 @@ trait PostFileMethods
 
     public function get_sample_width($user = null)
     {
-        $this->get_file_sample($user)['width'];
+        return $this->get_file_sample($user)['width'];
     }
     
     public function get_sample_height($user = null)
     {
-        $this->get_file_sample($user)['height'];
+        return $this->get_file_sample($user)['height'];
     }
     
     public function has_jpeg()
