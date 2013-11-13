@@ -254,6 +254,9 @@ abstract class DefaultConfig
     # Default language.
     public $default_locale = 'en';
     
+    # Use this config to enable Google Analytics. Fill in the GA Tracking ID (like 'UA-XXXXX-X')
+    public $ga_tracking_id = '';
+    
     /**
      * *******************************
      * MyImouto-specific configuration
