@@ -104,12 +104,12 @@ class History extends Rails\ActiveRecord\Base
         
         foreach (array_reverse($stack) as $node) {
             $object = $node['o'];
-            /**
-             * MI: Only Pool model sets the undo (:after) callback.
-             * Calling it manually at the end because runCallbacks doesn't behave like in Rails.
-             * TODO: fix callbacks in the framework and update this.
-             */
-            // $object->runCallbacks('undo', function() {
+            // /**
+             // * MI: Only Pool model sets the undo (:after) callback.
+             // * Calling it manually at the end because runCallbacks doesn't behave like in Rails.
+             // * TODO: fix callbacks in the framework and update this.
+             // */
+            $object->runCallbacks('undo', function() {
                 $changes = !empty($node['changes']) ? $node['changes'] : [];
                 
                 if ($changes) {
@@ -137,8 +137,8 @@ class History extends Rails\ActiveRecord\Base
                         }
                     }
                 }
-                $object->runCallbacks('after_undo');
-            // });
+                // $object->runCallbacks('after_undo');
+            });
             
             $object->save();
         }
