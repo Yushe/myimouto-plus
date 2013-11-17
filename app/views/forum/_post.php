@@ -19,7 +19,7 @@
     <div class="post-footer" style="clear: left;">
       <ul class="flat-list pipe-list">
       <?php if (current_user()->has_permission($this->post, 'creator_id')) : ?>
-        <li> <?= $this->linkTo($this->t('.edit'), ['action' => "edit", 'id' => $this->post->id]) ?>
+        <li> <?= $this->linkTo($this->t('.edit'), ['action' => "edit", 'id' => $this->post->id, 'page' => (int)$this->params()->page]) ?>
         <li> <?= $this->linkTo($this->t('.delete'), ["#destroy", 'id' => $this->post->id], ['confirm' => $this->t('.delete_confirm'), 'method' => 'post']) ?>
       <?php endif ?>
       <?php if ($this->post->is_parent() && current_user()->is_mod_or_higher()) : ?>

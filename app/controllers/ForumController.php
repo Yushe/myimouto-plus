@@ -123,7 +123,9 @@ class ForumController extends ApplicationController
         $this->forum_post->assignAttributes($this->params()->forum_post);
         if ($this->forum_post->save()) {
             $this->notice("Post updated");
-            $this->redirectTo(["#show", 'id' => $this->forum_post->root_id(), 'page' => ceil($this->forum_post->root()->response_count / 30.0)]);
+            
+            $page = $this->params()->page ? $this->page_number() : ceil($this->forum_post->root()->response_count / 30.0);
+            $this->redirectTo(["#show", 'id' => $this->forum_post->root_id(), 'page' => $page]);
         } else {
             $this->_render_error($this->forum_post);
         }
@@ -132,7 +134,7 @@ class ForumController extends ApplicationController
     public function show()
     {
         $this->forum_post = ForumPost::find($this->params()->id);
-        $this->children = ForumPost::where("parent_id = ?", $this->params()->id)->order("id")->paginate($this->page_number(), 30);
+        $this->children   = ForumPost::where("parent_id = ?", $this->params()->id)->order("id")->paginate($this->page_number(), 30);
 
         if (!$this->current_user->is_anonymous() && $this->current_user->last_forum_topic_read_at < $this->forum_post->updated_at && $this->forum_post->updated_at < (time() - 3)) {
             $this->current_user->updateAttribute('last_forum_topic_read_at', $this->forum_post->updated_at);
