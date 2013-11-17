@@ -313,7 +313,6 @@ trait PostTagMethods
         // $this->tags = implode(' ', array_unique(TagImplication::with_implied(TagAlias::to_aliased($this->new_tags))));
         $this->new_tags = TagAlias::to_aliased($this->new_tags);
         $this->new_tags = array_unique(TagImplication::with_implied($this->new_tags));
-        sort($this->new_tags);
         // $this->tags = implode(' ', $this->tags());
         
         # TODO: be more selective in deleting from the join table
@@ -324,7 +323,7 @@ trait PostTagMethods
         $this->new_tags = array_map(function ($x) use (&$new_tags_ids, &$new_tags_names) {
             $tag = Tag::find_or_create_by_name($x);
             if (!in_array($tag->id, $new_tags_ids)) {
-                $new_tags_ids[] = $tag->id;
+                $new_tags_ids[]   = $tag->id;
                 $new_tags_names[] = $tag->name;
                 return $tag;
             }
@@ -351,6 +350,10 @@ trait PostTagMethods
                 Moebooru\CacheHelper::expire_tag_version();
             }
         }
+        
+        # Sort
+        sort($new_tags_names);
+        sort($this->new_tags);
         
         $tag_set = implode(", ", array_map(function($x){return "(".$this->id.", ".$x->id.")";}, $this->new_tags));
         
