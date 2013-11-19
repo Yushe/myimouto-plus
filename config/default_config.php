@@ -244,6 +244,9 @@ abstract class DefaultConfig
     
     public $available_locales = ['de', 'en', 'es', 'ja', 'ru', 'zh_CN'];
     
+    # The default name to use for anyone who isn't logged in.
+    public $default_guest_name = "Anonymous";
+    
     public $admin_contact = 'admin@myimouto';
     
     # Background color when resizing transparent PNG/GIF images.
