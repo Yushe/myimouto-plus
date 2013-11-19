@@ -25,7 +25,7 @@ class CommentController extends ApplicationController
     {
         $comment = Comment::find($this->params()->id);
         if (current_user()->has_permission($comment)) {
-            $comment->updateAttributes($this->params()->comment);
+            $comment->updateAttributes(array_merge($this->params()->comment, ['updater_ip_addr' => $this->request()->remoteIp()]));
             $this->respond_to_success("Comment updated", '#index');
         } else {
             $this->access_denied();
@@ -52,7 +52,7 @@ class CommentController extends ApplicationController
         }
 
         $user_id = current_user()->id;
-Rails::log($this->params()->comment);
+        
         $comment = new Comment(array_merge($this->params()->comment, array('ip_addr' => $this->request()->remoteIp(), 'user_id' => $user_id)));
         if ($this->params()->commit == "Post without bumping") {
             $comment->do_not_bump_post = true;

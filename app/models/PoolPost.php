@@ -42,10 +42,10 @@ class PoolPost extends Rails\ActiveRecord\Base
     
     protected function callbacks()
     {
-        return array_merge_recursive([
+        return [
             'before_create' => ['set_active_changed'], # MI
             'after_save' => ['expire_cache']
-        ], $this->versioning_callbacks());
+        ];
     }
     
     public function can_change(User $user, $attribute)

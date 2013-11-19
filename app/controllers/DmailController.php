@@ -36,7 +36,7 @@ class DmailController extends ApplicationController
         $dmail = $this->params()->dmail;
         if (empty($dmail['parent_id']))
             $dmail['parent_id'] = null;
-        $this->dmail = Dmail::create(array_merge($dmail, ['from_id' => $this->current_user->id]));
+        $this->dmail = Dmail::create(array_merge($dmail, ['from_id' => $this->current_user->id, 'ip_addr' => $this->request()->remoteIp()]));
 
         if ($this->dmail->errors()->none()) {
             $this->notice("Message sent to ".$dmail['to_name']);

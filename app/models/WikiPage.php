@@ -125,10 +125,10 @@ class WikiPage extends Rails\ActiveRecord\Base
     
     protected function callbacks()
     {
-        return array_merge_recursive([
+        return [
             'before_save' => ['normalize_title'],
             'before_validation_on_update' => ['ensure_changed']
-        ], $this->versioningCallbacks());
+        ];
     }
     
     protected function associations()

@@ -21,21 +21,21 @@ class FlaggedPostDetail extends Rails\ActiveRecord\Base
 
     static public function new_deleted_posts($user)
     {
-        if ($user->is_anonymous())
+        if ($user->is_anonymous()) {
             return 0;
+        }
         
-        return self::connection()->selectValue(
-            "SELECT COUNT(*) FROM flagged_post_details fpd JOIN posts p ON (p.id = fpd.post_id) " .
-            "WHERE p.status = 'deleted' AND p.user_id = ? AND fpd.user_id <> ? AND fpd.created_at > ?",
-            $user->id, $user->id, $user->last_deleted_post_seen_at
+        return Rails::cache()->fetch(
+            'deleted_posts:'.$user->id.':'.$user->last_deleted_post_seen_at,
+            ['expires_in' => '1 minute'],
+            function() use ($user) {
+                return self::connection()->selectValue(
+                    "SELECT COUNT(*) FROM flagged_post_details fpd JOIN posts p ON (p.id = fpd.post_id) " .
+                    "WHERE p.status = 'deleted' AND p.user_id = ? AND fpd.user_id <> ? AND fpd.created_at > ?",
+                    $user->id, $user->id, $user->last_deleted_post_seen_at
+                );
+            }
         );
-        # iTODO:
-        // return Rails.cache.fetch("deleted_posts:#{user.id}:#{user.last_deleted_post_seen_at.to_i}", :expires_in => 1.minute) do
-            // select_value_sql(
-                // "SELECT COUNT(*) FROM flagged_post_details fpd JOIN posts p ON (p.id = fpd.post_id) " +
-                // "WHERE p.status = 'deleted' AND p.user_id = ? AND fpd.user_id <> ? AND fpd.created_at > ?",
-                    // user.id, user.id, user.last_deleted_post_seen_at).to_i
-        // end
     }
 
     # XXX: author and flagged_by are redundant

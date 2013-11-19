@@ -195,8 +195,9 @@ class Post extends Rails\ActiveRecord\Base
 
     public function first_delete()
     {
-        $this->updateAttributes(array('status' => 'deleted'));
-        $this->runCallbacks('after_delete');
+        $this->runCallbacks('delete', function() {
+            $this->updateAttributes(array('status' => 'deleted'));
+        });
     }
 
     public function delete_from_database()
@@ -211,14 +212,14 @@ class Post extends Rails\ActiveRecord\Base
         $this->runCallbacks('after_destroy');
     }
     
-    # This method is in status_methods
     public function undelete()
     {
-        $this->status = 'active';
-        $this->save();
-        if ($this->parent_id) {
-            Post::update_has_children($this->parent_id);
+        if ($this->status == 'active') {
+            return;
         }
+        $this->runCallbacks('undelete', function() {
+            $this->updateAttributes(['status' => 'active']);
+        });
     }
     
     public function service_icon()
@@ -228,20 +229,28 @@ class Post extends Rails\ActiveRecord\Base
     
     protected function callbacks()
     {
-        return array_merge_recursive([
-            'before_save'   => ['commit_tags', 'filter_parent_id'],
+        return [
             'before_create' => ['set_index_timestamp'],
             'after_create'  => ['after_creation'],
-            'after_delete'  => ['clear_avatars', 'give_favorites_to_parent'],
+            
+            'before_delete' => ['clear_avatars'],
+            'after_delete'  => ['give_favorites_to_parent', 'decrement_count'],
+            
+            'after_undelete'=> ['increment_count'],
+            
+            'before_save'   => ['commit_tags', 'filter_parent_id'],
             'after_save'    => ['update_parent', 'save_post_history', 'expire_cache'],
+            
             'after_destroy' => ['expire_cache'],
-            'after_validation_on_create'  => ['before_creation'],
+            
             'before_validation_on_create' => [
                 'download_source', 'ensure_tempfile_exists', 'determine_content_type',
                 'validate_content_type', 'generate_hash', 'set_image_dimensions',
                 'set_image_status', 'check_pending_count', 'generate_sample',
-                'generate_jpeg', 'generate_preview', 'move_file']
-        ], $this->versioning_callbacks());
+                'generate_jpeg', 'generate_preview', 'move_file'
+            ],
+            'after_validation_on_create'  => ['before_creation']
+        ];
     }
     
     protected function associations()

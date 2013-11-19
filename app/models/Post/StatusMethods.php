@@ -114,11 +114,13 @@ trait PostStatusMethods
         return $hold;
     }
 
-    public function undelete()
-    {
-        if ($this->status == 'active')
-            return;
-        $this->updateAttribute('status', 'active');
-        $this->runCallbacks('after_undelete');
-    }
+    # MI: Can't have a method with bang!
+    // public function undelete!()
+    // {
+        // $this->status = 'active';
+        // $this->save();
+        // if ($this->parent_id) {
+            // Post::update_has_children($this->parent_id);
+        // }
+    // }
 }

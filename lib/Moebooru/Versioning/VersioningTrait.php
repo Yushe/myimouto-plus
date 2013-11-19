@@ -140,7 +140,7 @@ trait VersioningTrait
         self::connection()->executeSql($sql, static::tableName(), $this->id);
     }
     
-    public function versioning_callbacks()
+    public function moeVersioningCallbacks()
     {
         return [
             'after_save' => [

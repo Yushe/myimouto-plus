@@ -34,7 +34,10 @@ Go to the location where you want MyImouto to be installed, then clone the repo,
   * Go to your site to complete the installation. After installation is completed, you may delete the install folder.
   * If you have problems, read below the Troubleshooting section or report them in the issues section.
 
-Every time you update the files with `remote update` or something, also run `composer update` to update dependencies, specially for the framework.
+Updating
+--------
+
+Every time you update the files with `git remote update` or something, also run `composer update` to update dependencies, specially for the framework, and also `php config/boot.php db:migrate` to run database migrations.
 
 Troubleshooting
 ---------------
