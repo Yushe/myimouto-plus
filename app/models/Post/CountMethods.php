@@ -5,25 +5,30 @@ trait PostCountMethods
     {
         # A small sanitation
         $tags = preg_replace('/ +/', ' ', trim($tags));
-        
-        # No cache. This query is too slow, if no tags, just return row_count().
-        if (!$tags) {
-            return self::row_count();
-        }
-        
-        // cache_version = Rails.cache.read("$cache_version").to_i
-        # Use base64 encoding of tags query for memcache key
-        // tags_base64 = Base64.urlsafe_encode64(tags)
-        // key = "post-count/v=#{cache_version}/#{tags_base64}"
+        $cache_version = (int)Rails::cache()->read('$cache_version');
+        # iTODO: cache hash key
+        $key = 'post_count.' . $tags . ':' . 'v.' . $cache_version;
 
-        // count = Rails.cache.fetch(key) {
-        // Post.count_by_sql(Post.generate_sql(tags, :count => true))
-        // }.to_i
-        list($sql, $params) = Post::generate_sql($tags, array('count' => true));
-        // vde($sql);
-        array_unshift($params, $sql);
-        
-        return Post::countBySql($params);
+        $count = (int)Rails::cache()->fetch($key, function() use ($tags) {
+            list($sql, $params) = Post::generate_sql($tags, ['count' => true]);
+            array_unshift($params, $sql);
+            return Post::countBySql($params);
+        });
+
+        return $count;
+
+      # This is just too brittle, and hard to make work with other features that may
+      # hide posts from the index.
+#      if tags.blank?
+#        return select_value_sql("SELECT row_count FROM table_data WHERE name = 'posts'").to_i
+#      else
+#        c = select_value_sql("SELECT post_count FROM tags WHERE name = ?", tags).to_i
+#        if c == 0
+#          return Post.count_by_sql(Post.generate_sql(tags, :count => true))
+#        else
+#          return c
+#        end
+#      end
     }
     
     static public function recalculate_row_count()

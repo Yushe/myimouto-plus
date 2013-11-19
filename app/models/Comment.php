@@ -65,10 +65,10 @@ class Comment extends Rails\ActiveRecord\Base
     {
         $source_lang_list = implode(',', $source_langs);
         $key = "comment:" . $this->id . ":" . strtotime($this->updated_at) . ":" . $target_lang . ":" . $source_lang_list;
-        # TODO
-        // return Rails::cache()->fetch($key) {
+        
+        return Rails::cache()->fetch($key, function() use ($target_lang, $source_langs) {
             return $this->get_translated_formatted_body_uncached($target_lang, $source_langs);
-        // }
+        });
     }
 
     public function author()

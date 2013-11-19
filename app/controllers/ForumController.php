@@ -120,7 +120,7 @@ class ForumController extends ApplicationController
             return;
         }
 
-        $this->forum_post->assignAttributes(array_merge($this->params()->forum_post, ['updater_ip_addr' => $this->request()->remoteIp()]);
+        $this->forum_post->assignAttributes(array_merge($this->params()->forum_post, ['updater_ip_addr' => $this->request()->remoteIp()]));
         if ($this->forum_post->save()) {
             $this->notice("Post updated");
             

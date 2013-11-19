@@ -315,9 +315,9 @@ class Tag extends Rails\ActiveRecord\Base
     #
     # === Parameters
     # * :tag_name<String>:: The tag name to search for
-    # TODO
     static public function type_name($tag_name)
     {
+        # iTODO: hash key
         return Rails::cache()->fetch('tag_type.' . $tag_name, ['expires_in' => '1 day'], function() use ($tag_name) {
             return self::type_name_helper(str_replace(' ', '_', $tag_name));
         });
@@ -362,29 +362,29 @@ class Tag extends Rails\ActiveRecord\Base
     # Get all tag types for the given tags.
     static public function batch_get_tag_types($post_tags)
     {
-        $types = [];
-        foreach ($post_tags as $tag) {
-            $types[$tag] = self::type_name($tag);
-        }
-        return $types;
+        $post_tags_key = [];
         
-        // $post_tags = Set.new(post_tags)
-
-        // post_tags_key = post_tags.each_with_object([]) { |t, k| k << { :tag_type => t } }
-        // # Without this, the following splat will eat the last argument because
-        // # it'll be considered an option instead of key (being a hash).
-        // post_tags_key << {}
-
-        // results = {}
-        // Rails.cache.read_multi(*post_tags_key).each do |cache_key, value|
-            // # The if cache_key is required since there's small chance read_multi
-            // # returning nil key on certain key names.
-            // results[cache_key[:tag_type]] = value if cache_key
-        // end
-        // (post_tags - results.keys).each do |tag|
-            // results[tag] = type_name(tag)
-        // end
-        // return results
+        foreach ($post_tags as $t) {
+            # iTODO: hash keys.
+            $post_tags_key[] = 'tag_type.' . $t;
+        }
+        # Without this, the following splat will eat the last argument because
+        # it'll be considered an option instead of key (being a hash).
+        $post_tags_key[] = [];
+        
+        $results = [];
+        $cached = call_user_func_array([Rails::cache(), 'readMulti'], $post_tags_key);
+        foreach ($cached as $cache_key => $value) {
+            # The if cache_key is required since there's small chance read_multi
+            # returning nil key on certain key names.
+            // if ($cache_key) {
+                $results[substr($cache_key, 9)] = $value;
+            // }
+        }
+        foreach( array_diff( $post_tags, array_keys($results) ) as $tag ) {
+            $results[$tag] = self::type_name($tag);
+        }
+        return $results;
     }
     
     # Returns tags (with type specified by input) related by input tag
@@ -414,15 +414,6 @@ class Tag extends Rails\ActiveRecord\Base
                 $reduced[] = ['name' => $row['name'], 'post_count' => $row['post_count']];
             }
             return $reduced;
-            
-            // return Post::select('posts.*, tags.name AS tag_name, tags.post_count AS tag_post_count')
-                    // ->joins('JOIN posts_tags pt ON posts.id = pt.post_id JOIN tags ON pt.tag_id = tags.id')
-                    // ->where('posts.status <> "deleted"')->where('tags.name IN (?)', $tag)
-                    // ->where('tags.tag_type = ?', $type)->group('tags.name')->limit($limit)
-                    // ->take()->reduce([], function($result, $hash) {
-                       // $result[] = ['name' => $hash->tag_name, 'post_count' => $hash->tag_post_count];
-                       // return $result;
-                    // });
         });
     }
     
@@ -465,6 +456,7 @@ class Tag extends Rails\ActiveRecord\Base
         
         !is_array($tags) && $tags = array($tags);
         
+        # iTODO: hash key
         return Rails::cache()->fetch('category.reltags.tags.' . implode(',', $tags), ['expires_in' => '1 hour'], function() use ($tags) {
             $from = array("posts_tags pt0");
             $cond = array("pt0.post_id = pt1.post_id");
@@ -507,6 +499,13 @@ class Tag extends Rails\ActiveRecord\Base
         return Rails::cache()->fetch('$tag_version', function() { return 0; });
     }
     
+    # Create a compact list of all active tags, sorted by post_count.
+    #
+    # "1`tagme` 2`fixme` 3`fixed`alias` "
+    #
+    # Each tag is bounded by backticks, so "`tagme`" can be used to match a whole tag.
+    #
+    # This is returned as a preencoded JSON string, so the entire block can be cached.
     static public function get_json_summary()
     {
         $summary_version = self::get_summary_version();

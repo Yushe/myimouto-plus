@@ -51,21 +51,20 @@ class User extends Rails\ActiveRecord\Base
     
     public function log($ip)
     {
-        // Rails.cache.fetch({ 'type' => :user_logs, 'id' => self.id, 'ip' => ip }, 'expires_in' => 10.minutes) do
-            // Rails.cache.fetch({ 'type' => :user_logs, 'id' => :all }, 'expires_id' => 1.day) do
-                // UserLog.where('created_at < ?', 3.days.ago).delete_all
-            // end
-            // begin
-                // log_entry = self.user_logs.find_or_initialize_by_ip_addr('ip_addr' => ip)
-                // log_entry.created_at = Time.now
-                // log_entry.save
-            // # Once in a blue moon there will be race condition on find_or_initialize
-            // # resulting unique key constraint violation.
-            // # It doesn't really affect anything so just ignore that error.
-            // rescue ActiveRecord::RecordNotUnique
-                // true
-            // end
-        // end
+        # iTODO: UserLog doesn't exist yet.
+        return;
+        
+        # iTODO: hash key
+        Rails::cache()->fetch('type.user_logs;id.'.$this->id.';ip.'.$ip, ['expires_in' => '10 minutes'], function() use ($ip) {
+            # iTODO: hash key
+            Rails::cache()->fetch('type.user_logs;id.all', ['expires_in' => '1 day'], function() {
+                return UserLog::where('created_at < ?', date('Y-m-d 0:0:0', strtotime('-3 days')))->deleteAll();
+            });
+            
+            $log_entry = UserLog::where(['ip_addr' => $ip])->firstOrInitialize();
+            $log_entry->created_at = date('Y-m-d H:i:s');
+            $log_entry->save();
+        });
     }
 
     # UserBlacklistMethods {
@@ -200,10 +199,13 @@ class User extends Rails\ActiveRecord\Base
 
     static public function find_name($user_id)
     {
-        # iTODO:
-        // return Rails.cache.fetch("user_name:#{user_id}") do
-        return self::_find_name_helper($user_id);
-        // end
+        Rails::cache()->fetch('user_name:' . $user_id, function() use ($user_id) {
+            try {
+                return self::find($user_id)->name;
+            } catch (Rails\ActiveRecord\Exception\RecordNotFoundException $e) {
+                return CONFIG()->default_guest_name;
+            }
+        });
     }
 
     static public function find_by_name($name)
@@ -221,10 +223,9 @@ class User extends Rails\ActiveRecord\Base
         
     // }
 
-    # iTODO:
-    protected function _update_cached_name()
+    protected function update_cached_name()
     {
-        // Rails::cache()->write("user_name:".$this->id, $this->name);
+        Rails::cache()->write("user_name:".$this->id, $this->name);
     }
     # }
 
@@ -269,17 +270,19 @@ class User extends Rails\ActiveRecord\Base
     {
         $type = !empty($options['type']) ? $options['type'] : null;
         
-        // uploaded_tags = Rails.cache.read("uploaded_tags/#{id}/#{type}")
-        // return uploaded_tags unless uploaded_tags == nil
+        $uploaded_tags = Rails::cache()->read("uploaded_tags/". $this->id . "/" . $type);
+        if ($uploaded_tags) {
+            return $uploaded_tags;
+        }
 
-        // if ((Rails.env == "test") == "test") {
-            // # disable filtering in test mode to simplify tests
-            // popular_tags = ""
-        // } else {
+        if (Rails::env() == "test") {
+            # disable filtering in test mode to simplify tests
+            $popular_tags = "";
+        } else {
             $popular_tags = implode(', ', self::connection()->selectValues("SELECT id FROM tags WHERE tag_type = " . CONFIG()->tag_types['General'] . " ORDER BY post_count DESC LIMIT 8"));
             if ($popular_tags)
                 $popular_tags = "AND pt.tag_id NOT IN (${popular_tags})";
-        // }
+        }
 
         if ($type) {
             $type = (int)$type;
@@ -310,28 +313,28 @@ class User extends Rails\ActiveRecord\Base
 
         $uploaded_tags = self::connection()->select($sql);
 
-        // Rails.cache.write("uploaded_tags/#{id}/#{type}", uploaded_tags, 'expires_in' => 1.day)
+        Rails::cache()->write("uploaded_tags/" . $this->id . "/" . $type, $uploaded_tags, ['expires_in' => '1 day']);
 
         return $uploaded_tags;
     }
 
-    # iTODO:
     public function voted_tags(array $options = array())
     {
         $type = !empty($options['type']) ? $options['type'] : null;
 
-        // $favorite_tags = Rails.cache.read("favorite_tags/#{id}/#{type}")
-        // if ($favorite_tags != nil)
-            // return $favorite_tags;
+        $favorite_tags = Rails::cache()->read("favorite_tags/".  $this->id . "/" . $type);
+        if ($favorite_tags) {
+            return $favorite_tags;
+        }
 
-        // if (Rails.env == "test") {
-            // # disable filtering in test mode to simplify tests
-            // popular_tags = ""
-        // } else {
+        if (Rails::env() == "test") {
+            # disable filtering in test mode to simplify tests
+            $popular_tags = "";
+        } else {
             $popular_tags = implode(', ', self::connection()->selectValues("SELECT id FROM tags WHERE tag_type = " . CONFIG()->tag_types['General'] . " ORDER BY post_count DESC LIMIT 8"));
             if ($popular_tags)
                 $popular_tags = "AND pt.tag_id NOT IN (${popular_tags})";
-        // }
+        }
 
         if ($type) {
             $type = (int)$type;
@@ -362,7 +365,7 @@ class User extends Rails\ActiveRecord\Base
 
         $favorite_tags = self::connection()->select($sql);
 
-        // Rails.cache.write("favorite_tags/#{id}/#{type}", favorite_tags, 'expires_in' => 1.day)
+        Rails::cache()->write("favorite_tags/" . $this->id . "/" . $type, $favorite_tags, ['expires_in' => '1 day']);
 
         return $favorite_tags;
     }
@@ -392,16 +395,14 @@ class User extends Rails\ActiveRecord\Base
         return $this->post_count;
     }
 
-    # iTODO:
     public function held_post_count()
     {
-        return Post::where("user_id = ? AND is_held AND status <> 'deleted'", $this->id)->count();
-        // $version = (int)Rails::cache()->read("%cache_version");
-        // $key = "held-post-count/v=".$version."/u=".$this->id;
-
-        // return Rails::cache()->fetch($key) {
-            // Post::count(['conditions' => ["user_id = ? AND is_held AND status <> 'deleted'", $this->id]]);
-        // }
+        $version = (int)Rails::cache()->read('$cache_version');
+        $key = 'held-post-count/v=' . $version . '/u=' . $this->id;
+        
+        return Rails::cache()->fetch($key, function() {
+            return Post::where(['user_id' => $this->id, 'is_held' => true])->where('status <> ?', 'deleted')->count();
+        });
     }
     # }
 
@@ -794,7 +795,7 @@ class User extends Rails\ActiveRecord\Base
             'before_create'     => $before_create,
             'before_save'       => array('_encrypt_password'),
             'before_validation' => array('_commit_secondary_languages'),
-            'after_save'        => array('_commit_blacklists', '_update_cached_name'),
+            'after_save'        => array('_commit_blacklists', 'update_cached_name'),
             'after_create'      => array('_set_default_blacklisted_tags', '_increment_count'),
             'after_destroy'     => array('_decrement_count')
         );

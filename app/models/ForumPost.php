@@ -18,7 +18,7 @@ class ForumPost extends Rails\ActiveRecord\Base
     protected function callbacks()
     {
         return [
-            'after_create'      => ['initialize_last_updated_by', 'update_parent_on_create'],
+            'after_create'      => ['initialize_last_updated_by', 'update_parent_on_create', 'clear_cache'],
             'before_destroy'    => ['update_parent_on_destroy'],
             'before_validation' => ['validate_title', 'validate_lock']
         ];
@@ -179,5 +179,10 @@ class ForumPost extends Rails\ActiveRecord\Base
     public function author()
     {
         return $this->creator->name;
+    }
+    
+    protected function clear_cache()
+    {
+        Rails::cache()->delete("forum_posts");
     }
 }
