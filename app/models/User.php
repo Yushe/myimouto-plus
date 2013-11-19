@@ -55,7 +55,7 @@ class User extends Rails\ActiveRecord\Base
         return;
         
         # iTODO: hash key
-        Rails::cache()->fetch('type.user_logs;id.'.$this->id.';ip.'.$ip, ['expires_in' => '10 minutes'], function() use ($ip) {
+        return Rails::cache()->fetch('type.user_logs;id.'.$this->id.';ip.'.$ip, ['expires_in' => '10 minutes'], function() use ($ip) {
             # iTODO: hash key
             Rails::cache()->fetch('type.user_logs;id.all', ['expires_in' => '1 day'], function() {
                 return UserLog::where('created_at < ?', date('Y-m-d 0:0:0', strtotime('-3 days')))->deleteAll();
@@ -63,7 +63,7 @@ class User extends Rails\ActiveRecord\Base
             
             $log_entry = UserLog::where(['ip_addr' => $ip])->firstOrInitialize();
             $log_entry->created_at = date('Y-m-d H:i:s');
-            $log_entry->save();
+            return $log_entry->save();
         });
     }
 
@@ -199,7 +199,7 @@ class User extends Rails\ActiveRecord\Base
 
     static public function find_name($user_id)
     {
-        Rails::cache()->fetch('user_name:' . $user_id, function() use ($user_id) {
+        return Rails::cache()->fetch('user_name:' . $user_id, function() use ($user_id) {
             try {
                 return self::find($user_id)->name;
             } catch (Rails\ActiveRecord\Exception\RecordNotFoundException $e) {
