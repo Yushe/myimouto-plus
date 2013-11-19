@@ -62,6 +62,16 @@ return array (
       'type' => 'text',
       'default' => NULL,
     ),
+    'ip_addr' => 
+    array (
+      'type' => 'varchar(255)',
+      'default' => NULL,
+    ),
+    'updater_ip_addr' => 
+    array (
+      'type' => 'varchar(255)',
+      'default' => NULL,
+    ),
   ),
   1 => 
   array (

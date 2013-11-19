@@ -7,44 +7,39 @@ return array (
       'type' => 'int(11)',
       'default' => NULL,
     ),
-    'from_id' => 
-    array (
-      'type' => 'int(11)',
-      'default' => NULL,
-    ),
-    'to_id' => 
-    array (
-      'type' => 'int(11)',
-      'default' => NULL,
-    ),
-    'title' => 
-    array (
-      'type' => 'text',
-      'default' => NULL,
-    ),
-    'body' => 
-    array (
-      'type' => 'text',
-      'default' => NULL,
-    ),
-    'created_at' => 
-    array (
-      'type' => 'datetime',
-      'default' => NULL,
-    ),
-    'has_seen' => 
-    array (
-      'type' => 'tinyint(1)',
-      'default' => '0',
-    ),
-    'parent_id' => 
-    array (
-      'type' => 'int(11)',
-      'default' => NULL,
-    ),
-    'ip_addr' => 
+    'image_url' => 
     array (
       'type' => 'varchar(255)',
+      'default' => NULL,
+    ),
+    'referral_url' => 
+    array (
+      'type' => 'varchar(255)',
+      'default' => NULL,
+    ),
+    'ad_type' => 
+    array (
+      'type' => 'varchar(255)',
+      'default' => NULL,
+    ),
+    'status' => 
+    array (
+      'type' => 'varchar(255)',
+      'default' => NULL,
+    ),
+    'hit_count' => 
+    array (
+      'type' => 'int(11)',
+      'default' => '0',
+    ),
+    'width' => 
+    array (
+      'type' => 'int(11)',
+      'default' => NULL,
+    ),
+    'height' => 
+    array (
+      'type' => 'int(11)',
       'default' => NULL,
     ),
   ),

@@ -1,7 +1,7 @@
 <?php
 class CreateAdvertisements extends Rails\ActiveRecord\Migration\Base
 {
-    public function change()
+    public function up()
     {
         $this->createTable('advertisements', function($t) {
             $t->column('image_url', 'string', ['null' => false]);

@@ -65,7 +65,7 @@ class ForumController extends ApplicationController
         if (empty($params['parent_id']) || !ctype_digit($params['parent_id']))
             $params['parent_id'] = null;
         
-        $this->forum_post = ForumPost::create(array_merge($params, ['creator_id' => $this->current_user->id]));
+        $this->forum_post = ForumPost::create(array_merge($params, ['creator_id' => $this->current_user->id, 'ip_addr' => $this->request()->remoteIp()]));
 
         if ($this->forum_post->errors()->blank()) {
             if (!$this->params()->forum_post['parent_id']) {
@@ -120,7 +120,7 @@ class ForumController extends ApplicationController
             return;
         }
 
-        $this->forum_post->assignAttributes($this->params()->forum_post);
+        $this->forum_post->assignAttributes(array_merge($this->params()->forum_post, ['updater_ip_addr' => $this->request()->remoteIp()]);
         if ($this->forum_post->save()) {
             $this->notice("Post updated");
             

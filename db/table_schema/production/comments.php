@@ -42,6 +42,11 @@ return array (
       'type' => 'tinyint(1)',
       'default' => '0',
     ),
+    'updater_ip_addr' => 
+    array (
+      'type' => 'varchar(46)',
+      'default' => NULL,
+    ),
   ),
   1 => 
   array (
