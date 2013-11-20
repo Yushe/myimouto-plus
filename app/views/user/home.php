@@ -1,3 +1,4 @@
+<?php $this->provide('title', $this->t('.title')) ?>
 <div id="user-index">
   <?php if (current_user()->is_anonymous()) : ?>
     <h2><?= $this->t('.not_logged_in') ?></h2>
