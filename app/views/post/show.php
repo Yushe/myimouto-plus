@@ -61,10 +61,6 @@
   <?php endif ?>
 </div>
 
-<?php if (CONFIG()->app_name == "oreno.imouto") : ?>
-<?= $this->partial('referral') ?>
-<?php endif ?>
-
 <?php if (CONFIG()->post_show_hotkeys) : ?>
 <script>(function($){$(document).keydown(function(ev){
 var t = $(ev.target), k = ev.keyCode;
