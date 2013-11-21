@@ -8,16 +8,14 @@ MyImouto\Application::routes()->draw(function() {
     $this->post('admin/purge_tags');
 
     # Advertisements
-    /*
-    resources :advertisements do
-        collection do
-            post :update_multiple
-        end
-        member do
-            get :redirect
-        end
-    end
-    */
+    $this->resources('advertisements', function() {
+        $this->collection(function() {
+            $this->post('update_multiple');
+        });
+        $this->member(function() {
+            $this->get('redirect');
+        });
+    });
 
     # Artist
     $this->match('artist(/index)(.:format)', 'artist#index', ['via' => ['get', 'post']]);
