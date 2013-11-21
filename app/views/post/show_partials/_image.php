@@ -38,7 +38,7 @@
   <div style="margin-bottom: 1em;">
     <p id="note-count"></p>
     <script type="text/javascript">
-      jQuery('#image').mousedown(function(e){
+      jQuery('#image').on('mousedown', function(e){
         if (e.shiftKey) Note.dragCreate(e)
       })
       
