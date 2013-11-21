@@ -1,31 +1,42 @@
 <div class="clearfix" id="main-menu" data-controller="<?= $this->request()->controller() ?>">
-  <?php //local_cache ['menu', current_user()->id, current_user()->level] do ?>
+  <?php
+  /**
+   * MI: how about caching the menu for each user level, instead of each user,
+   * having placeholders for user id and name that will be replaced with current user's
+   * data right before echoing the menu.
+   */
+  $key  = 'menu.'.current_user()->level;
+  $menu = Rails::cache()->read($key);
+  
+  if (!$menu) :
+    ob_start();
+  ?>
     <ul>
       <li class="user"><?= $this->linkTo($this->t('.account._'), ['user#home'], ['onclick' => 'if(!User.run_login_onclick(event)) return false;', 'class' => 'login-button']) ?>
         <?= $this->linkTo('■', '#', ['class' => 'submenu-button']) ?>
         <ul class="submenu">
-          <?php if (current_user()->is_anonymous()) : ?>
+          <?php if (current_user()->is_anonymous()) : ?> 
             <li><?= $this->linkTo($this->t('.account.login'), ['controller' => 'user', 'action' => 'login'], ['id' => 'login-link', 'class' => 'login-button']) ?></li>
             <li><?= $this->linkTo($this->t('.account.reset'), ['controller' => 'user', 'action' => 'reset_password']) ?></li>
-          <?php else: ?>
-            <li><?= $this->linkTo($this->t('.account.profile'), ['controller' => 'user', 'action' => 'show', 'id' => current_user()->id]) ?></li>
+          <?php else: ?> 
+            <li><?= $this->linkTo($this->t('.account.profile'), ['controller' => 'user', 'action' => 'show', 'id' => "-user.id-"]) // MI: -user.id- ?></li>
             <li><?= $this->linkTo($this->t('.account.mail'), ['controller' => 'dmail', 'action' => 'inbox']) ?></li>
-            <li><?= $this->linkTo($this->t('.account.favorites'), ['controller' => 'post', 'action' => 'index', 'tags' => "order:vote vote:3:".current_user()->name]) ?></li>
+            <li><?= $this->linkTo($this->t('.account.favorites'), ['controller' => 'post', 'action' => 'index', 'tags' => "order:vote vote:3:-user.name-"]) // MI: -user.name- ?></li>
             <li><?= $this->linkTo($this->t('.account.settings'), ['controller' => 'user', 'action' => 'edit']) ?></li>
             <li><?= $this->linkTo($this->t('.account.change_password'), ['controller' => 'user', 'action' => 'change_password']) ?></li>
-            <li><?= $this->linkTo($this->t('.account.logout'), ['controller' => 'user', 'action' => 'logout'], ['from' => $this->request()->path()]) ?></li>
+            <li><?= $this->linkTo($this->t('.account.logout'), ['controller' => 'user', 'action' => 'logout']/* (MI: Since menu is cached, this doesn't make sense) , ['from' => $this->request()->path()]*/) ?></li>
           <?php endif ?>
         </ul>
       </li>
-      <li class="post"><?= $this->linkTo($this->t('.posts._'), ['controller' => 'post', 'action' => 'index']) ?>
-        <?= $this->linkTo('■', '#', ['class' => 'submenu-button']) ?>
+      <li class="post"><?= $this->linkTo($this->t('.posts._'), ['controller' => 'post', 'action' => 'index']) ?> 
+        <?= $this->linkTo('■', '#', ['class' => 'submenu-button']) ?> 
         <ul class="search-box">
           <li>
             <div>
-              <?= $this->formTag('post#', ['method' => 'get'], function(){ ?>
+              <?= $this->formTag('post#', ['method' => 'get'], function(){ ?> 
                 <?= $this->textFieldTag('tags', '', ['id' => '']) ?><br />
-                <?= $this->submitTag($this->t('.posts.search')) ?>
-              <?php }) ?>
+                <?= $this->submitTag($this->t('.posts.search')) ?> 
+              <?php }) ?> 
             </div>
           </li>
         </ul>
@@ -208,5 +219,16 @@
     </ul>
     <span id='cn' style="display: none;">
     </span>
-  <?php //end ?>
+  <?php
+    $menu = ob_get_clean();
+    Rails::cache()->write($key, $menu);
+  endif;
+
+  if (!current_user()->is_anonymous()) {
+    $menu = substr_replace($menu,   current_user()->id, strpos($menu, '-user.id-'),    9);
+    echo    substr_replace($menu, current_user()->name, strpos($menu, '-user.name-'), 11);
+  } else {
+    echo $menu;
+  }
+  ?>
 </div>
