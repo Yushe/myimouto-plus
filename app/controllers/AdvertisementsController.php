@@ -4,7 +4,9 @@ class AdvertisementsController extends ApplicationController
     protected function filters()
     {
         return [
-            'admin_only' => ['except' => ['redirect']]
+            'before' => [
+                'admin_only' => ['except' => ['redirect']]
+            ]
         ];
     }
     
