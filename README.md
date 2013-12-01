@@ -32,6 +32,7 @@ Go to the location where you want MyImouto to be installed, then clone the repo,
   * Set your MyImouto configuration in _config/config.php_ (read the _config/default_config.php_ file to see the available options). For the system for work correctly only the *server_host* and *url_base* options are the most important.
   * If you're not accessing the site locally, list the IP address you'll connect from in the 'safe_ips' array in _install/config.php_.
   * Go to your site to complete the installation. After installation is completed, you may delete the install folder.
+  * After installation is completed, run `php config/boot.php db:migrate` to run database migrations.
   * If you have problems, read below the Troubleshooting section or report them in the issues section.
 
 Updating
