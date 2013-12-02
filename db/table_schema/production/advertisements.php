@@ -42,6 +42,16 @@ return array (
       'type' => 'int(11)',
       'default' => NULL,
     ),
+    'script' => 
+    array (
+      'type' => 'text',
+      'default' => NULL,
+    ),
+    'html' => 
+    array (
+      'type' => 'text',
+      'default' => NULL,
+    ),
   ),
   1 => 
   array (
