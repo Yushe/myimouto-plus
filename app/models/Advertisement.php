@@ -7,12 +7,9 @@ class Advertisement extends Rails\ActiveRecord\Base
             'ad_type' => [
                 'inclusion' => ['in' => ['horizontal', 'vertical']]
             ],
-            'image_url'    => [ 'presence' => true ],
-            'referral_url' => [ 'presence' => true ],
-            'ad_type'      => [ 'presence' => true ],
-            'status'       => [ 'presence' => true ],
-            'width'        => [ 'presence' => true ],
-            'height'       => [ 'presence' => true ]
+            'ad_type' => [ 'presence' => true ],
+            'status'  => [ 'presence' => true ],
+            'validateType'
         ];
     }
     
@@ -40,5 +37,34 @@ class Advertisement extends Rails\ActiveRecord\Base
     public function getResetHitCount()
     {
         return '0';
+    }
+    
+    protected function validateType()
+    {
+        if ($this->html) {
+            $this->image_url    = null;
+            $this->referral_url = null;
+            $this->width        = null;
+            $this->height       = null;
+        } else {
+            $attr = '';
+            
+            if (!$this->image_url) {
+                $attr = 'image_url';
+            } elseif (!$this->referral_url) {
+                $attr = 'referral_url';
+            } elseif (!$this->width) {
+                $attr = 'width';
+            } elseif (!$this->height) {
+                $attr = 'height';
+            }
+            
+            if ($attr) {
+                $this->errors()->add($attr, "can't be blank");
+                return false;
+            }
+            
+            $this->html = null;
+        }
     }
 }

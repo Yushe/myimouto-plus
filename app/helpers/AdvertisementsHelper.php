@@ -6,17 +6,21 @@ class AdvertisementsHelper extends Rails\ActionView\Helper
         if (CONFIG()->can_see_ads(current_user())) {
             $ad = Advertisement::random($ad_type);
             if ($ad) {
-                return $this->contentTag("div",
-                    $this->linkTo(
-                        $this->imageTag(
-                            $ad->image_url,
-                            ['alt' => "Advertisement", 'width' => $ad->width, 'height' => $ad->height]
+                if ($ad->html) {
+                    return $ad->html;
+                } else {
+                    return $this->contentTag("div",
+                        $this->linkTo(
+                            $this->imageTag(
+                                $ad->image_url,
+                                ['alt' => "Advertisement", 'width' => $ad->width, 'height' => $ad->height]
+                            ),
+                            $this->redirectAdvertisementPath($ad),
+                            ['target' => '_blank']
                         ),
-                        $this->redirectAdvertisementPath($ad),
-                        ['target' => '_blank']
-                    ),
-                    ['style' => "margin-bottom: 1em;"]
-                );
+                        ['style' => "margin-bottom: 1em;"]
+                    );
+                }
             }
         }
     }

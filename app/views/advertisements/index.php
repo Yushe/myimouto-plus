@@ -7,7 +7,7 @@
       <tr>
         <th class="center"><?= $this->checkBoxTag('check_all', 'check_all', false, ['onClick' => "checkbox_toggle(this, 'advertisement_ids[]');"]) ?></th>
         <th>#</th>
-        <th><?= $this->humanize('image_url') ?></th>
+        <th>Image URL/Html</th>
         <th><?= $this->humanize('referral_url') ?></th>
         <th><?= $this->humanize('width') ?></th>
         <th><?= $this->humanize('height') ?></th>
@@ -23,7 +23,13 @@
         <tr>
           <td class="center"><?= $this->checkBoxTag('advertisement_ids[]', $ad->id) ?></td>
           <td><?= $this->linkTo($ad->id, $ad) ?></td>
-          <td><?= $this->linkTo($ad->image_url, $ad->image_url) ?></td>
+          <td><?php
+            if (!$ad->html) {
+              echo $this->linkTo($ad->image_url, $ad->image_url);
+            } else {
+              echo '<pre style="font-size:1.15em;margin:0px;">' . substr($this->h($ad->html), 0, 100) . '...</pre>';
+            }
+          ?></td>
           <td><?= $this->linkTo($ad->referral_url, $ad->referral_url) ?></td>
           <td><?= $ad->width ?></td>
           <td><?= $ad->height ?></td>

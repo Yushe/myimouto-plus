@@ -2,4 +2,4 @@
 
 <?= $this->partial('form', ['ad' => $this->ad]) ?>
 
-<?= $this->linkTo($this->t('buttons.back'), $this->ad) ?>
+<?= $this->linkTo($this->t('buttons.back'), '#index') ?>

@@ -5,6 +5,26 @@
   <?= $this->ad->id ?>
 </div>
 <div>
+  <label><?= $this->humanize('ad_type') ?></label>
+  <?= $this->ad->ad_type ?>
+</div>
+<div>
+  <label><?= $this->humanize('status') ?></label>
+  <?= $this->ad->status ?>
+</div>
+<div>
+  <label><?= $this->humanize('hit_count') ?></label>
+  <?= $this->ad->hit_count ?>
+</div>
+<?php if ($this->ad->html) : ?>
+<div>
+  <label>Html</label>
+  <pre style="font-size:1.15em;margin:0px;">
+  <?= $this->h($this->ad->html) ?>
+  </pre>
+</div>
+<?php else: ?>
+<div>
   <label><?= $this->humanize('image_url') ?></label>
   <?= $this->ad->image_url ?>
 </div>
@@ -20,18 +40,7 @@
   <label><?= $this->humanize('height') ?></label>
   <?= $this->ad->height ?>
 </div>
-<div>
-  <label><?= $this->humanize('ad_type') ?></label>
-  <?= $this->ad->ad_type ?>
-</div>
-<div>
-  <label><?= $this->humanize('status') ?></label>
-  <?= $this->ad->status ?>
-</div>
-<div>
-  <label><?= $this->humanize('hit_count') ?></label>
-  <?= $this->ad->hit_count ?>
-</div>
+<?php endif ?>
 
 <?= $this->linkTo($this->t('buttons.edit'), $this->editAdvertisementPath($this->ad)) ?> 
 <?= $this->linkTo($this->t('buttons.delete'), $this->ad, ['data' => ['confirm' => $this->t('confirmations.is_sure')], 'method' => 'delete']) ?> 
