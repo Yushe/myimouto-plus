@@ -28,8 +28,8 @@ class DmailController extends ApplicationController
 
     public function create()
     {
-        if (Dmail::where('from_id = ? AND created_at > ?', $this->current_user->id, date('Y-m-d H:i:s', time()-3600))->count() > 10) {
-            $this->notice("You can't send more than 10 dmails per hour.");
+        if (Dmail::where('from_id = ? AND created_at > ?', $this->current_user->id, date('Y-m-d H:i:s', time()-3600))->count() >= CONFIG()->max_dmails_per_hour) {
+            $this->notice("You can't send more than " . CONFIG()->max_dmails_per_hour . " dmails per hour.");
             $this->redirectTo('#inbox');
             return;
         }

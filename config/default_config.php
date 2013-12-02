@@ -293,6 +293,9 @@ abstract class DefaultConfig
     # Enables the E/R hotkeys to jump to the edit/reply forms respectevely in post#show.
     public $post_show_hotkeys = true;
     
+    # Max number of dmails users can send in one hour.
+    public $max_dmails_per_hour = 10;
+    
     # Only Job tasks listed here will be active.
     # @see $enable_asynchronous_tasks
     # @see is_job_task_active()
