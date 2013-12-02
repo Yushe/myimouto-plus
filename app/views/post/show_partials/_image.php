@@ -19,8 +19,8 @@
                     'alt'          => $this->post->tags(),
                     'id'           => 'image',
                     'class'        => 'image',
-                    'width'        => $file_sample['width'],
-                    'height'       => $file_sample['height'],
+                    'width'        => $file_sample['width']  ?: $jpeg['width'],
+                    'height'       => $file_sample['height'] ?: $jpeg['height'],
                     'large_width'  => $jpeg['width'],
                     'large_height' => $jpeg['height'])); ?>
     <?php elseif ($this->post->flash()) : ?>
