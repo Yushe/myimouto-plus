@@ -30,7 +30,7 @@ class AdvertisementsController extends ApplicationController
         $this->ad = new Advertisement($this->params()->advertisement);
         if ($this->ad->save()) {
             $this->notice('Advertisement added');
-            $this->redirectTo(['#show', 'id' => $this->ad->id]);
+            $this->redirectTo($this->ad);
         } else {
             $this->render('blank');
         }
@@ -46,7 +46,7 @@ class AdvertisementsController extends ApplicationController
         $this->ad = Advertisement::find($this->params()->id);
         if ($this->ad->updateAttributes($this->params()->advertisement)) {
             $this->notice('Advertisement updated');
-            $this->redirectTo(['#show', 'id' => $this->ad]);
+            $this->redirectTo($this->ad);
         } else {
             $this->render('blank');
         }
