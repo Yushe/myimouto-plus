@@ -12,11 +12,10 @@ Requirements
   * Must have PHP libraries are GD2 (for image processing), PDO (database) and cURL (for both Image search and Search external data features).
   * Recommended libraries are Imagick and Memcached.
   * If running under Apache, the Rewrite mod must be enabled. Also, to serve gzipped assets (css and js files), the Headers mod is needed.
+  * Both Git and Composer are needed for installation/update. How to install Composer can be found [here](http://getcomposer.org/download/) and/or [here](http://getcomposer.org/doc/00-intro.md).
 
 Installation
 ------------
-
-Note: You need both Git and Composer installed in your system. How to install Composer can be found [here](http://getcomposer.org/download/) and/or [here](http://getcomposer.org/doc/00-intro.md).
 
 Go to the location where you want MyImouto to be installed, then clone the repo, then install dependencies:
 
@@ -33,7 +32,6 @@ Go to the location where you want MyImouto to be installed, then clone the repo,
   * If you're not accessing the site locally, list the IP address you'll connect from in the 'safe_ips' array in _install/config.php_.
   * Go to your site to complete the installation. After installation is completed, you may delete the install folder.
   * After installation is completed, run `php config/boot.php db:migrate` to run database migrations.
-  * If you have problems, read below the Troubleshooting section or report them in the issues section.
 
 Updating
 --------
