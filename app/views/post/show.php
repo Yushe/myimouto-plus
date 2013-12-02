@@ -27,8 +27,6 @@
     <div class="content" id="right-col">
     <?php if (CONFIG()->can_see_ads(current_user())) : ?>
       <?= $this->partial('horizontal') ?>
-      <br />
-      <br />
     <?php endif ?>
       <?= $this->partial('post/show_partials/image') ?>
       <?= $this->partial('post/show_partials/image_footer', ['post_id' => $this->post->id]) ?>
