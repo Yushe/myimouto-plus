@@ -69,8 +69,9 @@ class WikiPage extends Rails\ActiveRecord\Base
 
     public function diff($version)
     {
-        if ($otherpage = self::find_page($this->title, $version))
-            return Moebooru\Diff::generate($body, $otherbody);
+        if ($otherpage = self::find_page($this->title, $version)) {
+            return Moebooru\Diff::generate($this->body, $otherpage->body);
+        }
     }
 
     # FIXME: history shouldn't be changed on lock/unlock.
