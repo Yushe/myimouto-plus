@@ -53,7 +53,7 @@
       <?php endif ?> 
     </tbody>
 
-    <tbody class="type-fields type-image<?php if ($action != 'blank' || $f->object()->html) echo ' hide' ?>">
+    <tbody class="type-fields type-image<?php if ($action != 'blank' && $f->object()->html) echo ' hide' ?>">
       <tr>
         <th><?= $f->label('image_url') ?></th>
         <td><?= $f->textField('image_url') ?></td>
