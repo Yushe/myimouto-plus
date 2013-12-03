@@ -16,6 +16,9 @@
       <li><?= $this->linkTo($this->t('static11'), 'post#deleted_index') ?></li>
       <li><?= $this->linkTo($this->t('static12'), 'history#index') ?></li>
       <li><?= $this->linkTo($this->t('static13'), 'post#upload') ?></li>
+      <?php if (current_user()->is_mod_or_higher()) : ?>
+      <li><?= $this->linkTo($this->t('static13a'), 'post#moderate') ?></li>
+      <?php endif ?>
       <?php if (current_user()->is_admin()) : ?>
       <li><?= $this->linkTo('Import', 'post#import') ?></li>
       <?php endif ?>
