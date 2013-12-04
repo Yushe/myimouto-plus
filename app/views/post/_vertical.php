@@ -1,2 +1,3 @@
-<?php
-echo $this->print_advertisement("vertical");
+<div style="margin-bottom: 1em;">
+  <?= $this->print_advertisement("vertical") ?>
+</div>

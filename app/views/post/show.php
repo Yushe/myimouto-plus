@@ -20,18 +20,23 @@
       <?= $this->partial('post/show_partials/options_panel') ?>
       <?= $this->partial('post/show_partials/related_posts_panel') ?>
  <br />
-  <?php if (CONFIG()->can_see_ads(current_user())) : ?>
-  <?= $this->partial('vertical') ?>
+  <?php if (CONFIG()->can_show_ad('post#show-sidebar', current_user())) : ?>
+    <?= $this->partial('vertical') ?>
   <?php endif ?>
     </div>
     <div class="content" id="right-col">
-    <?php if (CONFIG()->can_see_ads(current_user())) : ?>
-      <?= $this->partial('horizontal') ?>
-    <?php endif ?>
+      <?php if (CONFIG()->can_show_ad('post#show-top', current_user())) : ?>
+        <?= $this->partial('horizontal') ?>
+      <?php endif ?>
+      
       <?= $this->partial('post/show_partials/image') ?>
       <?= $this->partial('post/show_partials/image_footer', ['post_id' => $this->post->id]) ?>
       <?= $this->partial('post/show_partials/edit') ?>
       <?= $this->partial('post/show_partials/comments') ?>
+      
+      <?php if (CONFIG()->can_show_ad('post#show-bottom', current_user())) : ?>
+        <?= $this->partial('horizontal') ?>
+      <?php endif ?>
     </div>
 
     <?= $this->contentFor('post_cookie_javascripts', function() { ?> 

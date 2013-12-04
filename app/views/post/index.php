@@ -73,7 +73,7 @@
 
     <br />
 
-    <?php if (CONFIG()->can_see_ads(current_user())) : ?>
+    <?php if (CONFIG()->can_show_ad('post#index-sidebar', current_user())) : ?>
     <?= $this->partial('vertical') ?>
     <?php endif ?>
   </div>
@@ -83,8 +83,8 @@
         <?= $this->t('.ambiguous') ?><?php array_map(function($x){echo linkTo(h($x), 'wiki#show', array('title' => $x));}, $ambiguous_tags) ?>
       </div>
     <?php endif ?>
-     <?php if (CONFIG()->can_see_ads(current_user())) : ?>
-      <?= CONFIG()->ad_code_index_bottom ?>
+    <?php if (CONFIG()->can_show_ad('post#index-top', current_user())) : ?>
+      <?= $this->partial('horizontal') ?>
     <?php endif ?>
 
     <div id="quick-edit" style="display: none;" class="top-corner-float">
@@ -99,6 +99,9 @@
     <?= $this->partial("hover") ?>
     <?= $this->partial('posts', array('posts' => $this->posts)) ?>
 
+    <?php if (CONFIG()->can_show_ad('post#index-bottom', current_user())) : ?>
+      <?= $this->partial('horizontal') ?>
+    <?php endif ?>
     <div id="paginator">
       <?= $this->willPaginate($this->posts) ?>
     </div>

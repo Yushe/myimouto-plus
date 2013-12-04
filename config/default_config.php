@@ -435,6 +435,21 @@ abstract class DefaultConfig
         'similarity' => 90
     ];
     
+    /**
+     * Active advertisements spots.
+     * Remove one of them from the list and the ads in that
+     * page/place won't show.
+     * The ones commented are new, extra spots.
+     */
+    public $active_ad_spots = [
+        'post#index-sidebar',
+        'post#show-sidebar',
+        'post#show-top',
+        'post#index-top',
+        // 'post#index-bottom',
+        // 'post#show-bottom'
+    ];
+    
     # Timeout for Danbooru::http_get_streaming() (used by batch upload, similar images, etc.).
     # If this limit is reached, the file that's being downloaded will be invalid.
     # Set to 0 to wait indefinitely.
@@ -450,6 +465,18 @@ abstract class DefaultConfig
     public function is_job_task_active($name)
     {
         return $this->enable_asynchronous_tasks && in_array($name, $this->active_job_tasks);
+    }
+    
+    /**
+     * Does a couple of checks:
+     * - If $user can see ads.
+     * - If $spot is active.
+     *
+     * @return bool
+     */
+    public function can_show_ad($spot, $user)
+    {
+        return in_array($spot, $this->active_ad_spots) && $this->can_see_ads($user);
     }
     
     /**

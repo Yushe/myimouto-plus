@@ -9,16 +9,13 @@ class AdvertisementsHelper extends Rails\ActionView\Helper
                 if ($ad->html) {
                     return $ad->html;
                 } else {
-                    return $this->contentTag("div",
-                        $this->linkTo(
-                            $this->imageTag(
-                                $ad->image_url,
-                                ['alt' => "Advertisement", 'width' => $ad->width, 'height' => $ad->height]
-                            ),
-                            $this->redirectAdvertisementPath($ad),
-                            ['target' => '_blank']
+                    return $this->linkTo(
+                        $this->imageTag(
+                            $ad->image_url,
+                            ['alt' => "Advertisement", 'width' => $ad->width, 'height' => $ad->height]
                         ),
-                        ['style' => "margin-bottom: 1em;"]
+                        $this->redirectAdvertisementPath($ad),
+                        ['target' => '_blank']
                     );
                 }
             }
