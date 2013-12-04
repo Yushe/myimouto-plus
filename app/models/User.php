@@ -54,10 +54,8 @@ class User extends Rails\ActiveRecord\Base
         # iTODO: UserLog doesn't exist yet.
         return;
         
-        # iTODO: hash key
-        return Rails::cache()->fetch('type.user_logs;id.'.$this->id.';ip.'.$ip, ['expires_in' => '10 minutes'], function() use ($ip) {
-            # iTODO: hash key
-            Rails::cache()->fetch('type.user_logs;id.all', ['expires_in' => '1 day'], function() {
+        return Rails::cache()->fetch(['type' => 'user_logs', 'id' => $this->id, 'ip' => $ip], ['expires_in' => '10 minutes'], function() use ($ip) {
+            Rails::cache()->fetch(['type' => 'user_logs', 'id' => 'all'], ['expires_in' => '1 day'], function() {
                 return UserLog::where('created_at < ?', date('Y-m-d 0:0:0', strtotime('-3 days')))->deleteAll();
             });
             

@@ -6,8 +6,7 @@ trait PostCountMethods
         # A small sanitation
         $tags = preg_replace('/ +/', ' ', trim($tags));
         $cache_version = (int)Rails::cache()->read('$cache_version');
-        # iTODO: cache hash key
-        $key = 'post_count.' . $tags . ':' . 'v.' . $cache_version;
+        $key = ['post_count' => $tags, 'v' => $cache_version];
 
         $count = (int)Rails::cache()->fetch($key, function() use ($tags) {
             list($sql, $params) = Post::generate_sql($tags, ['count' => true]);

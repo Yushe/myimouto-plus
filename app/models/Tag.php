@@ -317,8 +317,7 @@ class Tag extends Rails\ActiveRecord\Base
     # * :tag_name<String>:: The tag name to search for
     static public function type_name($tag_name)
     {
-        # iTODO: hash key
-        return Rails::cache()->fetch('tag_type.' . $tag_name, ['expires_in' => '1 day'], function() use ($tag_name) {
+        return Rails::cache()->fetch(['tag_type' => $tag_name], ['expires_in' => '1 day'], function() use ($tag_name) {
             return self::type_name_helper(str_replace(' ', '_', $tag_name));
         });
     }
@@ -365,8 +364,7 @@ class Tag extends Rails\ActiveRecord\Base
         $post_tags_key = [];
         
         foreach ($post_tags as $t) {
-            # iTODO: hash keys.
-            $post_tags_key[] = 'tag_type.' . $t;
+            $post_tags_key[] = ['tag_type' => $t];
         }
         # Without this, the following splat will eat the last argument because
         # it'll be considered an option instead of key (being a hash).
@@ -392,8 +390,7 @@ class Tag extends Rails\ActiveRecord\Base
     # Hash in format { 'name' => tag_name, 'post_count' => tag_post_count }
     static public function calculate_related_by_type($tag, $type, $limit = 25)
     {
-        # iTODO: cache key.
-        return Rails::cache()->fetch('category.reltags_by_type;type.' . $type . '.tag.' . $tag, ['expires_in' => '1 hour'], function() use ($tag, $type, $limit) {
+        return Rails::cache()->fetch(['category' => 'reltags_by_type', 'type' => $type, 'tag' => $tag], ['expires_in' => '1 hour'], function() use ($tag, $type, $limit) {
             
             $sql = "
                 SELECT tags.name, tags.post_count
@@ -456,8 +453,7 @@ class Tag extends Rails\ActiveRecord\Base
         
         !is_array($tags) && $tags = array($tags);
         
-        # iTODO: hash key
-        return Rails::cache()->fetch('category.reltags.tags.' . implode(',', $tags), ['expires_in' => '1 hour'], function() use ($tags) {
+        return Rails::cache()->fetch(['category' => 'reltags', 'tags' => implode(',', $tags)], ['expires_in' => '1 hour'], function() use ($tags) {
             $from = array("posts_tags pt0");
             $cond = array("pt0.post_id = pt1.post_id");
             $sql = "SELECT ";
