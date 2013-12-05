@@ -99,12 +99,13 @@
     <?= $this->partial("hover") ?>
     <?= $this->partial('posts', array('posts' => $this->posts)) ?>
 
-    <?php if (CONFIG()->can_show_ad('post#index-bottom', current_user())) : ?>
-      <?= $this->partial('horizontal') ?>
-    <?php endif ?>
     <div id="paginator">
       <?= $this->willPaginate($this->posts) ?>
     </div>
+    
+    <?php if (CONFIG()->can_show_ad('post#index-bottom', current_user())) : ?>
+      <?= $this->partial('horizontal') ?>
+    <?php endif ?>
   </div>
 </div>
 
