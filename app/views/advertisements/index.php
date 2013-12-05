@@ -12,6 +12,7 @@
         <th><?= $this->humanize('width') ?></th>
         <th><?= $this->humanize('height') ?></th>
         <th><?= $this->humanize('ad_type') ?></th>
+        <th><?= $this->humanize('position') ?></th>
         <th><?= $this->humanize('status') ?></th>
         <th><?= $this->humanize('hit_count') ?></th>
         <th></th>
@@ -34,6 +35,7 @@
           <td><?= $ad->width ?></td>
           <td><?= $ad->height ?></td>
           <td><?= $ad->ad_type ?></td>
+          <td><?= $ad->ad_type == 'vertical' ? '&ndash;' : $ad->prettyPosition() ?></td>
           <td><?= $ad->status ?></td>
           <td><?= $ad->hit_count ?></td>
           <td><?= $this->linkTo($this->t('buttons.edit'), $this->editAdvertisementPath($ad)) ?></td>

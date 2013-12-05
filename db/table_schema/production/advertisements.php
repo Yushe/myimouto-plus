@@ -52,6 +52,11 @@ return array (
       'type' => 'text',
       'default' => NULL,
     ),
+    'position' => 
+    array (
+      'type' => 'char(255)',
+      'default' => NULL,
+    ),
   ),
   1 => 
   array (

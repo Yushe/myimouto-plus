@@ -26,7 +26,7 @@
     </div>
     <div class="content" id="right-col">
       <?php if (CONFIG()->can_show_ad('post#show-top', current_user())) : ?>
-        <?= $this->partial('horizontal') ?>
+        <?= $this->partial('horizontal', ['position' => 'top']) ?>
       <?php endif ?>
       
       <?= $this->partial('post/show_partials/image') ?>
@@ -35,7 +35,7 @@
       <?= $this->partial('post/show_partials/comments') ?>
       
       <?php if (CONFIG()->can_show_ad('post#show-bottom', current_user())) : ?>
-        <?= $this->partial('horizontal') ?>
+        <?= $this->partial('horizontal', ['position' => 'bottom']) ?>
       <?php endif ?>
     </div>
 

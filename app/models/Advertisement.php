@@ -1,6 +1,9 @@
 <?php
 class Advertisement extends Rails\ActiveRecord\Base
 {
+    # Valid positions for horizontal advertisements: any, top, bottom.
+    static protected $POSITIONS = ['a', 't', 'b'];
+    
     protected function validations()
     {
         return [
@@ -9,13 +12,18 @@ class Advertisement extends Rails\ActiveRecord\Base
             ],
             'ad_type' => [ 'presence' => true ],
             'status'  => [ 'presence' => true ],
-            'validateType'
+            'validateType',
+            'validatePosition',
         ];
     }
     
-    static public function random($type = 'vertical')
+    static public function random($type = 'vertical', $position = null)
     {
-        return self::where(['ad_type' => $type, 'status' => 'active'])->order('RAND()')->first();
+        $sql = self::where(['ad_type' => $type, 'status' => 'active'])->order('RAND()');
+        if ($position) {
+            $sql->where('position IN (?)', ['a', $position]);
+        }
+        return $sql->first();
     }
     
     static public function reset_hit_count($ids)
@@ -39,13 +47,53 @@ class Advertisement extends Rails\ActiveRecord\Base
         return '0';
     }
     
+    public function prettyPosition()
+    {
+        switch ($this->position) {
+            case 'a':
+                return 'Any';
+            
+            case 't':
+                return 'Top';
+            
+            case 'b':
+                return 'Bottom';
+            
+            default:
+                return 'Unknown';
+        }
+    }
+    
+    protected function validatePosition()
+    {
+        if ($this->ad_type == 'vertical') {
+            $this->position = null;
+        } else {
+            if (!in_array($this->position, self::$POSITIONS)) {
+                $this->errors()->add('position', "is invalid");
+                return false;
+            }
+        }
+    }
+    
     protected function validateType()
     {
+        # Common needed attributes, width and height.
+        $attr = null;
+        if (!$this->width) {
+            $attr = 'width';
+        } elseif (!$this->height) {
+            $attr = 'height';
+        }
+        
+        if ($attr) {
+            $this->errors()->add($attr, "can't be blank");
+            return false;
+        }
+
         if ($this->html) {
             $this->image_url    = null;
             $this->referral_url = null;
-            $this->width        = null;
-            $this->height       = null;
         } else {
             $attr = '';
             
@@ -53,10 +101,6 @@ class Advertisement extends Rails\ActiveRecord\Base
                 $attr = 'image_url';
             } elseif (!$this->referral_url) {
                 $attr = 'referral_url';
-            } elseif (!$this->width) {
-                $attr = 'width';
-            } elseif (!$this->height) {
-                $attr = 'height';
             }
             
             if ($attr) {

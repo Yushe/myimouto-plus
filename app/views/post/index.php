@@ -84,7 +84,7 @@
       </div>
     <?php endif ?>
     <?php if (CONFIG()->can_show_ad('post#index-top', current_user())) : ?>
-      <?= $this->partial('horizontal') ?>
+      <?= $this->partial('horizontal', ['position' => 'top']) ?>
     <?php endif ?>
 
     <div id="quick-edit" style="display: none;" class="top-corner-float">
@@ -104,7 +104,7 @@
     </div>
     
     <?php if (CONFIG()->can_show_ad('post#index-bottom', current_user())) : ?>
-      <?= $this->partial('horizontal') ?>
+      <?= $this->partial('horizontal', ['position' => 'bottom', 'center' => true]) ?>
     <?php endif ?>
   </div>
 </div>
