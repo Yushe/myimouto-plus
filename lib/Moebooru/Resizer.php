@@ -22,6 +22,9 @@ abstract class Resizer
         
         if (class_exists('Imagick', false)) {
             $image = new Imagick($read_path);
+            if ($file_ext == 'gif' && $image->getNumberImages()) {
+                $image = $image->coalesceImages()->current();
+            }
             $image->cropImage($crop_width, $crop_height, $crop_left, $crop_top);
             $image->thumbnailImage($width, $height);
             
