@@ -494,8 +494,6 @@ class User extends Rails\ActiveRecord\Base
             throw new Rails\ActiveRecord\Exception\RecordNotFoundException();
         }
         
-        // self::load_model('UserRecord');
-        
         if (UserRecord::where("user_id = ? AND is_positive = false AND reported_by IN (SELECT id FROM users WHERE level >= ?)", $invitee->id, CONFIG()->user_levels["Mod"])->exists() && !$this->is_admin()) {
             throw new User_HasNegativeRecord();
         }
@@ -660,13 +658,13 @@ class User extends Rails\ActiveRecord\Base
 
     protected function _commit_secondary_languages()
     {
-      if (!$this->secondary_languages)
-        return;
+        if (!$this->secondary_languages)
+            return;
 
-      if (in_array("none", $this->secondary_languages))
-        $this->secondary_languages = "";
-      else
-        $this->secondary_languages = implode(",", $this->secondary_languages);
+        if (in_array("none", $this->secondary_languages))
+            $this->secondary_languages = "";
+        else
+            $this->secondary_languages = implode(",", $this->secondary_languages);
     }
     # }
 
@@ -837,6 +835,11 @@ class User extends Rails\ActiveRecord\Base
     
     private function parse_is_level_or($method)
     {
+        # For anonymous users
+        if (!$this->id) {
+            return false;
+        }
+        
         list($name, $operator) = explode('_or_', substr($method, 3));
         $name = ucfirst($name);
         $levels = CONFIG()->user_levels;
@@ -856,6 +859,11 @@ class User extends Rails\ActiveRecord\Base
     
     private function parse_is_level($method)
     {
+        # For anonymous users
+        if (!$this->id) {
+            return false;
+        }
+        
         $level_name = ucfirst(substr($method, 3));
         $levels = CONFIG()->user_levels;
         if (!isset($levels[$level_name])) {
