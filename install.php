@@ -69,19 +69,6 @@ $c->put("done");
 
 
 /**
- * Compile assets
- */
-$c->put("\n");
-$c->put("Compiling assets", null, Color::BLUE);
-
-# Set console to assets
-Rails::assets()->setConsole($c);
-
-# Compile files
-Rails::assets()->compileAll();
-
-
-/**
  * Create /public/data folders
  */
 $c->put("\n");
@@ -104,6 +91,20 @@ foreach ($dirs as $dir) {
         mkdir($path);
     }
 }
+
+
+/**
+ * Compile assets
+ */
+$c->put("\n");
+$c->put("Compiling assets", null, Color::BLUE);
+
+# Set console to assets
+Rails::assets()->setConsole($c);
+
+# Compile files
+Rails::assets()->compileAll();
+
 $c->put("done");
 
 
