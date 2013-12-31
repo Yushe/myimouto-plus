@@ -91,7 +91,12 @@ class ApplicationHelper extends Rails\ActionView\Helper
         if (!$inline->inline_images)
             return "";
 
-        $url = $inline->inline_images->first->preview_url();
+        if ($inline->inline_images->any()) {
+            $url = $inline->inline_images[0]->preview_url();
+        } else {
+            $url = '';
+        }
+        
         if (!$preview_html)
             $preview_html = '<img src="'.$url.'">';
         
@@ -108,29 +113,30 @@ class ApplicationHelper extends Rails\ActionView\Helper
             </div>
         ';
         $inline_id = "inline-$id-$num";
-        $script = 'InlineImage.register("'.$inline_id.'", '.to_json($inline).');';
+        $script = 'InlineImage.register("' . $inline_id . '", ' . $inline->toJson() . ');';
         return array($block, $script, $inline_id);
     }
     
     public function format_inlines($text, $id)
     {
-        $num = 0;
+        $num  = 0;
         $list = [];
         
-        // preg_match('/image #(\d+)/i', $text, $m);
-        // foreach ($m as $t) {
-            // $i = Inline::find($m[1]);
-            // if ($i) {
-                // list($block, $script) = format_inline($i, $num, $id);
-                // $list[] = $script;
-                // $num++;
-                // return $block;
-            // } else
-                // return $t;
-        // }
+        $text = preg_replace_callback('/image #(\d+)/i', function($m) use (&$list, &$num, $id) {
+            $i = Inline::where(['id' => (int)$m[1]])->first();
+            if ($i) {
+                list($block, $script) = $this->format_inline($i, $num, $id);
+                $list[] = $script;
+                $num++;
+                return $block;
+            } else {
+                return $m[0];
+            }
+        }, $text);
 
-        if ($num > 0 )
-            $text .= '<script language="javascript">' . implode("\n", $list) . '</script>';
+        if ($num > 0) {
+            $text .= '<script type="text/javascript">' . implode("\n", $list) . '</script>';
+        }
 
         return $text;
     }

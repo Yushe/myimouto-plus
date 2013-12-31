@@ -19,3 +19,9 @@ en:
   
   static13a: Moderate
   static62a: Index
+  
+  # These ones are missing:
+  inline:
+    index:
+      description2: Image-set description
+      created: Created

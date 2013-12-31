@@ -26,6 +26,8 @@
  */
 class InlineImage extends Rails\ActiveRecord\Base
 {
+    use Moebooru\TempfilePrefix;
+    
     public $source;
     
     public $received_file;
@@ -64,17 +66,17 @@ class InlineImage extends Rails\ActiveRecord\Base
     
     public function tempfile_image_path()
     {
-        return $this->temfile_prefix . '.upload';
+        return $this->tempfile_prefix() . '.upload';
     }
     
     public function tempfile_sample_path()
     {
-        return $this->temfile_prefix . '-sample.upload';
+        return $this->tempfile_prefix() . '-sample.upload';
     }
     
     public function tempfile_preview_path()
     {
-        return $this->temfile_prefix . '-preview.upload';
+        return $this->tempfile_prefix() . '-preview.upload';
     }
     
     /**
@@ -102,15 +104,15 @@ class InlineImage extends Rails\ActiveRecord\Base
     }
     
     /**
-     * @param string $f
+     * @param Rails\ActionDispatch\Http\UploadedFile $f
      */
     public function setFile($f)
     {
-        if (!is_file($f) || !filesize($f)) {
+        if (!$f->size()) {
             return;
         }
         
-        copy($f, $this->tempfile_image_path());
+        copy($f->tempName(), $this->tempfile_image_path());
         
         $this->got_file();
     }
@@ -143,7 +145,7 @@ class InlineImage extends Rails\ActiveRecord\Base
         }
         
         if (!file_exists($this->tempfile_image_path())) {
-            $this->errors()->add('base', "No file received");
+            $this->errors()->addToBase("No file received");
             return false;
         }
         
@@ -156,7 +158,7 @@ class InlineImage extends Rails\ActiveRecord\Base
         }
         
         if (!in_array($this->file_ext, ['jpg', 'png', 'gif'])) {
-            $this->errors()->add('file', 'is an invalid content type: ' . $this->file_ext);
+            $this->errors()->add('file', 'is an invalid content type: ' . $this->file_ext ?: 'unknown');
         }
         
         return true;
@@ -191,8 +193,10 @@ class InlineImage extends Rails\ActiveRecord\Base
             return true;
         }
         
-        # We can generate the sample image during upload or offline.  Use tempfile_image_path
-        # if it exists, otherwise use file_path.
+        /**
+         * We can generate the sample image during upload or offline.  Use tempfile_image_path
+         * if it exists, otherwise use file_path.
+         */
         $path = $this->tempfile_image_path();
         if (!is_file($path)) {
             $path = $this->file_path();
@@ -263,8 +267,8 @@ class InlineImage extends Rails\ActiveRecord\Base
             return true;
         }
         
-        if (!is_dir(dirname($file_path))) {
-            mkdir(dirname($file_path), 0777, true);
+        if (!is_dir(dirname($this->file_path()))) {
+            mkdir(dirname($this->file_path()), 0777, true);
         }
         rename($this->tempfile_image_path(), $this->file_path());
         
@@ -290,7 +294,7 @@ class InlineImage extends Rails\ActiveRecord\Base
             return;
         }
         $siblings = $this->inline->inline_images;
-        $max_sequence = max($siblings->getAttributes('sequence')) ?: 0;
+        $max_sequence = ($siblings->getAttributes('sequence') && max($siblings->getAttributes('sequence'))) ?: 0;
         $this->sequence = $max_sequence + 1;
     }
     
@@ -390,19 +394,19 @@ class InlineImage extends Rails\ActiveRecord\Base
     public function api_attributes()
     {
         return [
-            'id' => $this->id,
-            'sequence' => $this->sequence,
-            'md5' => $this->md5,
-            'width' => $this->width,
-            'height' => $this->height,
-            'sample_width' => $this->sample_width,
-            'sample_height' => $this->sample_height,
-            'preview_width' => $this->preview_dimensions()['width'],
+            'id'             => (int)$this->id,
+            'sequence'       => $this->sequence,
+            'md5'            => $this->md5,
+            'width'          => (int)$this->width,
+            'height'         => (int)$this->height,
+            'sample_width'   => $this->sample_width,
+            'sample_height'  => $this->sample_height,
+            'preview_width'  => $this->preview_dimensions()['width'],
             'preview_height' => $this->preview_dimensions()['height'],
-            'description' => $this->description,
-            'file_url' => $this->file_url(),
-            'sample_url' => $this->sample_url(),
-            'preview_url' => $this->preview_url()
+            'description'    => (string)$this->description,
+            'file_url'       => $this->file_url(),
+            'sample_url'     => $this->sample_url(),
+            'preview_url'    => $this->preview_url()
         ];
     }
     

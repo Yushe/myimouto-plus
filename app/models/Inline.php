@@ -1,16 +1,32 @@
 <?php
 class Inline extends Rails\ActiveRecord\Base
 {
-    protected function assotiacions()
+    protected function associations()
     {
         return [
             'belongs_to' => [
                 'user'
             ],
             'has_many' => [
-                'inline_images' => [function() { $this->order('sequence'); }, 'dependent' => 'destroy', 'class_name' => 'inlineImage']
+                'inline_images' => [function() { $this->order('sequence'); } /*Not yet supported: 'dependent' => 'destroy'*/, 'class_name' => 'InlineImage']
             ]
         ];
+    }
+    
+    protected function callbacks()
+    {
+        return [
+            'before_destroy' => [
+                'destroy_inline_images'
+            ]
+        ];
+    }
+    
+    protected function destroy_inline_images()
+    {
+        foreach ($this->inline_images as $i) {
+            $i->destroy();
+        }
     }
     
     # Sequence numbers must start at 1 and increase monotonically, to keep the UI simple.
@@ -65,7 +81,7 @@ class Inline extends Rails\ActiveRecord\Base
             
             try {
                 # Create one crop for the image, and InlineImage will create the sample and preview from that.
-                Moebooru\Reizer::resize($image->file_ext, $image->file_path(), $new_image->tempfile_image_path(), $size, 95);
+                Moebooru\Resizer::resize($image->file_ext, $image->file_path(), $new_image->tempfile_image_path(), $size, 95);
                 chmod($new_image->tempfile_image_path(), 0775);
             } catch (Exception $e) {
                 if (is_file($new_image->tempfile_image_path())) {
@@ -85,10 +101,10 @@ class Inline extends Rails\ActiveRecord\Base
     public function api_attributes()
     {
         return [
-            'id'          => $this->id,
-            'description' => $this->description,
-            'user_id'     => $this->user_id,
-            'images'      => $this->inline_images->toArray()
+            'id'          => (int)$this->id,
+            'description' => (string)$this->description,
+            'user_id'     => (int)$this->user_id,
+            'images'      => $this->inline_images->asJson()
         ];
     }
     
