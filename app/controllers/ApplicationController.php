@@ -280,8 +280,9 @@ class ApplicationController extends Rails\ActionController\Base
 
     protected function init_cookies()
     {
-        if ($this->request()->format() == "xml" || $this->request()->format() == "json")
+        if ($this->request()->format() == "xml" || $this->request()->format() == "json") {
             return;
+        }
 
         $forum_posts = ForumPost::where("parent_id IS NULL")->order("updated_at DESC")->limit(10)->take();
         $this->cookies()->current_forum_posts = json_encode(array_map(function($fp) {
@@ -330,6 +331,11 @@ class ApplicationController extends Rails\ActionController\Base
             $this->cookies()->delete('login');
             $this->cookies()->blacklisted_tags = json_encode(CONFIG()->default_blacklists);
         }
+        
+        if ($this->session()->notice) {
+            $this->cookies()->notice = $this->session()->notice;
+            $this->session()->delete('notice');
+        }
     }
     
     protected function set_title($title = null)
@@ -343,7 +349,7 @@ class ApplicationController extends Rails\ActionController\Base
     
     protected function notice($str)
     {
-        $this->cookies()->notice = $str;
+        $this->session()->notice = $str;
     }
     
     protected function set_locale()
