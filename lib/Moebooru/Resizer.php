@@ -22,11 +22,19 @@ abstract class Resizer
         
         if (class_exists('Imagick', false)) {
             $image = new Imagick($read_path);
+            
+            /**
+             * Coalesce GIF if it has many layers (animated),
+             * to ensure a good output. Otherwise the resulting image could
+             * look "corrupt".
+             */
             if ($file_ext == 'gif' && $image->getNumberImages()) {
                 $image = $image->coalesceImages()->current();
             }
+            
             $image->cropImage($crop_width, $crop_height, $crop_left, $crop_top);
             $image->thumbnailImage($width, $height);
+            $image->setImageFormat('jpg');
             
             $fh = fopen($write_path, 'w');
             $image->writeImageFile($fh);
