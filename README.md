@@ -19,7 +19,7 @@ Requirements
 Installation
 ------------
 
-For an explained, step-by-step guide, please go [[here|How to install]].
+For an explained, step-by-step guide, please go [here](https://github.com/myimouto/myimouto/wiki/How-to-install).
 
   * Install system dependencies: `composer install`.
   * Create a database for the booru.
