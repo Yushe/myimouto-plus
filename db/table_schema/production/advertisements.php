@@ -54,7 +54,7 @@ return array (
     ),
     'position' => 
     array (
-      'type' => 'char(255)',
+      'type' => 'char(1)',
       'default' => NULL,
     ),
   ),
