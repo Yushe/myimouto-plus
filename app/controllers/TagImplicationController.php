@@ -13,16 +13,14 @@ class TagImplicationController extends ApplicationController
     public function create()
     {
         $tag_implication = $this->params()->tag_implication;
-        // $tag_implication['new_predicate'] = $tag_implication['predicate'];
-        // $tag_implication['new_consequent'] = $tag_implication['consequent'];
         $tag_implication['is_pending'] = true;
-        // vpe($tag_implication);
         $ti = new TagImplication($tag_implication);
-// vpe($ti, $tag_implication);
-        if ($ti->save())
+        
+        if ($ti->save()) {
             $this->notice("Tag implication created");
-        else
+        } else {
             $this->notice("Error: " . $ti->errors()->fullMessages(', '));
+        }
 
         $this->redirectTo("#index");
     }
@@ -64,14 +62,16 @@ class TagImplicationController extends ApplicationController
                     $tis[] = $ti;
                 }
                 
-                if (current_user()->is_mod_or_higher() && $can_delete) {
-                    foreach ($tis as $ti)
+                if (current_user()->is_mod_or_higher() || $can_delete) {
+                    foreach ($tis as $ti) {
                         $ti->destroy_and_notify(current_user(), $this->params()->reason);
+                    }
                 
                     $this->notice("Tag implications deleted");
                     $this->redirectTo("#index");
-                } else
+                } else {
                     $this->access_denied();
+                }
                 break;
             
             case "Approve":
@@ -87,8 +87,9 @@ class TagImplicationController extends ApplicationController
                     
                     $this->notice("Tag implication approval jobs created");
                     $this->redirectTo('job_task#index');
-                } else
+                } else {
                     $this->access_denied();
+                }
                 break;
             
             default:
