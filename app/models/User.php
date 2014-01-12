@@ -831,11 +831,6 @@ class User extends Rails\ActiveRecord\Base
     
     private function parse_is_level_or($method)
     {
-        # For anonymous users
-        if (!$this->id) {
-            return false;
-        }
-        
         list($name, $operator) = explode('_or_', substr($method, 3));
         $name = ucfirst($name);
         $levels = CONFIG()->user_levels;
@@ -845,9 +840,19 @@ class User extends Rails\ActiveRecord\Base
         $level = $levels[$name];
         
         if ($operator == 'higher') {
-            return $this->level >= $level;
+            # For anonymous users
+            if (!$this->id) {
+                return false;
+            } else {
+                return $this->level >= $level;
+            }
         } elseif ($operator == 'lower') {
-            return $this->level <= $level;
+            # For anonymous users
+            if (!$this->id) {
+                return true;
+            } else {
+                return $this->level <= $level;
+            }
         } else {
             throw new InvalidArgumentException("Invalid user level operator " . $operator);
         }
