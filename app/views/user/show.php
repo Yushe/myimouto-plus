@@ -1,8 +1,3 @@
-<?php
-// vpe(
-// $this->user->tag_subscriptions->select(function($x) { return (bool)$x->is_visible_on_profile; })
-// )
-?>
 <?php if ($this->user->has_avatar()) : ?>
   <div style="width: 25em; height: <?= max($this->user->avatar_height, 80) ?>px; position: relative;">
     <div style="position: absolute; bottom: 0;">
@@ -72,11 +67,11 @@
     </tr>
     <tr>
       <td><strong><?= $this->t('user_edits') ?></strong></td>
-      <td><?= 0 //$this->linkTo(History::where(['user_id' => $this->user->id])->count(), array('history#index', 'search' => 'user:'.$this->user->name))) ?></td>
+      <td><?= $this->linkTo(History::where(['user_id' => $this->user->id])->count(), array('history#index', 'search' => 'user:'.$this->user->name)) ?></td>
     </tr>
     <tr>
       <td><strong><?= $this->t('user_tag_edits') ?></strong></td>
-      <td><?= 0 //$this->linkTo(History::where(['user_id' => $this->user->id, 'group_by_table' => 'posts'])->count(), array('history#index', 'search' => 'type:post user:'.$this->user->name)) ?></td>
+      <td><?= $this->linkTo(History::where(['user_id' => $this->user->id, 'group_by_table' => 'posts'])->count(), array('history#index', 'search' => 'type:post user:'.$this->user->name)) ?></td>
     </tr>
     <tr>
       <td><strong><?= $this->t('user_note_edits') ?></strong></td>
