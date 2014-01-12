@@ -164,18 +164,19 @@ trait PostSqlMethods
             $cond_params[] = $q['source'];
         }
 
-        // if (is_string($q['subscriptions'])) {
-            // preg_match('/^(.+?):(.+)$/', $q['subscriptions'], $m);
-            // $username = $m[1] || $q['subscriptions'];
-            // $subscription_name = $m[2];
-            // $user = new User('find_by_name', $username);
+        if (isset($q['subscriptions'])) {
+            preg_match('/^(.+?):(.+)$/', $q['subscriptions'], $m);
+            $username = $m[1] ?: $q['subscriptions'];
+            $subscription_name = $m[2];
+            $user = User::find_by_name($username);
 
-            // if ($user) {
-                // $paramsost_ids = TagSubscription.find_post_ids(user.id, subscription_name)
-                // $conds[] = "p.id IN (?)"
-                // $cond_params[] = post_ids
-            // }
-        // }
+            if ($user) {
+                if ($post_ids = TagSubscription::find_post_ids($user->id, $subscription_name)) {
+                    $conds[] = 'p.id IN (?)';
+                    $cond_params[] = $post_ids;
+                }
+            }
+        }
 
         if (is_string($q['fav'])) {
             $joins[] = "JOIN favorites f ON f.post_id = p.id JOIN users fu ON f.user_id = fu.id";

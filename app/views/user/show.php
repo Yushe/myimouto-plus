@@ -1,3 +1,8 @@
+<?php
+// vpe(
+// $this->user->tag_subscriptions->select(function($x) { return (bool)$x->is_visible_on_profile; })
+// )
+?>
 <?php if ($this->user->has_avatar()) : ?>
   <div style="width: 25em; height: <?= max($this->user->avatar_height, 80) ?>px; position: relative;">
     <div style="position: absolute; bottom: 0;">
@@ -143,14 +148,12 @@
   </table>
 </div>
 
-<?php /*
-<?php $this->user->tag_subscriptions.visible.each do |tag_subscription| ?>
+<?php foreach($this->user->tag_subscriptions->select(function($x) { return (bool)$x->is_visible_on_profile; }) as $tag_subscription) : ?>
   <div style="margin-bottom: 1em; float: left; clear: both;">
-    <h4><?= $this->t('user_sub2') ?><?= tag_subscription.name ?> <?= $this->linkTo("»", 'post#index', 'tags' => 'sub:#array($this->user->name}:#{tag_subscription.name)' ?></h4>
-    <?= $this->partial("post/posts", array('posts' => $this->user->tag_subscription_posts(5, tag_subscription.name).select array(|x| CONFIG()->can_see_post.call(current_user(), x)))) ?>
+    <h4><?= $this->t('user_sub2') ?><?= $tag_subscription->name ?> <?= $this->linkTo("»", ['post#index', 'tags' => 'sub:' . $this->user->name . ':' . $tag_subscription->name]) ?></h4>
+    <?= $this->partial("post/posts", array('posts' => $this->user->tag_subscription_posts(5, $tag_subscription->name)->select(function($x) { return CONFIG()->can_see_post(current_user(), $x); }))) ?>
   </div>
-<?php end ?>
-*/ ?>
+<?php endforeach ?>
 
 <div style="margin-bottom: 1em; float: left; clear: both;">
   <h4><?= $this->linkTo($this->t('user_fav3'), array('post#index', 'tags' => 'vote:3:'.$this->user->name.' order:vote')) ?></h4>

@@ -1,7 +1,7 @@
-<?php if (empty($this->user->tag_subscriptions)) : ?>
+<?php if ($this->user->tag_subscriptions->none()) : ?>
   <?= $this->t('sub_none') ?>
 <?php else: ?>
-  <?= $this->tag_subscription_listing($user) ?>
+  <?= $this->tag_subscription_listing($this->user) ?>
 <?php endif ?>
   
 <?php if (current_user()->id == $this->user->id) : ?>

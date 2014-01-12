@@ -260,6 +260,12 @@ abstract class DefaultConfig
     # Use this config to enable Google Analytics. Fill in the GA Tracking ID (like 'UA-XXXXX-X')
     public $ga_tracking_id = '';
     
+    # Max number of posts to cache
+    public $tag_subscription_post_limit = 200;
+    
+    # Max number of fav tags per user
+    public $max_tag_subscriptions = 5;
+    
     /**
      * *******************************
      * MyImouto-specific configuration
@@ -305,6 +311,7 @@ abstract class DefaultConfig
         'upload_batch_posts',
         'approve_tag_implication',
         'approve_tag_alias',
+        'calculate_tag_subscriptions'
     ];
     
     # Javascripts assets manifest files.
@@ -499,5 +506,13 @@ abstract class DefaultConfig
         if (preg_match("/^(?:moe|yande\.re) (\d+) /", $filename, $m)) {
             return 'https://yande.re/post/show/'.$m[1];
         }
+    }
+    
+    public $external_storage = null;
+    
+    public function es_create($model)
+    {
+        $className = $this->external_storage . '\Models\\' . get_class($model);
+        $className::create($model);
     }
 }

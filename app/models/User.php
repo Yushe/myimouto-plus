@@ -18,11 +18,6 @@ class User extends Rails\ActiveRecord\Base
      */
     public $ip_addr;
     
-    /**
-     * iTODO: Temp property while tag subs aren't enabled.
-     */
-    public $tag_subscriptions;
-    
     protected $post_count;
     
     static public function set_current_user(User $user)
@@ -638,9 +633,10 @@ class User extends Rails\ActiveRecord\Base
       // tag_subscriptions_text.map(&:tag_query).sort.join(" ")
     // end
 
-    // def tag_subscription_posts(limit, name)
-      // TagSubscription.find_posts(id, name, limit)
-    // end
+    public function tag_subscription_posts($limit, $name)
+    {
+        return TagSubscription::find_posts($this->id, $name, $limit);
+    }
     # }
 
     # UserLanguageMethods {

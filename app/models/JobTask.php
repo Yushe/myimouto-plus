@@ -42,9 +42,9 @@ class JobTask extends Rails\ActiveRecord\Base
                 return "start: " . $ti->predicate->name . ", result: " . $ti->consequent->name;
                 break;
                 
-            // case "calculate_tag_subscriptions"
-                // last_run = data["last_run"]
-                // "last run:#{last_run}"
+            case "calculate_tag_subscriptions":
+                return "last run: " . $this->data->last_run;
+                break;
 
             // case "upload_posts_to_mirrors"
                 // ret = ""
@@ -253,6 +253,16 @@ class JobTask extends Rails\ActiveRecord\Base
         $updater_id = $this->data->updater_id;
         $updater_ip_addr = $this->data->updater_ip_addr;
         $ti->approve($updater_id, $updater_ip_addr);
+    }
+    
+    public function execute_calculate_tag_subscriptions()
+    {
+        if (Rails::cache()->read("delay-tag-sub-calc")) {
+            return;
+        }
+        Rails::cache()->write("delay-tag-sub-calc", ['expires_in' => '360 minutes']);
+        TagSubscription::process_all();
+        $this->updateAttributes(['data' => ['last_run' => date('Y-m-d H:i')]]);
     }
     
     protected function init()
