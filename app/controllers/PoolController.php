@@ -162,7 +162,7 @@ class PoolController extends ApplicationController
                 // $this->render(['xml' => $xml]);
             // },
             'json' => function() {
-                $this->render(['json' => $this->pool->toJson()]);
+                $this->render(['json' => json_encode(array_merge($this->pool->asJson(), ['posts' => $this->posts->asJson()]))]);
             }
         ]);
     }
