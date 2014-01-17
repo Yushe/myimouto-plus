@@ -80,7 +80,7 @@
   <div class="content">
     <?php if (!empty($this->ambiguous_tags)) : ?>
       <div class="status-notice">
-        <?= $this->t('.ambiguous') ?><?php array_map(function($x){echo linkTo(h($x), 'wiki#show', array('title' => $x));}, $ambiguous_tags) ?>
+        <?= $this->t('.ambiguous') ?>: <?= implode(', ', array_map(function($x){ return $this->linkTo($this->h($x), ['wiki#show', 'title' => $x]); }, $this->ambiguous_tags)) ?>
       </div>
     <?php endif ?>
     <?php if (CONFIG()->can_show_ad('post#index-top', current_user())) : ?>
