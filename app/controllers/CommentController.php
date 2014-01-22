@@ -96,29 +96,35 @@ class CommentController extends ApplicationController
 
     public function search()
     {
-        $query = Comment::order('id desc');
-        // $conds = $cond_params = $search_terms = array();
-        if ($this->params()->query) {
-            $keywords = array();
-            foreach (explode(' ', $this->params()->query) as $s) {
-                if (!$s) continue;
-                
-                if (strpos($s, 'user:') === 0 && strlen($s) > 5) {
-                    list($search_type, $param) = explode(':', $s);
-                    if ($user = User::where(['name' => $param])->first()) {
-                        $query->where('user_id = ?', $user->id);
-                    } else {
-                        $query->where('false');
-                    }
-                    continue;
-                }
-
-                $search_terms[] = $s;
+        $query        = Comment::order('id desc');
+        $search_query = explode(' ', $this->params()->query);
+        $search_terms = array();
+        
+        foreach ($search_query as $s) {
+            if (!$s) {
+                continue;
             }
+            
+            if (strpos($s, 'user:') === 0 && strlen($s) > 5) {
+                list($search_type, $param) = explode(':', $s);
+                
+                if ($user = User::where(['name' => $param])->first()) {
+                    $query->where('user_id = ?', $user->id);
+                } else {
+                    $query->where('false');
+                }
+                continue;
+            }
+
+            $search_terms[] = $s;
+        }
+        
+        if ($search_terms) {
             $query->where('body LIKE ?', '%' . implode('%', $search_terms) . '%');
-            // $options['conditions'] = array_merge(array(implode(' AND ', $conds)), $cond_params);
-        } else
+        } else {
+            # MI: this query makes no sense, it will return nothing.
             $query->where('false');
+        }
 
         $this->comments = $query->paginate($this->page_number(), 30);
 
