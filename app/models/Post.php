@@ -202,14 +202,15 @@ class Post extends Rails\ActiveRecord\Base
 
     public function delete_from_database()
     {
-        $this->delete_file();
-        self::connection()->executeSql('UPDATE pools SET post_count = post_count - 1 WHERE id IN (SELECT pool_id FROM pools_posts WHERE post_id = '.$this->id.')');
-        self::connection()->executeSql('UPDATE tags SET post_count = post_count - 1 WHERE id IN (SELECT tag_id FROM posts_tags WHERE post_id = '.$this->id.')');
-        # MI: Destroying pool posts manually so their histories are deleted by foreign keys.
-        # This is done in Pool too. This could be done with a MySQL trigger.
-        PoolPost::destroyAll('post_id = ?', $this->id);
-        self::connection()->executeSql("DELETE FROM posts WHERE id = ?", $this->id);
-        $this->runCallbacks('after_destroy');
+        $this->runCallbacks('destroy', function() {
+            $this->delete_file();
+            self::connection()->executeSql('UPDATE pools SET post_count = post_count - 1 WHERE id IN (SELECT pool_id FROM pools_posts WHERE post_id = ?)', $this->id);
+            self::connection()->executeSql('UPDATE tags SET post_count = post_count - 1 WHERE id IN (SELECT tag_id FROM posts_tags WHERE post_id = ?)', $this->id);
+            # MI: Destroying pool posts manually so their histories are deleted by foreign keys.
+            # This is done in Pool too. This could be done with a MySQL trigger.
+            PoolPost::destroyAll('post_id = ?', $this->id);
+            self::connection()->executeSql("DELETE FROM posts WHERE id = ?", $this->id);
+        });
     }
     
     public function undelete()
@@ -241,7 +242,7 @@ class Post extends Rails\ActiveRecord\Base
             'before_save'   => ['commit_tags', 'filter_parent_id'],
             'after_save'    => ['update_parent', 'save_post_history', 'expire_cache'],
             
-            'after_destroy' => ['expire_cache'],
+            // 'after_destroy' => ['expire_cache'],
             
             'before_validation_on_create' => [
                 'download_source', 'ensure_tempfile_exists', 'determine_content_type',
