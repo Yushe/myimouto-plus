@@ -59,17 +59,13 @@ class History extends Rails\ActiveRecord\Base
         $objects = new ArrayObject();
         
         foreach ($changes as $change) {
-            // # MI: If we're redoing, why would we need a previous?
-            // # Adding this conditional so redos won't need a previous.
-            // if (!$redo_change) {
-                # If we have no previous change, this was the first change to this property
-                # and we have no default, so this change can't be undone.
-                $previous_change = $change->previous;
-                
-                if (!$previous_change && empty($change->options()['allow_reverting_to_default'])) {
-                    continue;
-                }
-            // }
+            # If we have no previous change, this was the first change to this property
+            # and we have no default, so this change can't be undone.
+            $previous_change = $change->previous;
+            
+            if (!$previous_change && empty($change->options()['allow_reverting_to_default'])) {
+                continue;
+            }
             
             if (!$user->can_change($change->obj(), $change->column_name)) {
                 $errors[spl_object_hash($change)] = 'denied';
@@ -104,12 +100,8 @@ class History extends Rails\ActiveRecord\Base
         
         foreach (array_reverse($stack) as $node) {
             $object = $node['o'];
-            // /**
-             // * MI: Only Pool model sets the undo (:after) callback.
-             // * Calling it manually at the end because runCallbacks doesn't behave like in Rails.
-             // * TODO: fix callbacks in the framework and update this.
-             // */
-            $object->runCallbacks('undo', function() {
+            
+            $object->runCallbacks('undo', function() use ($node, $redo_change, $object) {
                 $changes = !empty($node['changes']) ? $node['changes'] : [];
                 
                 if ($changes) {
@@ -137,7 +129,6 @@ class History extends Rails\ActiveRecord\Base
                         }
                     }
                 }
-                // $object->runCallbacks('after_undo');
             });
             
             $object->save();
