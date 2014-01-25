@@ -337,12 +337,13 @@ class UserController extends ApplicationController
         if ($this->request()->isPost()) {
             if ($this->user->is_mod_or_higher()) {
                 $this->notice("You can not ban other moderators or administrators");
-                $this->redirectTo('#block');
+                $this->redirectTo(['#block', 'id' => $this->params()->id]);
                 return;
             }
             !is_array($this->params()->ban) && $this->params()->ban = [];
             
             $attrs = array_merge($this->params()->ban, ['banned_by' => current_user()->id, 'user_id' => $this->params()->id]);
+            
             Ban::create($attrs);
             $this->redirectTo('#show_blocked_users');
         } else {
