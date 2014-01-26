@@ -23,7 +23,7 @@ class IpBans extends Rails\ActiveRecord\Base
             $this->expires_at = '00-00-00 00:00:00';
             $duration = null;
         } else {
-            $this->expires_at = date('Y-m-d H:i:s', strtotime('-1 day'));
+            $this->expires_at = date('Y-m-d H:i:s', time() + ((int)$dur *60*60*24));
             $duration = $dur;
         }
         
