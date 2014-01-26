@@ -89,8 +89,9 @@ class UserController extends ApplicationController
         }
         
         if (current_user()->is_mod_or_higher()) {
+            # RP: Missing feature.
             // $this->user_ips = $this->user->user_logs->order('created_at DESC').pluck('ip_addr').uniq
-            $this->user_ips = array();
+            $this->user_ips = array_unique(UserLog::where(['user_id' => $this->user->id])->order('created_at DESC')->take()->getAttributes('ip_addr'));
         }
         
         $tag_types = CONFIG()->tag_types;

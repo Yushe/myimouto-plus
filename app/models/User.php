@@ -46,15 +46,14 @@ class User extends Rails\ActiveRecord\Base
     
     public function log($ip)
     {
-        # iTODO: UserLog doesn't exist yet.
-        return;
-        
         return Rails::cache()->fetch(['type' => 'user_logs', 'id' => $this->id, 'ip' => $ip], ['expires_in' => '10 minutes'], function() use ($ip) {
             Rails::cache()->fetch(['type' => 'user_logs', 'id' => 'all'], ['expires_in' => '1 day'], function() {
-                return UserLog::where('created_at < ?', date('Y-m-d 0:0:0', strtotime('-3 days')))->deleteAll();
+                # RP: Missing relation method "deleteAll()"
+                return UserLog::where('created_at < ?', date('Y-m-d 0:0:0', strtotime('-3 days')))->take()->each('destroy');
             });
             
-            $log_entry = UserLog::where(['ip_addr' => $ip])->firstOrInitialize();
+            # RP: Missing feature.
+            $log_entry = UserLog::where(['ip_addr' => $ip, 'user_id' => $this->id])->firstOrInitialize();
             $log_entry->created_at = date('Y-m-d H:i:s');
             return $log_entry->save();
         });
@@ -65,10 +64,6 @@ class User extends Rails\ActiveRecord\Base
     # characters in tags, they can be used to separate lines (with whitespace separating
     # tags). Denormalizing this into a field in users would save a SQL query.
     public $blacklisted_tags;
-    // protected function setBlacklistedTags($blacklists)
-    // {
-        // $this->('blacklisted_tags', $blacklists);
-    // }
 
     public function blacklisted_tags()
     {
