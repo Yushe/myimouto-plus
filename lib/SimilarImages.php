@@ -50,7 +50,7 @@ class SimilarImages
         $server_threads = [];
         $server_responses = [];
         $curl_opts = [
-            CURLOPT_TIMEOUT         => 4,
+            CURLOPT_TIMEOUT         => 5,
             CURLOPT_POST            => true,
             CURLOPT_RETURNTRANSFER  => true
         ];
@@ -59,6 +59,7 @@ class SimilarImages
         
         foreach ($services_by_server as $services_list) {
             $chk++;
+            
             $search_url = null;
             
             if ($options['type'] == 'url')
@@ -67,9 +68,9 @@ class SimilarImages
                 $search_url = $options['source']['preview_url'];
 
             $params = [];
-            if ($search_url)
+            if ($search_url) {
                 $params['url'] = $search_url;
-            else {
+            } else {
                 $params['file'] = '@' . $source_file;
             }
             
@@ -94,8 +95,12 @@ class SimilarImages
         do {
             $ret = curl_multi_exec($mh, $active);
         } while ($ret == CURLM_CALL_MULTI_PERFORM);
-     
+
+        
         while ($active && $ret == CURLM_OK) {
+            if (curl_multi_select($mh) != -1) {
+                usleep(100);
+            }
             do {
                 $mrc = curl_multi_exec($mh, $active);
             } while ($mrc == CURLM_CALL_MULTI_PERFORM);
@@ -127,7 +132,20 @@ class SimilarImages
             $resp = curl_multi_getcontent($$chn);
             
             if (!$resp) {
-                throw new Exception("Empty response. cURL error: " . curl_error($$chn));
+                $curl_err = curl_error($$chn);
+                if (preg_match('/^Operation timed out/', $curl_err)) {
+                    $err_msg = 'timed out';
+                    Rails::log()->notice(
+                        "[SimilarImages] cURL timed out: " . $curl_err
+                    );
+                } else {
+                    $err_msg = 'empty response';
+                    Rails::log()->warning(sprintf(
+                        "[SimilarImages] cURL error: (%s) %s", curl_errno($$chn), $curl_err
+                    ));
+                }
+                $errors[$server] = [ 'message' => $err_msg ];
+                continue;
             }
             
             try {
