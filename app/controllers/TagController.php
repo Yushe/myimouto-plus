@@ -116,7 +116,7 @@ class TagController extends ApplicationController
                     $this->render(array('xml' => $query->limit($limit)->take(), 'root' => "tags"));
                 // }
             },
-            'json' => function ($s) use ($order, $limit, $query) {
+            'json' => function () use ($order, $limit, $query) {
                 $tags = $query->limit($limit)->take();
                 $this->render(array('json' => $tags));
             }
