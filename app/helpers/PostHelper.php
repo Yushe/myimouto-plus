@@ -94,7 +94,7 @@ class PostHelper extends Rails\ActionView\Helper
         $ddl_class .= ($post->width > 1500 || $post->height > 1500)?    " largeimg":" smallimg";
 
         if (!empty($options['similarity'])) {
-            $icon = '<img src="'.$post->service_icon().'" alt="'.$post->service.'" class="service-icon" id="source">';
+            $icon = '<img src="'.$post->service_icon().'" alt="'.$post->service().'" class="service-icon" id="source">';
             $ddl_class .= " similar similar-directlink";
             is_numeric($options['similarity']) && $options['similarity'] >= 90 && $li_class .= " similar-match";
             is_string($options['similarity']) && $options['similarity'] == 'Original' && $li_class .= " similar-original";

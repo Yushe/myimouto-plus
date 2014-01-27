@@ -223,6 +223,11 @@ class Post extends Rails\ActiveRecord\Base
         });
     }
     
+    public function service()
+    {
+        return CONFIG()->local_image_service;
+    }
+    
     public function service_icon()
     {
         return "/favicon.ico";

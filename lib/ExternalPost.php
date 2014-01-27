@@ -2,7 +2,7 @@
 class ExternalPost
 {
     # These mimic the equivalent attributes in Post directly.
-    public $md5, $url, $preview_url, $sample_url, $service, $width, $height, $tags, $rating, $id, $similarity, $parent_id, $has_children;
+    public $md5, $url, $preview_url, $sample_url, $width, $height, $tags, $rating, $id, $similarity, $parent_id, $has_children;
     
     public $author, $created_at, $creator_id, $file_size, $file_url, $score, $source, $original_preview_url;
     
@@ -102,5 +102,9 @@ class ExternalPost
     public function file_url()
     {
         return $this->url;
+    }
+    
+    public function service()
+    {
     }
 }
