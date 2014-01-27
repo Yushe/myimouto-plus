@@ -43,7 +43,7 @@ class JobTask extends Rails\ActiveRecord\Base
                 break;
                 
             case "calculate_tag_subscriptions":
-                return "last run: " . $this->data->last_run;
+                return "last run: " . (isset($this->data->last_run) ? $this->data->last_run : 'never');
                 break;
 
             // case "upload_posts_to_mirrors"
