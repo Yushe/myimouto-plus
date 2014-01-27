@@ -28,9 +28,8 @@ abstract class Danbooru
             $file = '';
             
             $url = parse_url($source);
-            // $url['host'] = url.normalized_host
 
-            if ($url['scheme'] != 'http' && $url['scheme'] != 'https')
+            if (empty($url['scheme']) || $url['scheme'] != 'http' && $url['scheme'] != 'https')
                 throw new Danbooru\Exception\RuntimeException('SocketError: URL must be HTTP or HTTPS');
 
             # check if the request uri is not percent-encoded
