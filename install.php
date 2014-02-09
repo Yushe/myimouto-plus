@@ -103,6 +103,10 @@ $c->put("Compiling assets", null, Color::BLUE);
 Rails::assets()->setConsole($c);
 
 # Compile files
+# CSS minifier Toopay/Assetic-Minifier uses /e modifier in its
+# preg_replace() calls, which is deprecated as of PHP 5.5. Change
+# error_reporting to avoid triggering the deprecation warning.
+error_reporting(E_WARNING);
 Rails::assets()->compileAll();
 
 $c->put("done");
