@@ -104,11 +104,9 @@ Rails::assets()->setConsole($c);
 
 # Compile files
 # CSS minifier Toopay/Assetic-Minifier uses /e modifier in its
-# preg_replace() calls, which is deprecated as of PHP 5.5, triggering
-# an error and stopping the script. This workaround will fix that problem.
-error_reporting(0);
-Rails::assets()->compileFile('application.css');
-Rails::config()->assets->precompile = ['application.js'];
+# preg_replace() calls, which is deprecated as of PHP 5.5. Change
+# error_reporting to avoid triggering the deprecation warning.
+set_error_handler('nullErrorHandler');
 Rails::assets()->compileAll();
 
 $c->put("done");
@@ -122,6 +120,7 @@ $c->put("Installation finished.", Color::GREEN);
 $c->put("You may delete this install.php file.");
 $c->put();
 
+function nullErrorHandler() {}
 
 function getAdminData($c)
 {
