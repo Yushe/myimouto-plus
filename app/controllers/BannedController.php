@@ -3,7 +3,7 @@ class BannedController extends ApplicationController
 {
     public function index()
     {
-        $this->layout('bare');
+        $this->setLayout('bare');
         
         $this->ban = $this->get_ip_ban();
         if (!$this->ban) {

@@ -3,7 +3,7 @@ class AdminController extends ApplicationController
 {
     protected function init()
     {
-        $this->layout('admin');
+        $this->setLayout('admin');
     }
     
     protected function filters()
