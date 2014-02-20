@@ -247,30 +247,48 @@ trait PostFileMethods
         if (!$this->image())
             return true;
 
-         // if (type == :sample then) {
-            // return; false if !generate_sample(options[:force_regen])
-            // temp_path = tempfile_sample_path
-            // dest_path = sample_path
-        // } elseif (type == :jpeg then) {
-            // return; false if !generate_jpeg(options[:force_regen])
-            // temp_path = tempfile_jpeg_path
-            // dest_path = jpeg_path
-        // } elseif (type == :preview then) {
-            // return; false if !generate_preview
-            // temp_path = tempfile_preview_path
-            // dest_path = preview_path
-        // } else {
-            // raise Exception, "unknown type: %s" % type
-        // }
+        $force_regen = !empty($options['force_regen']);
+        
+        switch ($type) {
+            case 'sample':
+                if (!$this->generate_sample($force_regen)) {
+                    return false;
+                }
+                $temp_path = $this->tempfile_sample_path();
+                $dest_path = $this->sample_path();
+                break;
+            
+            case 'jpeg':
+                if (!$this->generate_jpeg($force_regen)) {
+                    return false;
+                }
+                $temp_path = $this->tempfile_jpeg_path();
+                $dest_path = $this->jpeg_path();
+                break;
+            
+            case 'preview':
+                if (!$this->generate_preview($force_regen)) {
+                    return false;
+                }
+                $temp_path = $this->tempfile_preview_path();
+                $dest_path = $this->preview_path();
+                break;
+            
+            default:
+                throw new Exception(sprintf("unknown type: %s", $type));
+        }
 
-        // # Only move in the changed files on success.    When we return; false, the caller won't
-        // # save us to the database; we need to only move the new files in if we're going to be
-        // # saved.    This is normally handled by move_file.
-         // if (File.exists?(temp_path)) {
-            // FileUtils.mkdir_p(File.dirname(dest_path), 'mode' => 0775)
-            // FileUtils.mv(temp_path, dest_path)
-            // FileUtils.chmod(0775, dest_path)
-        // }
+        # Only move in the changed files on success.    When we return; false, the caller won't
+        # save us to the database; we need to only move the new files in if we're going to be
+        # saved.    This is normally handled by move_file.
+         if (is_file($temp_path)) {
+            $dest_dir = dirname($dest_path);
+            if (!is_dir($dest_dir)) {
+                mkdir($dest_dir, 0775, true);
+            }
+            rename($temp_path, $dest_path);
+            chmod($dest_path, 0775);
+        }
 
         return true;
     }
@@ -506,21 +524,26 @@ trait PostFileMethods
         return true;
     }
     
-    protected function generate_preview()
+    protected function generate_preview($force_regen = false)
     {
         if (!$this->image() || (!$this->width && !$this->height))
             return true;
         
+        # If we already have a preview image, don't regenerate it.
+        if (is_file($this->preview_path()) && !$force_regen) {
+            return true;
+        }
+        
         $size = Moebooru\Resizer::reduce_to(array('width' => $this->width, 'height' => $this->height), array('width' => 300, 'height' => 300));
 
         # Generate the preview from the new sample if we have one to save CPU, otherwise from the image.
-        if (file_exists($this->tempfile_sample_path()))
+        if (is_file($this->tempfile_sample_path()))
             list($path, $ext) = array($this->tempfile_sample_path(), "jpg");
-        elseif (file_exists($this->sample_path()))
+        elseif (is_file($this->sample_path()))
             list($path, $ext) = array($this->sample_path(), "jpg");
-        elseif (file_exists($this->tempfile_path()))
-            list($path, $ext) = array($this->tempfile_path(), $this->file_ext);
-        elseif (file_exists($this->file_path()))
+        elseif (is_file($this->tempfile_path))
+            list($path, $ext) = array($this->tempfile_path, $this->file_ext);
+        elseif (is_file($this->file_path()))
             list($path, $ext) = array($this->file_path(), $this->file_ext);
         else
             return false;
