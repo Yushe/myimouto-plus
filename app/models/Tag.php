@@ -550,11 +550,11 @@ class Tag extends Rails\ActiveRecord\Base
     
     static public function purge_tags()
     {
-        $sql =
-            "DELETE FROM tags " .
-            "WHERE post_count = 0 AND " .
+        $condition = "post_count = 0 AND " .
             "id NOT IN (SELECT alias_id FROM tag_aliases UNION SELECT predicate_id FROM tag_implications UNION SELECT consequent_id FROM tag_implications)";
-        self::connection()->executeSql($sql);
+        foreach(Tag::where($condition)->take() as $tag) {
+            $tag->destroy();
+        }
     }
     
     static public function recalculate_post_count()
