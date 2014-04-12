@@ -186,7 +186,7 @@ class ForumController extends ApplicationController
 
     public function markAllRead()
     {
-        $this->current_user->updateAttribute('last_forum_topic_read_at', time());
+        $this->current_user->updateAttribute('last_forum_topic_read_at', date('Y-m-d H:i:s'));
         $this->render('nothing');
     }
 }
