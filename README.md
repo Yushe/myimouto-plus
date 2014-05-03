@@ -2,7 +2,7 @@
 
 MyImouto is a port of [Moebooru](https://github.com/moebooru/moebooru) to PHP and MySQL. In order for this to be an actual port (or as close as possible), MyImouto uses a custom framework that is based on Ruby on Rails, thus the code from Moebooru is transcribed to PHP with some modifications here and there to fit the target language and framework.
 
-MyImouto is still under development. For more information about its features, changes and additions, please refer to the [About MyImouto](https://github.com/myimouto/myimouto/wiki/About-MyImouto) wiki.
+MyImouto is still under development, although practically complete. For more information about its features, changes and additions, please refer to the [About MyImouto](https://github.com/myimouto/myimouto/wiki/About-MyImouto) wiki. For news about the booru, you can checkout the [blog](http://pop-works.blogspot.com), where I post from time to time.
 
 
 ## Requirements
