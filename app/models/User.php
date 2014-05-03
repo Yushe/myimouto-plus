@@ -437,7 +437,7 @@ class User extends Rails\ActiveRecord\Base
         elseif (method_exists($record, $method))
             return $record->$method($this);
         elseif (method_exists($record, 'can_change'))
-            $record->can_change($this, $attribute);
+            return $record->can_change($this, $attribute);
         else
             return true;
     }
