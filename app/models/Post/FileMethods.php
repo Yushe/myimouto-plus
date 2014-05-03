@@ -70,6 +70,7 @@ trait PostFileMethods
             }
             closedir($fh);
         }
+        sort($data[0]);
         return $data;
     }
     
