@@ -60,7 +60,7 @@
               <?php endif ?>
             </th>
             <td>
-              <?= $this->textArea("post", "tags", array('disabled' => !$this->post->can_be_seen_by(current_user()), 'size' => '50x4', 'tabindex' => '10', 'value' => $this->post->cached_tags)) ?>
+              <?= $this->textArea("post", "tags", array('disabled' => !$this->post->can_be_seen_by(current_user()), 'size' => '50x4', 'tabindex' => '10', 'value' => $this->h($this->post->cached_tags))) ?>
             <?php if ($this->post->can_be_seen_by(current_user())) : ?>
               <?= $this->linkToFunction($this->t('.related.tags'), "RelatedTags.find('post_tags')") ?> |
               <?= $this->linkToFunction($this->t('.related.artists'), "RelatedTags.find('post_tags', 'artist')") ?> |
