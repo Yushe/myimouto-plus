@@ -15,8 +15,6 @@ class Post extends Rails\ActiveRecord\Base
     
     protected $next_id;
     
-    // public $author;
-    
     public $updater_user_id;
     
     public $updater_ip_addr;
@@ -315,10 +313,14 @@ class Post extends Rails\ActiveRecord\Base
     protected function after_creation()
     {
         if ($this->new_tags) {
+            $this->clearChangedAttributes();
             $this->commit_tags();
-            $sql = "UPDATE posts SET cached_tags = ? WHERE id = ?";
-            self::connection()->executeSql($sql, $this->cached_tags, $this->id);
-            $this->save();
+            
+            $update = [];
+            foreach (array_keys($this->changedAttributes()) as $attrName) {
+                $update[$attrName] = $this->getAttribute($attrName);
+            }
+            $this->updateColumns($update);
         }
     }
     
