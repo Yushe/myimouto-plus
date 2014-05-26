@@ -245,7 +245,7 @@ class Post extends Rails\ActiveRecord\Base
             'before_save'   => ['commit_tags', 'filter_parent_id'],
             'after_save'    => ['update_parent', 'save_post_history', 'expire_cache'],
             
-            // 'after_destroy' => ['expire_cache'],
+            'after_destroy' => ['expire_cache'],
             
             'before_validation_on_create' => [
                 'download_source', 'ensure_tempfile_exists', 'determine_content_type',
