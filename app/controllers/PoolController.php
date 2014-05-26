@@ -126,8 +126,6 @@ class PoolController extends ApplicationController
 
         $this->browse_mode = current_user()->pool_browse_mode;
 
-        // $q = Tag::parse_query("");
-
         $q = [];
         $q['pool'] = (int)$this->params()->id;
         $q['show_deleted_only'] = false;
@@ -142,9 +140,19 @@ class PoolController extends ApplicationController
         
         list($sql, $params) = Post::generate_sql($q, array('from_api' => true, 'offset' => $offset, 'limit' => $q['limit']));
         
-        $posts = Post::findBySql($sql, $params);
-        $this->posts = new Rails\ActiveRecord\Collection($posts->members(), ['page' => $page, 'perPage' => $q['limit'], 'offset' => $offset, 'totalRows' => $posts->totalRows()]);
+        # Stringify query so it can be passed to fast_count.
+        $tag_query = [];
+        foreach ($q as $tag => $value) {
+            if ($tag == 'show_deleted_only') {
+                $tag   = 'deleted';
+                $value = 'all';
+            }
+            $tag_query[] = $tag . ':' . $value;
+        }
+        $count = Post::fast_count(implode(' ', $tag_query));
         
+        $posts = Post::findBySql($sql, $params);
+        $this->posts = new Rails\ActiveRecord\Collection($posts->members(), ['page' => $page, 'perPage' => $q['limit'], 'offset' => $offset, 'totalRows' => $count]);
         $this->set_title($this->pool->pretty_name());
 
         # iTODO:
