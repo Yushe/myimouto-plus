@@ -9,7 +9,7 @@
     ],
     "require": {
         "php": ">=5.4.0",
-        "myimouto/railsphp": "dev-master",
+        "railsphp/railsphp": "dev-master",
         "railsphp/willpaginate": "dev-master",
         "railsphp/actsasversioned": "dev-master",
         "michelf/php-markdown": "1.3.*"
