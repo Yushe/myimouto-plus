@@ -71,7 +71,11 @@ class SimilarImages
             if ($search_url) {
                 $params['url'] = $search_url;
             } else {
-                $params['file'] = '@' . $source_file;
+                if (function_exists('curl_file_create')) { // PHP v5.5.* fix
+                    $params['file'] = curl_file_create($source_file);
+                } else {
+                    $params['file'] = '@' . $source_file;
+                }
             }
             
             foreach ($services_list as $k => $s)
