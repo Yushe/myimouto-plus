@@ -14,7 +14,7 @@ define('RAILS_ROOT', dirname(__DIR__));
 /**
  * Path to Rails.
  */
-$railsPath = __DIR__ . '/../vendor/myimouto/railsphp/lib/Rails';
+$railsPath = __DIR__ . '/../vendor/railsphp/railsphp/lib/Rails';
 
 /**
  * Load and initialize Rails.
