@@ -129,7 +129,7 @@ class TagAlias extends Rails\ActiveRecord\Base
                 ->where("tags.name LIKE ?", $this->name)
                 ->take()->each(function($post) use ($user_id, $ip_addr) {
             $post->reload();
-            $post->updateAttributes(['tags' => $post->tags(), 'updater_user_id' => $user_id, 'updater_ip_addr' => $ip_addr]);
+            $post->updateAttributes(['tags' => $post->cached_tags, 'updater_user_id' => $user_id, 'updater_ip_addr' => $ip_addr]);
         });
 
         Moebooru\CacheHelper::expire_tag_version();
