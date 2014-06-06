@@ -125,7 +125,7 @@ class Post extends Rails\ActiveRecord\Base
                         ->select("users.name, users.id")
                         ->order("v.updated_at DESC")
                         ->take()
-                        ->getAttributes('id', 'name') ?: array();
+                        ->getAttributes(['id', 'name']) ?: array();
             }
         }
         
