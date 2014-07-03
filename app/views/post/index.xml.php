@@ -5,6 +5,6 @@ echo $this->contentTag('posts', function() {
     echo "\n";
     
     foreach ($this->posts as $post) {
-        echo '  ' . $this->tag('post', $post->api_attributes()) . "\n";
+        echo '  ' . $this->tag('post', $post->api_attributes(), false, true) . "\n";
     }
 }, ['count' => $this->posts->totalRows(), 'offset' => ($this->posts->currentPage() - 1) * $this->posts->perPage()]);
