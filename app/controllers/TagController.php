@@ -22,15 +22,16 @@ class TagController extends ApplicationController
         });
     }
 
-    // # Generates list of tag names matching parameter term.
-    // # Used by jquery.ui.autocomplete.
-    // public function autocompleteName()
-    // {
-        // $this->tags = Tag.where(['name ILIKE ?', "*#{$this->params()->term}*".to_escaped_for_sql_like]).pluck(:name)
-        // $this->respondTo(array(
-            // format.json { $this->render(array('json' => $this->tags })
-        // ));
-    // }
+    # Generates list of tag names matching parameter term.
+    # Used by jquery.ui.autocomplete.
+    public function autocompleteName()
+    {
+        $this->tags = Tag::where('name LIKE ?', '%' . $this->params()->term . '%')->pluck('name');
+        # MI: RoR can respond to requests by reading the "Accept" request header. So even though
+        # the request URL doesn't have the .json extension, it will respond JSON if the request accepts
+        # it. But this is not the case here, so this action will always respond JSON.
+        $this->render(['json' => $this->tags]);
+    }
 
     public function summary()
     {
