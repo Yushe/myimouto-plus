@@ -9,7 +9,6 @@
       <?= $this->linkTo($this->t(array('time.x_ago', 't' => $this->timeAgoInWords($this->comment->created_at))), array('post#show', 'id' => $this->comment->post_id, 'anchor' => "c".$this->comment->id)) ?>
     </span>
     <?php if ($this->comment->user and $this->comment->user->has_avatar()) : ?>
-      <?php $this->avatar_init($this->comment->user->avatar_post) ?>
       <div class="comment-avatar-container"> <?= $this->avatar($this->comment->user, $this->comment->id) ?> </div>
     <?php endif ?>
   </div>
