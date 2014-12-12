@@ -31,31 +31,31 @@ class BatchUpload extends Rails\ActiveRecord\Base
         $this->active = true;
         $this->save();
 
-        $this->post = Post::create(['source' => $this->url, 'tags' => $this->tags, 'updater_user_id' => $this->user_id, 'updater_ip_addr' => $this->ip, 'user_id' => $this->user_id, 'ip_addr' => $this->ip, 'status' => "active", 'is_upload' => false]);
+        $post = Post::create(['source' => $this->url, 'tags' => $this->tags, 'updater_user_id' => $this->user_id, 'updater_ip_addr' => $this->ip, 'user_id' => $this->user_id, 'ip_addr' => $this->ip, 'status' => "active", /*'is_upload' => false*/]);
 
-        if ($this->post->errors()->blank()) {
-            if (CONFIG()->dupe_check_on_upload && $this->post->image() && !$this->post->parent_id) {
-                $options = [ 'services' => SimilarImages::get_services("local"), 'type' => 'post', 'source' => $this->post ];
+        if ($post->errors()->blank()) {
+            if (CONFIG()->dupe_check_on_upload && $post->image() && !$post->parent_id) {
+                $options = [ 'services' => SimilarImages::get_services("local"), 'type' => 'post', 'source' => $post ];
 
                 $res = SimilarImages::similar_images($options);
                 if (!empty($res['posts'])) {
-                    $this->post->tags = $this->post->tags() . " possible_duplicate";
-                    $this->post->save();
+                    $post->tags = $post->tags() . " possible_duplicate";
+                    $post->save();
                 }
             }
             $this->data->success = true;
-            $this->data->post_id = $this->post->id;
-        } elseif ($this->post->errors()->on('md5')) {
-            // $p = $this->post->errors();
-            $p = Post::where(['md5' => $this->post->md5])->first();
+            $this->data->post_id = $post->id;
+        } elseif ($post->errors()->on('md5')) {
+            // $p = $post->errors();
+            $p = Post::where(['md5' => $post->md5])->first();
             
             $this->data->success = false;
             $this->data->error = "Post already exists";
             $this->data->post_id = $p->id;
        } else {
-            // p $this->post.errors
+            // p $post.errors
             $this->data->success = false;
-            $this->data->error = $this->post->errors()->fullMessages(", ");
+            $this->data->error = $post->errors()->fullMessages(", ");
         }
 
         if ($this->data->success) {
