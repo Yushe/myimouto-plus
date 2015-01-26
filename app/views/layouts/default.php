@@ -45,7 +45,7 @@
 <body>
   <?= $this->partial('layouts/news') ?>
   <div id="header">
-    <div id="title"><h2 id="site-title"><?= $this->linkTo($this->imageTag('images/logo_small.png', array('alt' => CONFIG()->app_name, 'size' => '484x75', 'id' => 'logo')), CONFIG()->url_base) ?><span><?= $this->tag_header($this->params()->tags) ?></span></h2></div>
+    <div id="title"><h2 id="site-title"><?= $this->linkTo($this->imageTag('images/logo_small.png', array('alt' => CONFIG()->app_name, 'size' => '484x75', 'id' => 'logo')), CONFIG()->url_base) ?><span><?= $this->tag_header($this->h($this->params()->tags)) ?></span></h2></div>
     <?= $this->partial('layouts/menu') ?>
   </div>
   <?= $this->partial('layouts/login') ?>
