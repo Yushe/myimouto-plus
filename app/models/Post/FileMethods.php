@@ -303,8 +303,12 @@ trait PostFileMethods
         try {
             $file = Danbooru::http_get_streaming($this->source);
             
-            if ($file)
+            if ($file) {
                 file_put_contents($this->tempfile_path(), $file);
+                # This flag will cause Post\ImageStore\Base\move_file() to rename() the file
+                # instead of move_uploaded_file().
+                $this->is_import = true;
+            }
             if (preg_match('/^http/', $this->source) && !preg_match('/pixiv\.net/', $this->source)) {
                 # $this->source = "Image board";
                 $this->source = "";
