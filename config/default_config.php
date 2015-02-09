@@ -167,14 +167,14 @@ abstract class DefaultConfig
     {
         # By default, no posts are hidden.
         return true;
-        
+
         # Some examples:
         #
         # Hide post if user isn't privileged and post is not safe:
-        # if($post->rating == 'e' && $user->is('>=20')) return true;
+        # if ($post->rating == 'e' && $user->is_privileged_or_higher()) return true;
         # 
         # Hide post if user isn't a mod and post has the loli tag:
-        # if($post->has_tag('loli') && $user->is('>=40')) return true;
+        # if ($post->has_tag('loli') && $user->is_mod_or_higher()) return true;
     }
     
     # Determines who can see ads.
