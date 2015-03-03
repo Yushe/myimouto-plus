@@ -104,6 +104,7 @@ class TagSubscription extends Rails\ActiveRecord\Base
                     });
                 } catch (Exception $e) {
                     # fail silently
+                    Rails::log()->exception($e);
                 }
                 sleep(1);
             }
