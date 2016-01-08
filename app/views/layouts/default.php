@@ -18,7 +18,7 @@
   </script>
 
   <?= $this->content('html_header') ?> 
-  <?= $this->autoDiscoveryLinkTag('atom', 'post#atom', array('tags' => $this->params()->tags)) ?> 
+  <?= $this->autoDiscoveryLinkTag('atom', 'post#atom', array('tags' => $this->h($this->params()->tags))) ?> 
 
   <?php foreach (CONFIG()->asset_stylesheets as $asset) : ?> 
   <?= $this->stylesheetLinkTag($asset) ?>
