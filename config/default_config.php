@@ -100,7 +100,7 @@ abstract class DefaultConfig
     # the above dimensions.
     public $sample_always_generate_size = 524288; // 512*1024
 
-    # After a post receives this many posts, new comments will no longer bump the post in comment/index.
+    # After a post receives this many comments, new comments will no longer bump the post in comment/index.
     public $comment_threshold = 9999;
 
     # Members cannot post more than X posts in a day.
