@@ -462,6 +462,14 @@ abstract class DefaultConfig
     # Set to 0 to wait indefinitely.
     public $http_streaming_timeout = 10;
 
+    /**
+     * Don't process tag subscriptions again within this time.
+     * Set to null to process tag subscriptions asap.
+     *
+     * @param string
+     */
+    public $tag_subscription_delay = '360 minutes';
+
     public function __get($prop)
     {
         return null;

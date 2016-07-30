@@ -43,8 +43,15 @@ class JobTask extends Rails\ActiveRecord\Base
                 break;
 
             case "calculate_tag_subscriptions":
-                return "last run: " . (isset($this->data->last_run) ? $this->data->last_run : 'never');
-                break;
+                if (CONFIG()->tag_subscription_delay && isset($this->data->last_run)) {
+                    $nextRun = date('Y-m-d H:i:s', strtotime('+' . CONFIG()->tag_subscription_delay, strtotime($this->data->last_run)));
+                } else {
+                    $nextRun = 'imminent';
+                }
+
+                $lastRun = (isset($this->data->last_run) ? $this->data->last_run : 'never');
+
+                return "last run: " . $lastRun . '; next run: ' . $nextRun;
 
             // case "upload_posts_to_mirrors"
                 // ret = ""
@@ -264,12 +271,17 @@ class JobTask extends Rails\ActiveRecord\Base
 
     public function execute_calculate_tag_subscriptions()
     {
-        if (Rails::cache()->read("delay-tag-sub-calc")) {
-            return;
+        if (CONFIG()->tag_subscription_delay) {
+            if (Rails::cache()->read("delay-tag-sub-calc")) {
+                return;
+            }
+
+            Rails::cache()->write("delay-tag-sub-calc", 1, ['expires_in' => CONFIG()->tag_subscription_delay]);
         }
-        Rails::cache()->write("delay-tag-sub-calc", ['expires_in' => '360 minutes']);
+
         TagSubscription::process_all();
-        $this->updateAttributes(['data' => ['last_run' => date('Y-m-d H:i')]]);
+        
+        $this->updateAttributes(['data' => ['last_run' => date('Y-m-d H:i:s')]]);
     }
 
     protected function init()
