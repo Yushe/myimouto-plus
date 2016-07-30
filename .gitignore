@@ -9,3 +9,4 @@
 !/vendor/Horde
 !/vendor/ZipStream.php
 !/vendor/htmLawed
+composer.lock
