@@ -221,9 +221,9 @@ abstract class DefaultConfig
 
     # List of image services available for similar image searching.
     public $image_service_list = [
-        "danbooru.donmai.us" => "http://iqdb.yande.re/index.xml",
-        "yande.re"           => "http://iqdb.yande.re/index.xml",
-        "konachan.com"       => "http://iqdb.yande.re/index.xml"
+        "danbooru.donmai.us" => "http://iqdb.org/index.xml",
+        "yande.re"           => "http://iqdb.org/index.xml",
+        "konachan.com"       => "http://iqdb.org/index.xml"
     ];
 
     public $dupe_check_on_upload = false;
