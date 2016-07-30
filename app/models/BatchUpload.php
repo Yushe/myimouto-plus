@@ -2,7 +2,7 @@
 class BatchUpload extends Rails\ActiveRecord\Base
 {
     public $data;
-    
+
     /**
      * Flag to know the upload is 100% finished.
      */
@@ -18,15 +18,10 @@ class BatchUpload extends Rails\ActiveRecord\Base
                 $this->save();
             }
         });
-        
+
         # Ugly: set the current user ID to the one set in the batch, so history entries
         # will be created as that user.
-        // $old_thread_user = Thread::current["danbooru-user"];
-        // $old_thread_user_id = Thread::current["danbooru-user_id"];
-        // $old_ip_addr = Thread::current["danbooru-ip_addr"];
-        // Thread::current["danbooru-user"] = User::find_by_id(self.user_id)
-        // Thread::current["danbooru-user_id"] = $this->user_id
-        // Thread::current["danbooru-ip_addr"] = $this->ip
+        User::set_current_user(User::find($this->user_id));
 
         $this->active = true;
         $this->save();
@@ -46,14 +41,12 @@ class BatchUpload extends Rails\ActiveRecord\Base
             $this->data->success = true;
             $this->data->post_id = $post->id;
         } elseif ($post->errors()->on('md5')) {
-            // $p = $post->errors();
             $p = Post::where(['md5' => $post->md5])->first();
-            
+
             $this->data->success = false;
             $this->data->error = "Post already exists";
             $this->data->post_id = $p->id;
        } else {
-            // p $post.errors
             $this->data->success = false;
             $this->data->error = $post->errors()->fullMessages(", ");
         }
@@ -65,15 +58,12 @@ class BatchUpload extends Rails\ActiveRecord\Base
         }
 
         $this->active = false;
-        
+
         $this->save();
 
         $this->finished = true;
-        // Thread::current["danbooru-user"] = old_thread_user
-        // Thread::current["danbooru-user_id"] = old_thread_user_id
-        // Thread::current["danbooru-ip_addr"] = old_ip_addr
     }
-    
+
     protected function associations()
     {
         return [
@@ -87,12 +77,12 @@ class BatchUpload extends Rails\ActiveRecord\Base
     {
         $this->data = json_decode($this->data_as_json) ?: new stdClass();
     }
-    
+
     protected function encode_data()
     {
         $this->data_as_json = json_encode($this->data);
     }
-    
+
     // protected function data_setter($hoge)
     // {
         // $this->data_as_json = json_encode($hoge);
