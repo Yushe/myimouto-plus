@@ -110,16 +110,4 @@ class TagSubscription extends Rails\ActiveRecord\Base
             }
         }
     }
-
-    protected function validations()
-    {
-        return [
-            'name' => [
-                'length' => ['minimum' => 1]
-            ],
-            'tag_query' => [
-                'length' => ['minimum' => 1]
-            ],
-        ];
-    }
 }
