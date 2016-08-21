@@ -209,16 +209,16 @@
         },
         {
             "name": "railsphp/railsphp",
-            "version": "v1.0.2",
+            "version": "v1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/railsphp/railsphp.git",
-                "reference": "49d3f1f697061161d5b2f535bad813826efceff4"
+                "reference": "489cb17f4e00a122ab8e57dc9d3a662e699de5dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/railsphp/railsphp/zipball/49d3f1f697061161d5b2f535bad813826efceff4",
-                "reference": "49d3f1f697061161d5b2f535bad813826efceff4",
+                "url": "https://api.github.com/repos/railsphp/railsphp/zipball/489cb17f4e00a122ab8e57dc9d3a662e699de5dd",
+                "reference": "489cb17f4e00a122ab8e57dc9d3a662e699de5dd",
                 "shasum": ""
             },
             "require": {
@@ -239,7 +239,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "time": "2016-08-04 22:04:46"
+            "time": "2016-08-21 23:25:36"
         },
         {
             "name": "railsphp/willpaginate",
