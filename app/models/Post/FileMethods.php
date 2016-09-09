@@ -12,6 +12,8 @@ trait PostFileMethods
         'image/jpg'  => 'jpg',
         'image/png'  => 'png',
         'image/gif'  => 'gif',
+        'video/webm' => 'webm',
+        'video/mp4'  => 'mp4',
         'application/x-shockwave-flash' => 'swf'
     ];
     
