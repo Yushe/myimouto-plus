@@ -1,5 +1,7 @@
 # MyImouto
 
+##This is mainly here for archiving feel free to fork this repo or send a pull request
+
 MyImouto is a clone of [Moebooru](https://github.com/moebooru/moebooru) for PHP and MySQL. In order for this clone to be as exact as possible, MyImouto uses a custom framework that is based on Ruby on Rails, thus the code from Moebooru was transcribed to PHP with some small modifications to fit the target language and framework.
 
 MyImouto development stopped around 2014. By then, the port was mostly complete, with some bugs here and there. For more information about its features, changes and additions compared to Moebooru, please refer to the [About MyImouto](https://github.com/myimouto/myimouto/wiki/About-MyImouto) wiki.
